@@ -1,15 +1,15 @@
 <?php
-namespace App\Filament\Resources\VatTypeResource\Pages;
-use App\Filament\Resources\VatTypeResource;
+namespace App\Filament\Resources\ArtworkStateResource\Pages;
+use App\Filament\Resources\ArtworkStateResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateVatType extends CreateRecord
+class CreateArtworkState extends CreateRecord
 {
   use CreateRecord\Concerns\Translatable;
 
-  protected static string $resource = VatTypeResource::class;
-  
+  protected static string $resource = ArtworkStateResource::class;
+
   protected function getHeaderActions(): array
   {
     return [
@@ -28,5 +28,4 @@ class CreateVatType extends CreateRecord
   {
     return $this->getResource()::getUrl('index');
   }
-
 }

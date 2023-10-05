@@ -1,14 +1,14 @@
 <?php
-namespace App\Filament\Resources\VatTypeResource\Pages;
-use App\Filament\Resources\VatTypeResource;
+namespace App\Filament\Resources\ArtistTypeResource\Pages;
+use App\Filament\Resources\ArtistTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateVatType extends CreateRecord
+class CreateArtistType extends CreateRecord
 {
   use CreateRecord\Concerns\Translatable;
 
-  protected static string $resource = VatTypeResource::class;
+  protected static string $resource = ArtistTypeResource::class;
   
   protected function getHeaderActions(): array
   {
@@ -28,5 +28,4 @@ class CreateVatType extends CreateRecord
   {
     return $this->getResource()::getUrl('index');
   }
-
 }

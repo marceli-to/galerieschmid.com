@@ -6,11 +6,22 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListVatTypes extends ListRecords
 {
+  use ListRecords\Concerns\Translatable;
+
   protected static string $resource = VatTypeResource::class;
 
   protected function getHeaderActions(): array
   {
     return [
+      Actions\LocaleSwitcher::make(),
+      Actions\CreateAction::make(),
+    ];
+  }
+
+  protected function getFooterActions(): array
+  {
+    return [
+      Actions\LocaleSwitcher::make(),
       Actions\CreateAction::make(),
     ];
   }

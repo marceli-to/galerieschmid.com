@@ -1,15 +1,16 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class VatType extends Model
+class ArtworkTechnique extends Model
 {
   use HasTranslations, SoftDeletes;
-  
+
   protected $fillable = [
+    'id',
     'display_name',
     'description',
     'user_id'
@@ -23,4 +24,14 @@ class VatType extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+  public static function rules($locale = null)
+  {
+    $rules = [
+      'description' => ['required_if:locale,' . $locale],
+    ];
+    return $rules;
+  }
+
 }
+

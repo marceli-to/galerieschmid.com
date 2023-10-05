@@ -5,40 +5,22 @@ use App\Models\VatType;
 
 class ImportVatTypes extends Command
 {
-  /**
-   * The name and signature of the console command.
-   *
-   * @var string
-   */
   protected $signature = 'import:vattypes';
 
-  /**
-   * The console command description.
-   *
-   * @var string
-   */
   protected $description = 'Imports and maps data from the old database to the new database';
 
   protected $file = 'tbl_reflist_mwst.json';
 
-  /**
-   * Create a new command instance.
-   *
-   * @return void
-   */
+  protected $model = VatType::class;
+
   public function __construct()
   {
-      parent::__construct();
+    parent::__construct();
   }
 
-  /**
-   * Execute the console command.
-   *
-   * @return int
-   */
   public function handle()
   {
-    $this->info('Import of file '.$this->file .' started:');
+    $this->info('Import of file '. $this->file .' started:');
     
     // Read contents of $file located at /storage/app/import
     $json = \File::get(storage_path('app/import/' . $this->file));
@@ -53,16 +35,15 @@ class ImportVatTypes extends Command
     {
       foreach($table->data as $item)
       {
-        VatType::create([
-          'description' => $item->value,
+        $this->model::create([
+          'display_name' => $item->value,
+          'description' => ['de' => $item->value, 'en' => $item->value . ' (en)'],
+          'user_id' => null,
         ]);
       }
     }
 
-    // Get the count of all records from VatType Model
-    $count = VatType::count();
-
-    $this->info('Import of file '.$this->file .' ended. A total of '.$count.' records were imported.');
+    $this->info('Import of file '.$this->file .' ended. A total of '. $this->model::count() .' records were imported.');
 
   }
 }

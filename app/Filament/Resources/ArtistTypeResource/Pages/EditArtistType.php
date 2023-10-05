@@ -1,14 +1,14 @@
 <?php
-namespace App\Filament\Resources\VatTypeResource\Pages;
-use App\Filament\Resources\VatTypeResource;
+namespace App\Filament\Resources\ArtistTypeResource\Pages;
+use App\Filament\Resources\ArtistTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditVatType extends EditRecord
+class EditArtistType extends EditRecord
 {
   use EditRecord\Concerns\Translatable;
 
-  protected static string $resource = VatTypeResource::class;
+  protected static string $resource = ArtistTypeResource::class;
 
   protected function getHeaderActions(): array
   {

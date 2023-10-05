@@ -1,20 +1,19 @@
 <?php
-namespace App\Filament\Resources\VatTypeResource\Pages;
-use App\Filament\Resources\VatTypeResource;
+namespace App\Filament\Resources\ArtworkFrameResource\Pages;
+use App\Filament\Resources\ArtworkFrameResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditVatType extends EditRecord
+class EditArtworkFrame extends EditRecord
 {
   use EditRecord\Concerns\Translatable;
 
-  protected static string $resource = VatTypeResource::class;
+  protected static string $resource = ArtworkFrameResource::class;
 
   protected function getHeaderActions(): array
   {
     return [
       Actions\LocaleSwitcher::make(),
-      // Actions\DeleteAction::make(),
     ];
   }
 

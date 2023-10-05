@@ -1,8 +1,8 @@
 <?php
 namespace App\Filament\Resources;
-use App\Filament\Resources\InventoryStateResource\Pages;
-use App\Filament\Resources\InventoryStateResource\RelationManagers;
-use App\Models\InventoryState;
+use App\Filament\Resources\ArtworkFrameResource\Pages;
+use App\Filament\Resources\ArtworkFrameResource\RelationManagers;
+use App\Models\ArtworkFrame;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,26 +12,27 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\Concerns\Translatable;
 
-class InventoryStateResource extends Resource
+class ArtworkFrameResource extends Resource
 {
   use Translatable;
 
-  protected static ?string $model = InventoryState::class;
+  protected static ?string $model = ArtworkFrame::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
-  
-  protected static ?string $navigationLabel = 'Bestandesstatus';
+  protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+  protected static ?string $navigationLabel = 'Rahmen';
 
   protected static ?string $navigationGroup = 'Settings';
 
   public static function form(Form $form): Form
   {
-    return $form->schema([
-      Forms\Components\TextInput::make('description')
+    return $form
+      ->schema([
+        Forms\Components\TextInput::make('description')
         ->label('Description')
         ->required()
         ->maxLength(255),
-    ]);
+      ]);
   }
 
   public static function table(Table $table): Table
@@ -42,9 +43,8 @@ class InventoryStateResource extends Resource
           ->label('Description')
           ->searchable()
           ->sortable(),
-        ])
+      ])
       ->filters([
-        //
       ])
       ->actions([
         Tables\Actions\EditAction::make(),
@@ -52,31 +52,29 @@ class InventoryStateResource extends Resource
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
-            Tables\Actions\DeleteBulkAction::make(),
+          Tables\Actions\DeleteBulkAction::make(),
         ]),
       ])->defaultSort('display_name', 'asc');
   }
-  
+
   public static function getRelations(): array
   {
-      return [
-          //
-      ];
-  }
-  
-  public static function getPages(): array
-  {
     return [
-      'index' => Pages\ListInventoryStates::route('/'),
-      'create' => Pages\CreateInventoryState::route('/create'),
-      'edit' => Pages\EditInventoryState::route('/{record}/edit'),
     ];
   }
 
+  public static function getPages(): array
+  {
+    return [
+      'index' => Pages\ListArtworkFrames::route('/'),
+      'create' => Pages\CreateArtworkFrame::route('/create'),
+      'edit' => Pages\EditArtworkFrame::route('/{record}/edit'),
+    ];
+  }
+  
   public function validationRules()
   {
     $locale = app()->getLocale();
-    return InventoryState::rules($locale);
+    return ArtworkFrame::rules($locale);
   }
-
 }

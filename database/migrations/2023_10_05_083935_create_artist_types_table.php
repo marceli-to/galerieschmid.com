@@ -11,7 +11,7 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('inventory_states', function (Blueprint $table) {
+    Schema::create('artist_types', function (Blueprint $table) {
       $table->id();
       $table->string('display_name');
       $table->json('description');
@@ -26,6 +26,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('inventory_states');
+    Schema::dropIfExists('artist_types');
   }
 };

@@ -10,9 +10,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Concerns\Translatable;
 
 class VatTypeResource extends Resource
 {
+  use Translatable;
+
   protected static ?string $model = VatType::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-banknotes';
@@ -26,6 +29,7 @@ class VatTypeResource extends Resource
     return $form
       ->schema([
         Forms\Components\TextInput::make('description')
+          ->label('Description')
           ->required()
           ->maxLength(255),
       ]);
@@ -35,34 +39,43 @@ class VatTypeResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('description')->sortable(),
+        Tables\Columns\TextColumn::make('display_name')
+        ->label('Description')
+        ->searchable()
+        ->sortable(),
       ])
       ->filters([
         //
       ])
       ->actions([
         Tables\Actions\EditAction::make(),
+        Tables\Actions\DeleteAction::make(),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ]);
+      ])->defaultSort('display_name', 'asc');
   }
 
   public static function getRelations(): array
   {
-      return [
-        //
-      ];
+    return [
+    ];
   }
 
   public static function getPages(): array
   {
-      return [
-        'index' => Pages\ListVatTypes::route('/'),
-        'create' => Pages\CreateVatType::route('/create'),
-        'edit' => Pages\EditVatType::route('/{record}/edit'),
-      ];
-  }    
+    return [
+      'index' => Pages\ListVatTypes::route('/'),
+      'create' => Pages\CreateVatType::route('/create'),
+      'edit' => Pages\EditVatType::route('/{record}/edit'),
+    ];
+  }
+
+  public function validationRules()
+  {
+    $locale = app()->getLocale();
+    return InventoryState::rules($locale);
+  }
 }

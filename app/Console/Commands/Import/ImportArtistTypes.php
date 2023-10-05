@@ -1,17 +1,17 @@
 <?php
 namespace App\Console\Commands\Import;
 use Illuminate\Console\Command;
-use App\Models\InventoryState;
+use App\Models\ArtistType;
 
-class ImportInventoryStates extends Command
+class ImportArtistTypes extends Command
 {
-  protected $signature = 'import:inventorystates';
+  protected $signature = 'import:artisttypes';
 
   protected $description = 'Imports and maps data from the old database to the new database';
 
-  protected $file = 'tbl_reflist_bestandes_status.json';
+  protected $file = 'tbl_reflist_kuenstler_type.json';
 
-  protected $model = InventoryState::class;
+  protected $model = ArtistType::class;
 
   public function __construct()
   {

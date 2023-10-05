@@ -1,17 +1,17 @@
 <?php
 namespace App\Console\Commands\Import;
 use Illuminate\Console\Command;
-use App\Models\InventoryState;
+use App\Models\ArtworkTechnique;
 
-class ImportInventoryStates extends Command
+class ImportObjectTechnique extends Command
 {
-  protected $signature = 'import:inventorystates';
+  protected $signature = 'import:objecttechnique';
 
   protected $description = 'Imports and maps data from the old database to the new database';
 
-  protected $file = 'tbl_reflist_bestandes_status.json';
+  protected $file = 'tbl_objekte_technik.json';
 
-  protected $model = InventoryState::class;
+  protected $model = ArtworkTechnique::class;
 
   public function __construct()
   {
@@ -35,10 +35,10 @@ class ImportInventoryStates extends Command
     {
       foreach($table->data as $item)
       {
+        if ($item->TECHNIK == '') continue;
         $this->model::create([
-          'id' => $item->key,
-          'display_name' => $item->value,
-          'description' => ['de' => $item->value, 'en' => $item->value . ' (en)'],
+          'display_name' => $item->TECHNIK,
+          'description' => ['de' => $item->TECHNIK, 'en' => $item->TECHNIK . ' (en)'],
           'user_id' => null,
         ]);
       }

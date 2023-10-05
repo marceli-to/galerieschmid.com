@@ -1,17 +1,17 @@
 <?php
 namespace App\Console\Commands\Import;
 use Illuminate\Console\Command;
-use App\Models\InventoryState;
+use App\Models\ArtworkFrame;
 
-class ImportInventoryStates extends Command
+class ImportObjectFrames extends Command
 {
-  protected $signature = 'import:inventorystates';
+  protected $signature = 'import:objectframes';
 
   protected $description = 'Imports and maps data from the old database to the new database';
 
-  protected $file = 'tbl_reflist_bestandes_status.json';
+  protected $file = 'tbl_objekte_rahmen.json';
 
-  protected $model = InventoryState::class;
+  protected $model = ArtworkFrame::class;
 
   public function __construct()
   {
@@ -35,10 +35,10 @@ class ImportInventoryStates extends Command
     {
       foreach($table->data as $item)
       {
+        if ($item->RAHMEN == '') continue;
         $this->model::create([
-          'id' => $item->key,
-          'display_name' => $item->value,
-          'description' => ['de' => $item->value, 'en' => $item->value . ' (en)'],
+          'display_name' => $item->RAHMEN,
+          'description' => ['de' => $item->RAHMEN, 'en' => $item->RAHMEN . ' (en)'],
           'user_id' => null,
         ]);
       }
