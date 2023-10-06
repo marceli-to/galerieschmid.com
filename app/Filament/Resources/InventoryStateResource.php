@@ -39,10 +39,10 @@ class InventoryStateResource extends Resource
     return $table
       ->columns([
         Tables\Columns\TextColumn::make('display_name')
-          ->label('Description')
-          ->searchable()
-          ->sortable(),
-        ])
+        ->label('Description')
+        ->searchable()
+        ->sortable(),
+      ])
       ->filters([
         //
       ])

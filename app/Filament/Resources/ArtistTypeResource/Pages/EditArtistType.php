@@ -14,7 +14,6 @@ class EditArtistType extends EditRecord
   {
     return [
       Actions\LocaleSwitcher::make(),
-      // Actions\DeleteAction::make(),
     ];
   }
 

@@ -13,15 +13,6 @@ class ListVatTypes extends ListRecords
   protected function getHeaderActions(): array
   {
     return [
-      Actions\LocaleSwitcher::make(),
-      Actions\CreateAction::make(),
-    ];
-  }
-
-  protected function getFooterActions(): array
-  {
-    return [
-      Actions\LocaleSwitcher::make(),
       Actions\CreateAction::make(),
     ];
   }
