@@ -109,7 +109,7 @@ class ArtistResource extends Resource
             ->schema([
               SpatieMediaLibraryFileUpload::make('image')
               ->collection('artist_portraits')
-              ->label('Upload image')
+              ->label('Image')
               ->directory('artists')
               ->image()
               ->imageEditor()
@@ -145,7 +145,7 @@ class ArtistResource extends Resource
           
               SpatieMediaLibraryFileUpload::make('biography_file')
               ->collection('artist_files')
-              ->label('Upload file')
+              ->label('PDF')
               ->directory('artists')
               ->moveFiles()
               ->downloadable()
@@ -186,7 +186,8 @@ class ArtistResource extends Resource
         ->searchable()
         ->sortable(),
         IconColumn::make('publish')
-        ->boolean()
+        ->sortable()
+        ->boolean(),
       ])
       ->filters([
       ])

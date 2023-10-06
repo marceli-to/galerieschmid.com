@@ -15,13 +15,13 @@ return new class extends Migration
       $table->text('address')->nullable();
       $table->text('address_additional')->nullable();
       $table->string('street')->nullable();
-      $table->string('box', 25)->nullable();
-      $table->string('zip', 25)->nullable();
+      $table->string('box', 100)->nullable();
+      $table->string('zip', 100)->nullable();
       $table->string('city')->nullable();
       $table->string('country')->nullable();
-      $table->string('phone', 25)->nullable();
-      $table->string('phone_business', 25)->nullable();
-      $table->string('fax', 25)->nullable();
+      $table->string('phone', 50)->nullable();
+      $table->string('phone_business', 50)->nullable();
+      $table->string('fax', 50)->nullable();
       $table->foreignId('artist_id')->nullable()->constrained();
       $table->foreignId('user_id')->nullable()->constrained();
       $table->softDeletes();
