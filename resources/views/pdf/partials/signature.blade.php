@@ -1,0 +1,1 @@
+<p>Oliver Schmid, Kurs Organisator<br>{{env('APP_NAME')}}</p>

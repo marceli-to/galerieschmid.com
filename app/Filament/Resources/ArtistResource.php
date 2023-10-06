@@ -21,6 +21,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
@@ -30,10 +31,10 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\Concerns\Translatable;
+use Filament\Notifications\Notification; 
 
 class ArtistResource extends Resource
 {
- 
   protected static ?string $model = Artist::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-user';
@@ -207,6 +208,33 @@ class ArtistResource extends Resource
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
+          BulkAction::make('exportArtistsToPdf')
+            ->action(function ($records, array $data) {
+              // foreach ($records as $record)
+              // {
+              //   $record->artist_type_id = $data['artist_type_id'];
+              //   $record->save();
+              // }
+              // Notification::make() 
+              // ->title('Saved successfully')
+              // ->success()
+              // ->send();
+              return response()->streamDownload(function () use ($records) {
+                echo \Pdf::loadHtml(
+                  \Blade::render('pdf.artwork-label', ['records' => $records])
+                )->stream();
+              }, 'galerieschmid-kuenstler.pdf');
+            })
+          // ->form([
+          //     Forms\Components\Select::make('artist_type_id')
+          //       ->label('Type')
+          //       ->options(ArtistType::query()->pluck('description', 'id'))
+          //       ->required(),
+          // ])
+            ->label('Künstler exportieren')
+            ->icon('heroicon-o-document-arrow-down')
+            ->color('warning')
+            ->deselectRecordsAfterCompletion()
         ]),
       ]);
   }
