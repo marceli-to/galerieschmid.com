@@ -22,6 +22,10 @@ class InventoryStateResource extends Resource
   
   protected static ?string $navigationLabel = 'Bestandesstatus';
 
+  protected static ?string $modelLabel = 'Bestandesstatus';
+  
+  protected static ?string $pluralModelLabel = 'Bestandesstatus';
+
   protected static ?string $navigationGroup = 'Settings';
 
   public static function form(Form $form): Form

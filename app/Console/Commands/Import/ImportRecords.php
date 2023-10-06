@@ -14,7 +14,10 @@ class ImportRecords extends Command
     'import:vattypes',
     'import:objectframes',
     'import:objecttechnique',
-    'import:objectstates'
+    'import:objectstates',
+    'import:artists',
+    'import:clients',
+    'import:artistpublications',
   ];
 
   public function __construct()

@@ -4,9 +4,9 @@ use Illuminate\Console\Command;
 use App\Models\Artist;
 use App\Models\ArtistAddress;
 
-class ImportArtist extends Command
+class ImportArtists extends Command
 {
-  protected $signature = 'import:artist';
+  protected $signature = 'import:artists';
 
   protected $description = 'Imports and maps data from the old database to the new database';
 

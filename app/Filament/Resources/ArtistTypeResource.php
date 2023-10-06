@@ -20,7 +20,11 @@ class ArtistTypeResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
-  protected static ?string $navigationLabel = 'Künstlerart';
+  protected static ?string $navigationLabel = 'Künstlertyp';
+
+  protected static ?string $modelLabel = 'Künstlertyp';
+  
+  protected static ?string $pluralModelLabel = 'Künstlertypen';
 
   protected static ?string $navigationGroup = 'Settings';
 

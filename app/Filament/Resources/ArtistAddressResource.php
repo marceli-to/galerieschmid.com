@@ -33,6 +33,10 @@ class ArtistAddressResource extends Resource
   protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
   
   protected static bool $shouldRegisterNavigation = false;
+
+  protected static ?string $modelLabel = 'Künstler Adresse';
+
+  protected static ?string $pluralModelLabel = 'Künstler Adressen';
   
   public static function form(Form $form): Form
   {

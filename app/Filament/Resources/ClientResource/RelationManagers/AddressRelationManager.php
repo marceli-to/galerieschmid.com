@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\ArtistResource\RelationManagers;
+namespace App\Filament\Resources\ClientResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Grid;
@@ -21,7 +21,7 @@ class AddressRelationManager extends RelationManager
   protected static string $relationship = 'addresses';
 
   protected static ?string $modelLabel = 'Adresse';
-
+  
   protected static ?string $pluralModelLabel = 'Adressen';
 
   public function form(Form $form): Form
@@ -33,10 +33,10 @@ class AddressRelationManager extends RelationManager
         ->schema([
           TextArea::make('address')
           ->label('Address')
-          ->columnSpan('full'),
+          ->columnSpan(6),
           TextArea::make('address_additional')
           ->label('Additional address')
-          ->columnSpan('full'),
+          ->columnSpan(6),
         ])->columns(12),
 
         Grid::make()
@@ -57,10 +57,14 @@ class AddressRelationManager extends RelationManager
           ->label('City')
           ->maxLength(255)
           ->columnSpan(6),
+          TextInput::make('state')
+          ->label('State')
+          ->maxLength(255)
+          ->columnSpan(6),
           TextInput::make('country')
           ->label('Country')
           ->maxLength(255)
-          ->columnSpan('full'),
+          ->columnSpan(6),
         ])->columns(12),
         Grid::make()
         ->schema([

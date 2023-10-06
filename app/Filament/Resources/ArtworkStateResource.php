@@ -22,6 +22,10 @@ class ArtworkStateResource extends Resource
 
   protected static ?string $navigationLabel = 'Objektstatus';
 
+  protected static ?string $modelLabel = 'Objektstatus';
+  
+  protected static ?string $pluralModelLabel = 'Objektstatus';
+
   protected static ?string $navigationGroup = 'Settings';
 
   public static function form(Form $form): Form

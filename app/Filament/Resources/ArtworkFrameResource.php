@@ -22,6 +22,10 @@ class ArtworkFrameResource extends Resource
 
   protected static ?string $navigationLabel = 'Rahmen';
 
+  protected static ?string $modelLabel = 'Rahmen';
+  
+  protected static ?string $pluralModelLabel = 'Rahmen';
+
   protected static ?string $navigationGroup = 'Settings';
 
   public static function form(Form $form): Form

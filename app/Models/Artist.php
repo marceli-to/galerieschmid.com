@@ -47,6 +47,11 @@ class Artist extends Model implements HasMedia
     return $this->hasMany(ArtistAddress::class);
   }
 
+  public function publications(): HasMany
+  {
+    return $this->hasMany(ArtistPublication::class);
+  }
+
   public function registerMediaConversions(Media $media = null): void
   {
     $this

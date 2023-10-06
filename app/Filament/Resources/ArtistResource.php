@@ -21,6 +21,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -32,28 +33,35 @@ use Filament\Resources\Concerns\Translatable;
 
 class ArtistResource extends Resource
 {
-  use Translatable;
-  
+ 
   protected static ?string $model = Artist::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-user';
 
   protected static ?string $navigationLabel = 'Künstler';
 
+  protected static ?string $modelLabel = 'Künstler';
+
+  protected static ?string $pluralModelLabel = 'Künstler';
+
   public static function form(Form $form): Form
   {
     return $form
       ->schema([
-
         Grid::make()->schema([
 
-          Section::make('Information')
+          Section::make('Data')
           ->schema([
 
             Select::make('artist_type_id')
             ->label('Status')
             ->required()
             ->options(ArtistType::all()->pluck('display_name', 'id')),
+
+            TextInput::make('salutation')
+            ->label('Salutation')
+            ->columnSpan('full')
+            ->maxLength(255),
 
             TextInput::make('firstname')
             ->label('Firstname')
@@ -190,6 +198,7 @@ class ArtistResource extends Resource
         ->boolean(),
       ])
       ->filters([
+        Filter::make('publish')->query(fn (Builder $query): Builder => $query->where('publish', true))
       ])
       ->actions([
         Tables\Actions\EditAction::make(),
@@ -206,6 +215,7 @@ class ArtistResource extends Resource
   {
     return [
       RelationManagers\AddressRelationManager::class,
+      RelationManagers\PublicationsRelationManager::class,
     ];
   }
   

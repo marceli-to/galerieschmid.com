@@ -22,6 +22,10 @@ class ArtworkTechniqueResource extends Resource
 
   protected static ?string $navigationLabel = 'Technik';
 
+  protected static ?string $modelLabel = 'Technik';
+  
+  protected static ?string $pluralModelLabel = 'Techniken';
+
   protected static ?string $navigationGroup = 'Settings';
 
   public static function form(Form $form): Form

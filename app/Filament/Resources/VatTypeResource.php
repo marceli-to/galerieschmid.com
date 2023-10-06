@@ -22,7 +22,11 @@ class VatTypeResource extends Resource
 
   protected static ?string $navigationGroup = 'Settings';
 
-  protected static ?string $navigationLabel = 'MwSt.-Sätze';
+  protected static ?string $modelLabel = 'Mehrwertsteuer-Satz';
+  
+  protected static ?string $pluralModelLabel = 'Mehrwertsteuer-Sätze';
+
+  protected static ?string $navigationLabel = 'Mehrwertsteuer';
 
   public static function form(Form $form): Form
   {
