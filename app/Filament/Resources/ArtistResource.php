@@ -21,6 +21,10 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
@@ -199,11 +203,16 @@ class ArtistResource extends Resource
         ->boolean(),
       ])
       ->filters([
-        Filter::make('publish')->query(fn (Builder $query): Builder => $query->where('publish', true))
+        Filter::make('publish')
+          ->label('Publiziert')
+          ->toggle()
+          ->query(fn (Builder $query): Builder => $query->where('publish', true)),
       ])
       ->actions([
-        Tables\Actions\EditAction::make(),
-        Tables\Actions\DeleteAction::make(),
+        ActionGroup::make([
+          EditAction::make(),
+          DeleteAction::make(),
+        ]),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([

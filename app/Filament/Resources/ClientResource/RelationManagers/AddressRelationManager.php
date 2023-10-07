@@ -8,6 +8,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,6 +21,8 @@ class AddressRelationManager extends RelationManager
 {
   protected static string $relationship = 'addresses';
 
+  protected static string $tabLabel = 'Adresse';
+
   protected static ?string $modelLabel = 'Adresse';
   
   protected static ?string $pluralModelLabel = 'Adressen';
@@ -31,6 +34,9 @@ class AddressRelationManager extends RelationManager
 
         Grid::make()
         ->schema([
+          Toggle::make('primary')
+          ->label('Primäre Adresse?')
+          ->columnSpan('full'),
           TextArea::make('address')
           ->label('Address')
           ->columnSpan(6),
@@ -92,6 +98,9 @@ class AddressRelationManager extends RelationManager
     return $table
       ->heading('Adressen')
       ->columns([
+        IconColumn::make('primary')
+        ->label('Primär')
+        ->boolean(),
         TextColumn::make('address'),
         TextColumn::make('street'),
         TextColumn::make('zip'),

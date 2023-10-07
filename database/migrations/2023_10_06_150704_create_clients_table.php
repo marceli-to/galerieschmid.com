@@ -26,7 +26,7 @@ return new class extends Migration
       $table->text('invitations')->nullable();
       $table->text('artists')->nullable();
       $table->tinyInteger('newsletter_subscriber')->default(0);
-      $table->tinyInteger('publish')->default(0);
+      $table->tinyInteger('active')->default(0);
       $table->foreignId('user_id')->nullable()->constrained();
       $table->softDeletes();
       $table->timestamps();

@@ -1,14 +1,16 @@
 <?php
-namespace App\Console\Commands\Import;
+namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
-class ImportRecords extends Command
+class CreateData extends Command
 {
-  protected $signature = 'import:records';
+  protected $signature = 'create:data';
 
-  protected $description = 'Calls all import commands to import data from the old database to the new database';
+  protected $description = 'Runs migrations, creates and admin user and calls all import commands to import data from the old database to the new database';
 
   protected $commands = [
+    'migrate:fresh',
+    'create:admin',
     'import:inventorystates',
     'import:artisttypes',
     'import:vattypes',

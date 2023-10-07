@@ -30,7 +30,7 @@ class Client extends Model
     'remarks',
     'invitations',
     'artists',
-    'publish',
+    'active',
     'user_id'
   ];
 
@@ -49,6 +49,11 @@ class Client extends Model
     return $this->hasMany(ClientAddress::class);
   }
 
+  public function primaryAddress(): HasMany
+  {
+    return $this->hasMany(ClientAddress::class)->where('primary', 1);
+  }
+  
   public function additional_fields(): HasMany
   {
     return $this->hasMany(ClientAdditionalField::class);

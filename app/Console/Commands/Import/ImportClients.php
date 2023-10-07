@@ -47,7 +47,7 @@ class ImportClients extends Command
           'mobile' => $item->NATEL ?? NULL,
           'email' => $item->EMAIL ?? NULL,
           'newsletter_subscriber' => $item->NEWSLETTER_SUBSCRIBE ?? 0,
-          'publish' => $item->STATUS,
+          'active' => $item->STATUS,
           'gallery' => $item->GALERIE == 2 ? 'gap' : 'eule',
           'artist' => $item->KUENSTLER ?? NULL,
           'language' => $item->LANG ?? NULL,
@@ -82,6 +82,7 @@ class ImportClients extends Command
             'phone' => $item->TELEFON_P_1 ?? NULL,
             'phone_business' => $item->TELEFON_G_1 ?? NULL,
             'fax' => $item->FAX_1 ?? NULL,
+            'primary' => 1,
             'client_id' => $client->id,
             'user_id' => 1,
           ]);

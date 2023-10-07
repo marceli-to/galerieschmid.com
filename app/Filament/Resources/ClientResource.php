@@ -22,6 +22,11 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -93,9 +98,9 @@ class ClientResource extends Resource
             Section::make('Settings')
               ->schema([
                 
-                Toggle::make('publish')
+                Toggle::make('active')
                 ->columnSpan(6)
-                ->label('Publizieren?'),
+                ->label('Aktiv'),
                 
                 Toggle::make('newsletter_subscriber')
                 ->columnSpan(6)
@@ -161,19 +166,32 @@ class ClientResource extends Resource
         ->label('E-Mail')
         ->searchable()
         ->sortable(),
+        TextColumn::make('primaryAddress.city')
+        ->label('Ort')
+        ->searchable(),
         TextColumn::make('gallery')
         ->badge(),
-        IconColumn::make('publish')
+        IconColumn::make('active')
         ->sortable()
         ->boolean(),
       ])
       ->filters([
-        Filter::make('gap')->label('GAP')->query(fn (Builder $query): Builder => $query->where('gallery', '=', 'gap')),
-        Filter::make('eule')->label('Eule')->query(fn (Builder $query): Builder => $query->where('gallery', '=', 'eule')),
+        Filter::make('active')
+          ->label('Aktiv')
+          ->toggle()
+          ->query(fn (Builder $query): Builder => $query->where('active', true)),
+
+        SelectFilter::make('gallery')
+          ->options([
+            'gap' => 'GAP',
+            'eule' => 'Eule',
+          ]),
       ])
       ->actions([
-          Tables\Actions\EditAction::make(),
-          Tables\Actions\DeleteAction::make(),
+        ActionGroup::make([
+          EditAction::make(),
+          DeleteAction::make(),
+        ]),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
