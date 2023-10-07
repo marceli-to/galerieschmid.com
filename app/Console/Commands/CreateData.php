@@ -20,6 +20,8 @@ class CreateData extends Command
     'import:artists',
     'import:clients',
     'import:artistpublications',
+    'import:artwork',
+    'import:artworkimages',
   ];
 
   public function __construct()
@@ -29,6 +31,14 @@ class CreateData extends Command
 
   public function handle()
   {
+    // Remove all folders and subfolders in storage_path('app/public')
+    $this->info('Remove all folders and subfolders in storage_path("app/public")');
+    \File::deleteDirectory(storage_path('app/public'));
+
+    // Remove all log files in storage_path('app/import/logs')
+    $this->info('Remove all log files in storage_path("app/import/logs")');
+    \File::deleteDirectory(storage_path('app/import/logs'));
+
     $this->info('Import records started...');
     foreach($this->commands as $command)
     {

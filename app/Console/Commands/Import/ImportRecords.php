@@ -18,6 +18,7 @@ class ImportRecords extends Command
     'import:artists',
     'import:clients',
     'import:artistpublications',
+    'import:artwork',
   ];
 
   public function __construct()
@@ -26,7 +27,12 @@ class ImportRecords extends Command
   }
 
   public function handle()
-  {
+  { 
+    // Remove all folders and subfolders in storage_path('app/public')
+    $this->info('Remove all folders and subfolders in storage_path("app/public")');
+    \File::deleteDirectory(storage_path('app/public'));
+
+    // Call all import commands
     $this->info('Import records started...');
     foreach($this->commands as $command)
     {

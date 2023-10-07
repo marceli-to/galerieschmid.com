@@ -42,6 +42,14 @@ class ImportInventoryStates extends Command
           'user_id' => null,
         ]);
       }
+
+      // Create entry for "unknown"
+      $this->model::create([
+        'id' => 14,
+        'display_name' => 'Unbekannt',
+        'description' => ['de' => 'Unbekannt', 'en' => 'Unbekannt (en)'],
+        'user_id' => null,
+      ]);
     }
 
     $this->info('Import of file '.$this->file .' ended. A total of '. $this->model::count() .' records were imported.');

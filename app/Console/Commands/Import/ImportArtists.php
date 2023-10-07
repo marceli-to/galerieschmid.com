@@ -64,7 +64,7 @@ class ImportArtists extends Command
           // check if file physically exists
           if (!file_exists($pathToFile))
           {
-            $this->info('File ' . $pathToFile . ' does not exist.');
+            $this->logError('Artist - [File BIO] ' . $item->BIO_PDF . ' does not exist for artist with id: ' . $item->KUENSTLER_ID);
           }
           else
           {
@@ -82,7 +82,7 @@ class ImportArtists extends Command
           // check if file physically exists
           if (!file_exists($pathToFile))
           {
-            $this->info('File ' . $pathToFile . ' does not exist.');
+            $this->logError('Artist - [Image Portrait] ' . $item->BILD . ' does not exist for artist with id: ' . $item->KUENSTLER_ID);
           }
           else
           {
@@ -179,5 +179,25 @@ class ImportArtists extends Command
 
     $this->info('Import of file '.$this->file .' ended. A total of '. $this->model::count() .' records were imported.');
 
+  }
+
+  public function logError($message)
+  {
+    $logFile = storage_path('app/import/logs/import_artist.txt');
+
+    // create the folder if it doesn't exist
+    if (!file_exists(storage_path('app/import/logs')))
+    {
+      mkdir(storage_path('app/import/logs'), 0777, true);
+    }
+
+    // create the file if it doesn't exist
+    if (!file_exists($logFile))
+    {
+      \File::put($logFile, '');
+    }
+
+    $logMessage = $message . "\n";
+    \File::append($logFile, $logMessage);
   }
 }
