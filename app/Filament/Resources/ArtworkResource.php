@@ -86,7 +86,6 @@ class ArtworkResource extends Resource
       SelectFilter::make('artwork_state_id')
       ->label('Objektstatus')
       ->relationship('artworkState', 'description_de', fn (Builder $query) => $query->withTrashed())
-
     ])
     ->actions([
       ActionGroup::make([
