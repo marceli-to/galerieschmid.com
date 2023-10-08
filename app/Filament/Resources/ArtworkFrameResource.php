@@ -5,17 +5,16 @@ use App\Filament\Resources\ArtworkFrameResource\RelationManagers;
 use App\Models\ArtworkFrame;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 
 class ArtworkFrameResource extends Resource
 {
-  use Translatable;
-
+  
   protected static ?string $model = ArtworkFrame::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-photo';
@@ -32,10 +31,22 @@ class ArtworkFrameResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('description')
-        ->label('Description')
-        ->required()
-        ->maxLength(255),
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
       ]);
   }
 
@@ -43,7 +54,7 @@ class ArtworkFrameResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
           ->label('Description')
           ->searchable()
           ->sortable(),
@@ -58,7 +69,7 @@ class ArtworkFrameResource extends Resource
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ])->defaultSort('display_name', 'asc');
+      ])->defaultSort('description_de', 'asc');
   }
 
   public static function getRelations(): array
@@ -74,11 +85,5 @@ class ArtworkFrameResource extends Resource
       'create' => Pages\CreateArtworkFrame::route('/create'),
       'edit' => Pages\EditArtworkFrame::route('/{record}/edit'),
     ];
-  }
-  
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return ArtworkFrame::rules($locale);
   }
 }

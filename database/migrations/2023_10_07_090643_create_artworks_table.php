@@ -12,6 +12,7 @@ return new class extends Migration
   {
     Schema::create('artworks', function (Blueprint $table) {
       $table->id();
+      $table->string('image')->nullable();
       $table->string('inventory_number')->nullable();
       $table->string('artist_inventory_number')->nullable();
       $table->string('litho_number')->nullable();

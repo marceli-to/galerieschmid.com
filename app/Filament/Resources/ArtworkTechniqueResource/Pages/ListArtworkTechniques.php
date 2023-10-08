@@ -6,8 +6,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListArtworkTechniques extends ListRecords
 {
-  use ListRecords\Concerns\Translatable;
-
   protected static string $resource = ArtworkTechniqueResource::class;
 
   protected function getHeaderActions(): array

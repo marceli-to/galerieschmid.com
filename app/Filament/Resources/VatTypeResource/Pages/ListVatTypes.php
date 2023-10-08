@@ -6,7 +6,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListVatTypes extends ListRecords
 {
-  use ListRecords\Concerns\Translatable;
 
   protected static string $resource = VatTypeResource::class;
 

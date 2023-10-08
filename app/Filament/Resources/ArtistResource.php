@@ -34,7 +34,6 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Notifications\Notification; 
 
 class ArtistResource extends Resource
@@ -61,7 +60,7 @@ class ArtistResource extends Resource
             Select::make('artist_type_id')
             ->label('Status')
             ->required()
-            ->options(ArtistType::all()->pluck('display_name', 'id')),
+            ->options(ArtistType::all()->pluck('description_de', 'id')),
 
             TextInput::make('salutation')
             ->label('Salutation')

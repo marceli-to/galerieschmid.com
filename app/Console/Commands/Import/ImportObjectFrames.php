@@ -37,8 +37,8 @@ class ImportObjectFrames extends Command
       {
         if ($item->RAHMEN == '') continue;
         $this->model::create([
-          'display_name' => $item->RAHMEN,
-          'description' => ['de' => $item->RAHMEN, 'en' => $item->RAHMEN . ' (en)'],
+          'description_de' => $item->RAHMEN,
+          'description_en' => $item->RAHMEN . ' (en)',
           'user_id' => null,
         ]);
       }

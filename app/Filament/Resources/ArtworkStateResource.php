@@ -5,17 +5,15 @@ use App\Filament\Resources\ArtworkStateResource\RelationManagers;
 use App\Models\ArtworkState;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 
 class ArtworkStateResource extends Resource
 {
-  use Translatable;
-
   protected static ?string $model = ArtworkState::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
@@ -32,10 +30,22 @@ class ArtworkStateResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('description')
-        ->label('Description')
-        ->required()
-        ->maxLength(255),
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
       ]);
   }
 
@@ -43,7 +53,7 @@ class ArtworkStateResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
           ->label('Description')
           ->searchable()
           ->sortable(),
@@ -52,14 +62,14 @@ class ArtworkStateResource extends Resource
           //
       ])
       ->actions([
-          Tables\Actions\EditAction::make(),
-          Tables\Actions\DeleteAction::make(),
+        Tables\Actions\EditAction::make(),
+        Tables\Actions\DeleteAction::make(),
       ])
       ->bulkActions([
-          Tables\Actions\BulkActionGroup::make([
-              Tables\Actions\DeleteBulkAction::make(),
-          ]),
-      ]);
+        Tables\Actions\BulkActionGroup::make([
+          Tables\Actions\DeleteBulkAction::make(),
+        ]),
+      ])->defaultSort('description_de', 'asc');
   }
   
   public static function getRelations(): array
@@ -77,9 +87,4 @@ class ArtworkStateResource extends Resource
     ];
   }
   
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return ArtworkFrame::rules($locale);
-  }
 }

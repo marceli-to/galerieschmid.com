@@ -37,8 +37,8 @@ class ImportInventoryStates extends Command
       {
         $this->model::create([
           'id' => $item->key,
-          'display_name' => $item->value,
-          'description' => ['de' => $item->value, 'en' => $item->value . ' (en)'],
+          'description_de' => $item->value,
+          'description_en' => $item->value . ' (en)',
           'user_id' => null,
         ]);
       }
@@ -46,8 +46,8 @@ class ImportInventoryStates extends Command
       // Create entry for "unknown"
       $this->model::create([
         'id' => 14,
-        'display_name' => 'Unbekannt',
-        'description' => ['de' => 'Unbekannt', 'en' => 'Unbekannt (en)'],
+        'description_de' => 'Unbekannt',
+        'description_en' => 'Unbekannt (en)',
         'user_id' => null,
       ]);
     }

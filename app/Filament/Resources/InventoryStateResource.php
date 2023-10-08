@@ -5,6 +5,7 @@ use App\Filament\Resources\InventoryStateResource\RelationManagers;
 use App\Models\InventoryState;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -30,19 +31,32 @@ class InventoryStateResource extends Resource
 
   public static function form(Form $form): Form
   {
-    return $form->schema([
-      Forms\Components\TextInput::make('description')
-        ->label('Description')
-        ->required()
-        ->maxLength(255),
-    ]);
+    return $form
+      ->schema([
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
+      ]);
   }
 
   public static function table(Table $table): Table
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
         ->label('Description')
         ->searchable()
         ->sortable(),
@@ -58,7 +72,7 @@ class InventoryStateResource extends Resource
         Tables\Actions\BulkActionGroup::make([
             Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ])->defaultSort('display_name', 'asc');
+      ])->defaultSort('description_de', 'asc');
   }
   
   public static function getRelations(): array
@@ -75,12 +89,6 @@ class InventoryStateResource extends Resource
       'create' => Pages\CreateInventoryState::route('/create'),
       'edit' => Pages\EditInventoryState::route('/{record}/edit'),
     ];
-  }
-
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return InventoryState::rules($locale);
   }
 
 }

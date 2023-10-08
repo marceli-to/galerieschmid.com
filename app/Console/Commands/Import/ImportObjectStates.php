@@ -37,8 +37,8 @@ class ImportObjectStates extends Command
       {
         $this->model::create([
           'id' => $item->key,
-          'display_name' => $item->value,
-          'description' => ['de' => $item->value, 'en' => $item->value . ' (en)'],
+          'description_de' => $item->value,
+          'description_en' => $item->value . ' (en)',
           'user_id' => null,
         ]);
       }

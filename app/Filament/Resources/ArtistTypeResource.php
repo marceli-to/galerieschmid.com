@@ -5,17 +5,15 @@ use App\Filament\Resources\ArtistTypeResource\RelationManagers;
 use App\Models\ArtistType;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 
 class ArtistTypeResource extends Resource
 {
-  use Translatable;
-
   protected static ?string $model = ArtistType::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
@@ -30,19 +28,33 @@ class ArtistTypeResource extends Resource
 
   public static function form(Form $form): Form
   {
-    return $form->schema([
-      Forms\Components\TextInput::make('description')
-        ->label('Description')
-        ->required()
-        ->maxLength(255),
-    ]);
+    return $form
+      ->schema([
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
+      ]);
   }
+
 
   public static function table(Table $table): Table
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
         ->label('Description')
         ->searchable()
         ->sortable(),
@@ -57,7 +69,7 @@ class ArtistTypeResource extends Resource
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ])->defaultSort('display_name', 'asc');
+      ])->defaultSort('description_de', 'asc');
   }
   
   public static function getRelations(): array
@@ -75,9 +87,4 @@ class ArtistTypeResource extends Resource
     ];
   }
   
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return ArtistType::rules($locale);
-  }
 }

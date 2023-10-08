@@ -15,6 +15,7 @@ class Artwork extends Model implements HasMedia
 
   protected $fillable = [
     'id',
+    'image',
     'inventory_number',
     'artist_inventory_number',
     'litho_number',

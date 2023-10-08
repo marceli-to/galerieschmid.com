@@ -6,8 +6,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListArtworkFrames extends ListRecords
 {
-  use ListRecords\Concerns\Translatable;
-  
+    
   protected static string $resource = ArtworkFrameResource::class;
 
   protected function getHeaderActions(): array

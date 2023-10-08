@@ -10,8 +10,6 @@ class ImportArtworkImages extends Command
 
   protected $description = 'Imports and maps data from the old database to the new database';
 
-  protected $file = 'tbl_objekte.json';
-
   protected $model = Artwork::class;
 
   public function __construct()
@@ -21,50 +19,57 @@ class ImportArtworkImages extends Command
 
   public function handle()
   {
-    // Ask for start
-    // $start = $this->ask('From which artwork do you want to start?');
+    $this->info('Artwork image update started...');
 
-    // // Ask for limit
-    // $limit = $this->ask('How many artworks do you want to import?');
+    $artworks = $this->model::where('image', '!=', null)->limit(1000)->get();
 
-
-
-
-    $this->info('Update of file '. $this->file .' started...');
+    // allowed mime types
+    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
     
-    // Read contents of $file located at /storage/app/import
-    $json = \File::get(storage_path('app/import/' . $this->file));
-
-    // Parse json
-    $data = json_decode($json);
-
-    // Find item with "type = table"
-    $table = collect($data)->where('type', 'table')->first();
-    dd($table->data[37]);
-
-    if ($table->data)
+    if ($artworks)
     {
-      foreach($table->data as $item)
-      {
-        // Handle iages
-        $artwork = $this->model::find($item->OBJEKTE_ID);
-        
-        if ($item->BILD)
+      foreach($artworks as $artwork)
+      { 
+        // get the mime type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+
+        if ($artwork->image)
         {
-          $pathToFile = storage_path('app/import/file_data/objekte/' . $item->OBJEKTE_ID . '/img/' . $item->BILD);
+          $pathToFile = storage_path('app/import/file_data/objekte/' . $artwork->id . '/img/' . $artwork->image);
+
+          // check import folder too
           if (!file_exists($pathToFile))
           {
-            $this->logError('Artwork - [File] ' . $item->BILD . ' does not exist for object with id: ' . $item->OBJEKTE_ID);
+            $pathToFile = storage_path('app/import/file_data/objekte_import/' . $artwork->image);
+          }
+    
+          if (!file_exists($pathToFile))
+          {
+            $this->logError('Artwork - [File] ' . $artwork->image . ' does not exist for object with id: ' . $artwork->id);
           }
           else
           {
-            $artwork->copyMedia($pathToFile)->toMediaCollection('artwork_images');
+            // get the mime type of the file
+            $mimeType = finfo_file($finfo, $pathToFile);
+
+            if (!in_array($mimeType, $allowedMimeTypes))
+            {
+              $this->logError('Artwork - [File, Mimetype] ' . $artwork->image . ' has an invalid mimetype ('.$mimeType.') for object with id: ' . $artwork->id);
+            }
+            else
+            {
+              $artwork->copyMedia($pathToFile)->toMediaCollection('artwork_images');
+            }
           }
+
+          $artwork->image = NULL;
+          $artwork->save();
         }
       }
     }
 
-    $this->info('Update of file '.$this->file .' ended.');
+    $this->info('Artwork image update ended.');
   }
 
   public function logError($message)

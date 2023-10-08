@@ -41,6 +41,7 @@ class ImportArtwork extends Command
       {
         $artwork = $this->model::create([
           'id' => $item->OBJEKTE_ID,
+          'image' => $item->BILD ?? null,
           'inventory_number' => $item->INVENTARNR ?? null,
           'artist_inventory_number' => $item->KUENSTLER_INV_NR ?? null,
           'litho_number' => $item->LITHO_NR ?? null,
@@ -78,7 +79,7 @@ class ImportArtwork extends Command
         // Set technique
         if ($item->TECHNIK)
         {
-          $technique = ArtworkTechnique::where('display_name', $item->TECHNIK)->first();
+          $technique = ArtworkTechnique::where('description_de', $item->TECHNIK)->first();
           if ($technique)
           {
             $artwork->artwork_technique_id = $technique->id;
@@ -94,7 +95,7 @@ class ImportArtwork extends Command
         // Set frame
         if ($item->RAHMEN)
         {
-          $frame = ArtworkFrame::where('display_name', $item->RAHMEN)->first();
+          $frame = ArtworkFrame::where('description_de', $item->RAHMEN)->first();
           if ($frame)
           {
             $artwork->artwork_frame_id = $frame->id;

@@ -13,8 +13,8 @@ return new class extends Migration
   {
     Schema::create('vat_types', function (Blueprint $table) {
       $table->id();
-      $table->string('display_name');
-      $table->json('description');
+      $table->string('description_de');
+      $table->string('description_en')->nullable();
       $table->foreignId('user_id')->nullable()->constrained();
       $table->softDeletes();
       $table->timestamps();

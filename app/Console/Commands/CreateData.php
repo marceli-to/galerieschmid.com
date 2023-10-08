@@ -21,7 +21,8 @@ class CreateData extends Command
     'import:clients',
     'import:artistpublications',
     'import:artwork',
-    'import:artworkimages',
+    'import:contentarticle'
+    //'import:artworkimages',
   ];
 
   public function __construct()

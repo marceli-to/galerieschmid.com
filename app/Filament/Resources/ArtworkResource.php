@@ -18,6 +18,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
@@ -25,7 +26,9 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\BulkAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -33,7 +36,13 @@ class ArtworkResource extends Resource
 {
   protected static ?string $model = Artwork::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+  protected static ?string $navigationLabel = 'Objekte';
+
+  protected static ?string $modelLabel = 'Objekt';
+
+  protected static ?string $pluralModelLabel = 'Objekte';
 
   public static function form(Form $form): Form
   {
@@ -46,11 +55,43 @@ class ArtworkResource extends Resource
   {
     return $table
     ->columns([
+      SpatieMediaLibraryImageColumn::make('image')
+      ->label('Bild')
+      ->height(40)
+      ->collection('artwork_images')
+      ->circular()
+      ->conversion('preview'),
+      
+      TextColumn::make('artist.artist_name')
+      ->label('Künstler')
+      ->searchable()
+      ->sortable(),
+
+      TextColumn::make('description_de')
+      ->label('Beschreibung')
+      ->searchable()
+      ->sortable(),
+
+      TextColumn::make('inventoryState.description_de')
+      ->label('Bestandesstatus')
+      ->searchable()
+      ->sortable(),
+
+      TextColumn::make('artworkState.description_de')
+      ->label('Status')
+      ->searchable()
+      ->sortable(),
     ])
     ->filters([
+      SelectFilter::make('artwork_state_id')
+      ->relationship('artworkState', 'description_de', fn (Builder $query) => $query->withTrashed())
+
     ])
     ->actions([
-      Tables\Actions\EditAction::make(),
+      ActionGroup::make([
+        EditAction::make(),
+        DeleteAction::make(),
+      ]),
     ])
     ->bulkActions([
       Tables\Actions\BulkActionGroup::make([

@@ -5,17 +5,15 @@ use App\Filament\Resources\ArtworkTechniqueResource\RelationManagers;
 use App\Models\ArtworkTechnique;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 
 class ArtworkTechniqueResource extends Resource
 {
-  use Translatable;
-
   protected static ?string $model = ArtworkTechnique::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-wrench';
@@ -32,10 +30,22 @@ class ArtworkTechniqueResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('description')
-        ->label('Description')
-        ->required()
-        ->maxLength(255),
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
       ]);
   }
 
@@ -43,7 +53,7 @@ class ArtworkTechniqueResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
           ->label('Description')
           ->searchable()
           ->sortable(),
@@ -58,7 +68,7 @@ class ArtworkTechniqueResource extends Resource
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ])->defaultSort('display_name', 'asc');
+      ])->defaultSort('description_de', 'asc');
   }
 
   public static function getRelations(): array
@@ -74,11 +84,5 @@ class ArtworkTechniqueResource extends Resource
       'create' => Pages\CreateArtworkTechnique::route('/create'),
       'edit' => Pages\EditArtworkTechnique::route('/{record}/edit'),
     ];
-  }
-  
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return ArtworkTechniqu::rules($locale);
   }
 }

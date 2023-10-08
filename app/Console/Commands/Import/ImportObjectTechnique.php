@@ -37,8 +37,8 @@ class ImportObjectTechnique extends Command
       {
         if ($item->TECHNIK == '') continue;
         $this->model::create([
-          'display_name' => $item->TECHNIK,
-          'description' => ['de' => $item->TECHNIK, 'en' => $item->TECHNIK . ' (en)'],
+          'description_de' => $item->TECHNIK,
+          'description_en' => $item->TECHNIK . ' (en)',
           'user_id' => null,
         ]);
       }

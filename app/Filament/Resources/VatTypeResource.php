@@ -5,17 +5,15 @@ use App\Filament\Resources\VatTypeResource\RelationManagers;
 use App\Models\VatType;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
 
 class VatTypeResource extends Resource
 {
-  use Translatable;
-
   protected static ?string $model = VatType::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-banknotes';
@@ -32,10 +30,22 @@ class VatTypeResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('description')
-          ->label('Description')
-          ->required()
-          ->maxLength(255),
+        Section::make('Deutsch')
+        ->collapsible()
+        ->schema([
+          Forms\Components\TextInput::make('description_de')
+            ->label('Beschreibung')
+            ->required()
+            ->maxLength(255),
+        ]),
+        Section::make('Englisch')
+        ->collapsible()
+        ->collapsed()
+        ->schema([
+          Forms\Components\TextInput::make('description_en')
+            ->label('Beschreibung')
+            ->maxLength(255),
+        ]),
       ]);
   }
 
@@ -43,7 +53,7 @@ class VatTypeResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('display_name')
+        Tables\Columns\TextColumn::make('description_de')
         ->label('Description')
         ->searchable()
         ->sortable(),
@@ -59,7 +69,7 @@ class VatTypeResource extends Resource
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
         ]),
-      ])->defaultSort('display_name', 'asc');
+      ])->defaultSort('description_de', 'asc');
   }
 
   public static function getRelations(): array
@@ -75,11 +85,5 @@ class VatTypeResource extends Resource
       'create' => Pages\CreateVatType::route('/create'),
       'edit' => Pages\EditVatType::route('/{record}/edit'),
     ];
-  }
-
-  public function validationRules()
-  {
-    $locale = app()->getLocale();
-    return InventoryState::rules($locale);
   }
 }

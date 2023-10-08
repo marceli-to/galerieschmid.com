@@ -6,7 +6,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListArtistTypes extends ListRecords
 {
-  use ListRecords\Concerns\Translatable;
 
   protected static string $resource = ArtistTypeResource::class;
 
