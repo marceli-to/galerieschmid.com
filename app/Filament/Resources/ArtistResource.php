@@ -217,32 +217,39 @@ class ArtistResource extends Resource
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
           BulkAction::make('exportArtistsToPdf')
-            ->action(function ($records, array $data) {
-              // foreach ($records as $record)
-              // {
-              //   $record->artist_type_id = $data['artist_type_id'];
-              //   $record->save();
-              // }
-              // Notification::make() 
-              // ->title('Saved successfully')
-              // ->success()
-              // ->send();
-              return response()->streamDownload(function () use ($records) {
-                echo \Pdf::loadHtml(
-                  \Blade::render('pdf.artwork-label', ['records' => $records])
-                )->stream();
-              }, 'galerieschmid-kuenstler.pdf');
-            })
-          // ->form([
-          //     Forms\Components\Select::make('artist_type_id')
-          //       ->label('Type')
-          //       ->options(ArtistType::query()->pluck('description', 'id'))
-          //       ->required(),
-          // ])
-            ->label('Künstler exportieren')
-            ->icon('heroicon-o-document-arrow-down')
-            ->color('warning')
-            ->deselectRecordsAfterCompletion()
+          ->action(function ($records, array $data) {
+            return response()->streamDownload(function () use ($records) {
+              echo \Pdf::loadHtml(
+                \Blade::render('pdf.artwork-label', ['records' => $records])
+              )->stream();
+            }, 'galerieschmid-kuenstler.pdf');
+          })
+          ->label('Künstler exportieren')
+          ->icon('heroicon-o-document-arrow-down')
+          ->color('warning')
+          ->deselectRecordsAfterCompletion(),
+
+          BulkAction::make('changeArtistState')
+          ->action(function ($records, array $data) {
+            foreach ($records as $record)
+            {
+              $record->artist_type_id = $data['artist_type_id'];
+              $record->save();
+            }
+            Notification::make() 
+            ->title('Künstlerstatus geändert')
+            ->success()
+            ->send();
+          })
+          ->form([
+              Forms\Components\Select::make('artist_type_id')
+                ->label('Type')
+                ->options(ArtistType::query()->pluck('description_de', 'id'))
+                ->required(),
+          ])
+          ->label('Künstlerstatus ändern')
+          ->icon('heroicon-o-arrow-path')
+          ->deselectRecordsAfterCompletion()
         ]),
       ]);
   }
