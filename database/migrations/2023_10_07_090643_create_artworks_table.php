@@ -16,8 +16,8 @@ return new class extends Migration
       $table->string('inventory_number')->nullable();
       $table->string('artist_inventory_number')->nullable();
       $table->string('litho_number')->nullable();
-      $table->text('description_de')->nullable();
-      $table->text('description_en')->nullable();
+      $table->string('description_de');
+      $table->string('description_en')->nullable();
       $table->string('location')->nullable();
       $table->decimal('height', 9, 2)->nullable();
       $table->decimal('width', 9, 2)->nullable();

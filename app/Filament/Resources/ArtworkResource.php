@@ -3,6 +3,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ArtworkResource\Pages;
 use App\Filament\Resources\ArtworkResource\RelationManagers;
 use App\Models\Artwork;
+use App\Models\ArtworkState;
+use App\Models\InventoryState;
+use App\Models\Artist;
+use App\Models\ArtistType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Grid;
@@ -48,6 +52,41 @@ class ArtworkResource extends Resource
   {
     return $form
       ->schema([
+        Grid::make()->schema([
+          Section::make('Data')
+          ->schema([
+
+            TextInput::make('description_de')
+            ->label('Titel')
+            ->columnSpan('full'),
+            TextInput::make('description_en')
+            ->label('Titel (EN)')
+            ->columnSpan('full'),
+
+          ])->columnSpan(7),
+
+          Grid::make()
+          ->schema([
+            Section::make('Einstellungen')
+            ->collapsible()
+            ->schema([
+              Select::make('artworkState')
+              ->label('Status')
+              ->options(ArtworkState::all()->sortBy('description_de')->pluck('description_de', 'id'))
+              ->columnSpan('full')
+              ->selectablePlaceholder(false),
+              Select::make('inventoryState')
+              ->label('Bestandesstatus')
+              ->options(InventoryState::all()->sortBy('description_de')->pluck('description_de', 'id'))
+              ->columnSpan('full')
+              ->selectablePlaceholder(false),
+            ]),
+          ])->columnSpan(5),
+          
+
+          
+
+        ])->columns(12)
       ]);
   }
 
@@ -61,20 +100,31 @@ class ArtworkResource extends Resource
       ->collection('artwork_images')
       ->circular()
       ->conversion('preview'),
-      
-      TextColumn::make('artist.artist_name')
-      ->label('Künstler')
-      ->searchable()
-      ->sortable(),
 
       TextColumn::make('description_de')
       ->label('Beschreibung')
       ->searchable()
       ->sortable(),
 
+      TextColumn::make('artist.artist_name')
+      ->label('Künstler')
+      ->searchable()
+      ->sortable(),
+
+      TextColumn::make('inventory_number')
+      ->label('Inventar Nr.')
+      ->searchable()
+      ->sortable(),
+
+      TextColumn::make('sale_price_internal')
+      ->label('VK Intern')
+      ->searchable()
+      ->sortable(),
+
       TextColumn::make('inventoryState.description_de')
       ->label('Bestandesstatus')
       ->badge()
+      ->color('tertiary')
       ->searchable()
       ->sortable(),
 
@@ -111,6 +161,7 @@ class ArtworkResource extends Resource
   public static function getRelations(): array
   {
     return [
+      RelationManagers\AdditionalFieldRelationManager::class,
     ];
   }
     

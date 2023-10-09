@@ -82,7 +82,7 @@ class PublicationsRelationManager extends RelationManager
         ->image()
         ->imageEditor()
         ->downloadable()
-        ->helperText('Allowed types: JPG, PNG')
+        ->helperText('Erlaubte Dateitypen: JPG, PNG')
         ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
           return (string) str('galerieschmid-kuenstler-publikation-' . uniqid() . '.' . $file->extension());
         })

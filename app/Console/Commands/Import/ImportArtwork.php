@@ -4,6 +4,7 @@ use Illuminate\Console\Command;
 use App\Models\Artwork;
 use App\Models\ArtworkTechnique;
 use App\Models\ArtworkFrame;
+use App\Models\ArtworkAdditionalField;
 use App\Models\Client;
 use App\Models\Artist;
 
@@ -42,7 +43,7 @@ class ImportArtwork extends Command
         $artwork = $this->model::create([
           'id' => $item->OBJEKTE_ID,
           'image' => $item->BILD ?? null,
-          'inventory_number' => $item->INVENTARNR ?? null,
+          'inventory_number' => $item->INVENTAR_NR ?? null,
           'artist_inventory_number' => $item->KUENSTLER_INV_NR ?? null,
           'litho_number' => $item->LITHO_NR ?? null,
           'description_de' => $item->DESCRX ?? null,
@@ -134,6 +135,19 @@ class ImportArtwork extends Command
           {
             $artwork->artist_id = $item->KUENSTLER_ID;
             $artwork->save();
+          }
+        }
+
+        // Handle Additional Fields
+        for($i = 1; $i <= 9; $i++)
+        {
+          if ($item->{'FELD_'.$i})
+          {
+            $additional_field = ArtworkAdditionalField::create([
+              'description' => $item->{'FELD_'.$i} ?? NULL,
+              'artwork_id' => $artwork->id,
+              'user_id' => 1,
+            ]);
           }
         }
       }

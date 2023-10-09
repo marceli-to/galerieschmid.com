@@ -52,17 +52,17 @@ class ClientResource extends Resource
           ->schema([
 
             TextInput::make('salutation')
-            ->label('Salutation')
+            ->label('Anrede')
             ->columnSpan('full')
             ->maxLength(100),
 
             TextInput::make('firstname')
-            ->label('Firstname')
+            ->label('Vorname')
             ->columnSpan('full')
             ->maxLength(255),
 
             TextInput::make('lastname')
-            ->label('Lastname')
+            ->label('Name')
             ->columnSpan('full')
             ->required()
             ->maxLength(255),
@@ -86,7 +86,7 @@ class ClientResource extends Resource
             ->prefixIcon('heroicon-m-device-phone-mobile'),
 
             TextInput::make('website')
-            ->label('Website')
+            ->label('Webseite')
             ->columnSpan('full')
             ->url()
             ->prefixIcon('heroicon-m-globe-alt'),
@@ -95,7 +95,7 @@ class ClientResource extends Resource
 
           Grid::make()->schema([
 
-            Section::make('Settings')
+            Section::make('Einstellungen')
               ->schema([
                 
                 Toggle::make('active')
@@ -107,28 +107,28 @@ class ClientResource extends Resource
                 ->label('Newsletter?'),
 
                 Select::make('gallery')
-                ->label('Gallery')
+                ->label('Galerie')
                 ->options(Gallery::class)
                 ->columnSpan('full')
                 ->selectablePlaceholder(false),
 
                 TextInput::make('language')
-                ->label('Language')
+                ->label('Sprache')
                 ->columnSpan('full')
                 ->maxLength(255),
 
                 TextArea::make('letter_salutation')
-                ->label('Letter salutation')
+                ->label('Briefanrede')
                 ->columnSpan('full')
                 ->rows(3),
 
                 TextInput::make('invitations')
-                ->label('Invitations')
+                ->label('Einladungen')
                 ->columnSpan('full')
                 ->maxLength(255),
 
                 TextArea::make('remarks')
-                ->label('Remarks')
+                ->label('Bemerkungen')
                 ->columnSpan('full')
                 ->rows(3)
 
@@ -136,12 +136,12 @@ class ClientResource extends Resource
 
             ])->columnSpan(5)->columns(12),
 
-            Section::make('Artists')
+            Section::make('Künstler')
             ->collapsible()
             ->collapsed()
             ->schema([
               TextArea::make('artists')
-              ->label('List of artists')
+              ->label('Liste der Künstler')
               ->columnSpan('full')
               ->rows(3),
             ])->columnSpan(7),
@@ -155,11 +155,11 @@ class ClientResource extends Resource
     return $table
       ->columns([
         TextColumn::make('firstname')
-        ->label('Firstname')
+        ->label('Vorname')
         ->searchable()
         ->sortable(),
         TextColumn::make('lastname')
-        ->label('Lastname')
+        ->label('Name')
         ->searchable()
         ->sortable(),
         TextColumn::make('email')

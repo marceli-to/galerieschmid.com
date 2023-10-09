@@ -63,17 +63,17 @@ class ArtistResource extends Resource
             ->options(ArtistType::all()->pluck('description_de', 'id')),
 
             TextInput::make('salutation')
-            ->label('Salutation')
+            ->label('Anrede')
             ->columnSpan('full')
             ->maxLength(255),
 
             TextInput::make('firstname')
-            ->label('Firstname')
+            ->label('Vorname')
             ->columnSpan('full')
             ->maxLength(255),
 
             TextInput::make('lastname')
-            ->label('Lastname')
+            ->label('Name')
             ->columnSpan('full')
             ->required()
             ->maxLength(255),
@@ -91,13 +91,13 @@ class ArtistResource extends Resource
             ->prefixIcon('heroicon-m-device-phone-mobile'),
 
             TextInput::make('website')
-            ->label('Website')
+            ->label('Webseite')
             ->columnSpan('full')
             ->url()
             ->prefixIcon('heroicon-m-globe-alt'),
 
             TextArea::make('bank_account')
-            ->label('Bank Account')
+            ->label('Bankkonto')
             ->columnSpan('full')
             ->rows(3)
             ->maxLength(255),
@@ -105,69 +105,69 @@ class ArtistResource extends Resource
 
           Grid::make()->schema([
 
-          Section::make('Settings')
-            ->schema([
-              Toggle::make('publish')
-              ->columnSpan(6)
-              ->label('Publizieren?'),
-              Toggle::make('newsletter_subscriber')
-              ->columnSpan(6)
-              ->label('Newsletter?')
-            ])->columns(12),
+            Section::make('Einstellungen')
+              ->schema([
+                Toggle::make('publish')
+                ->columnSpan(6)
+                ->label('Publizieren?'),
+                Toggle::make('newsletter_subscriber')
+                ->columnSpan(6)
+                ->label('Newsletter?')
+              ])->columns(12),
 
-          Section::make('Portrait')
-            ->collapsible()
-            ->collapsed()
-            ->schema([
-              SpatieMediaLibraryFileUpload::make('image')
-              ->collection('artist_portraits')
-              ->label('Image')
-              ->directory('artists')
-              ->image()
-              ->imageEditor()
-              ->downloadable()
-              ->helperText('Allowed types: JPG, PNG')
-              ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
-                return (string) str('galerieschmid-kuenstler-portrait-' . uniqid() . '.' . $file->extension());
-              }),
-            ]),
+            Section::make('Portrait')
+              ->collapsible()
+              ->collapsed()
+              ->schema([
+                SpatieMediaLibraryFileUpload::make('image')
+                ->collection('artist_portraits')
+                ->label('Image')
+                ->directory('artists')
+                ->image()
+                ->imageEditor()
+                ->downloadable()
+                ->helperText('Erlaubte Dateitypen: JPG, PNG')
+                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
+                  return (string) str('galerieschmid-kuenstler-portrait-' . uniqid() . '.' . $file->extension());
+                }),
+              ]),
 
-            Section::make('Biography')
-            ->collapsible()
-            ->collapsed()
-            ->schema([
-  
-              RichEditor::make('biography_de')
-              ->label('Deutsch')
-              ->toolbarButtons([
-                'h2',
-                'bold',
-                'bulletList',
-                'link',
+              Section::make('Biografie')
+              ->collapsible()
+              ->collapsed()
+              ->schema([
+    
+                RichEditor::make('biography_de')
+                ->label('Deutsch')
+                ->toolbarButtons([
+                  'h2',
+                  'bold',
+                  'bulletList',
+                  'link',
+                ]),
+    
+                RichEditor::make('biography_en')
+                ->label('Englisch')
+                ->toolbarButtons([
+                  'h2',
+                  'bold',
+                  'bulletList',
+                  'link',
+                ]),
+            
+                SpatieMediaLibraryFileUpload::make('biography_file')
+                ->collection('artist_files')
+                ->label('PDF')
+                ->directory('artists')
+                ->moveFiles()
+                ->downloadable()
+                ->acceptedFileTypes(['application/pdf'])
+                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
+                  return (string) str('galerieschmid-kuenstler-bio-' . uniqid() . '.' . $file->extension());
+                })
+                ->helperText('Erlaubte Dateitypen: PDF')
+    
               ]),
-  
-              RichEditor::make('biography_en')
-              ->label('Englisch')
-              ->toolbarButtons([
-                'h2',
-                'bold',
-                'bulletList',
-                'link',
-              ]),
-          
-              SpatieMediaLibraryFileUpload::make('biography_file')
-              ->collection('artist_files')
-              ->label('PDF')
-              ->directory('artists')
-              ->moveFiles()
-              ->downloadable()
-              ->acceptedFileTypes(['application/pdf'])
-              ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
-                return (string) str('galerieschmid-kuenstler-bio-' . uniqid() . '.' . $file->extension());
-              })
-              ->helperText('Allowed types: PDF')
-  
-            ]),
 
           ])->columnSpan(5)->columns(12),
 
@@ -186,11 +186,11 @@ class ArtistResource extends Resource
         ->circular()
         ->conversion('preview'),
         TextColumn::make('firstname')
-        ->label('Firstname')
+        ->label('Vorname')
         ->searchable()
         ->sortable(),
         TextColumn::make('lastname')
-        ->label('Lastname')
+        ->label('Name')
         ->searchable()
         ->sortable(),
         TextColumn::make('email')

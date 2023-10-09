@@ -38,29 +38,29 @@ class AddressRelationManager extends RelationManager
           ->label('Primäre Adresse?')
           ->columnSpan('full'),
           TextArea::make('address')
-          ->label('Address')
+          ->label('Adresse')
           ->columnSpan(6),
           TextArea::make('address_additional')
-          ->label('Additional address')
+          ->label('Adresszusatz')
           ->columnSpan(6),
         ])->columns(12),
 
         Grid::make()
         ->schema([
           TextInput::make('street')
-          ->label('Street, No.')
+          ->label('Strasse, Nr.')
           ->maxLength(50)
           ->columnSpan(6),
           TextInput::make('box')
-          ->label('P.O. Box')
+          ->label('Postfach')
           ->maxLength(50)
           ->columnSpan(6),
           TextInput::make('zip')
-          ->label('ZIP')
+          ->label('PLZ')
           ->maxLength(50)
           ->columnSpan(6),
           TextInput::make('city')
-          ->label('City')
+          ->label('Ort')
           ->maxLength(255)
           ->columnSpan(6),
           TextInput::make('state')
@@ -68,19 +68,19 @@ class AddressRelationManager extends RelationManager
           ->maxLength(255)
           ->columnSpan(6),
           TextInput::make('country')
-          ->label('Country')
+          ->label('Land')
           ->maxLength(255)
           ->columnSpan(6),
         ])->columns(12),
         Grid::make()
         ->schema([
           TextInput::make('phone')
-          ->label('Phone')
+          ->label('Telefon')
           ->tel()
           ->prefixIcon('heroicon-m-phone')
           ->columnSpan(6),
           TextInput::make('phone_business')
-          ->label('Phone Business')
+          ->label('Telefon G.')
           ->tel()
           ->prefixIcon('heroicon-m-phone')
           ->columnSpan(6),
@@ -101,10 +101,10 @@ class AddressRelationManager extends RelationManager
         IconColumn::make('primary')
         ->label('Primär')
         ->boolean(),
-        TextColumn::make('address'),
-        TextColumn::make('street'),
-        TextColumn::make('zip'),
-        TextColumn::make('city'),
+        TextColumn::make('address')->label('Adresse'),
+        TextColumn::make('street')->label('Strasse/Nr.'),
+        TextColumn::make('zip')->label('PLZ'),
+        TextColumn::make('city')->label('Ort'),
       ])
       ->filters([
       ])
