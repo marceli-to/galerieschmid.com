@@ -22,6 +22,7 @@ return new class extends Migration
       $table->decimal('height', 9, 2)->nullable();
       $table->decimal('width', 9, 2)->nullable();
       $table->decimal('depth', 9, 2)->nullable();
+      $table->decimal('diameter', 9, 2)->nullable();
       $table->year('year')->nullable();
       $table->date('date_in')->nullable();
       $table->date('date_out')->nullable();
@@ -37,6 +38,7 @@ return new class extends Migration
       $table->tinyInteger('show_exact_price')->default(0);
       $table->string('discount')->nullable();
       $table->text('info')->nullable();
+      $table->text('info_arttrade')->nullable();
       $table->string('bank_account_number')->nullable();
       $table->text('bank_account_info')->nullable();
       $table->tinyInteger('order')->default(-1);

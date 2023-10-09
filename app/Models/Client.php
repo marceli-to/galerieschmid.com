@@ -34,6 +34,10 @@ class Client extends Model
     'user_id'
   ];
 
+  protected $append = [
+    'fullname'
+  ];
+
   public function user(): BelongsTo
   {
     return $this->belongsTo(User::class);
@@ -57,5 +61,14 @@ class Client extends Model
   public function additional_fields(): HasMany
   {
     return $this->hasMany(ClientAdditionalField::class);
+  }
+
+  public function getFullnameAttribute(): string
+  {
+    if (!$this->firstname && !$this->lastname)
+    {
+      return $this->alfa;
+    }
+    return $this->firstname . ' ' . $this->lastname;
   }
 }

@@ -4,9 +4,13 @@ use App\Filament\Resources\ArtworkResource\Pages;
 use App\Filament\Resources\ArtworkResource\RelationManagers;
 use App\Models\Artwork;
 use App\Models\ArtworkState;
+use App\Models\ArtworkTechnique;
+use App\Models\ArtworkFrame;
 use App\Models\InventoryState;
 use App\Models\Artist;
 use App\Models\ArtistType;
+use App\Models\Client;
+use App\Models\VatType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Grid;
@@ -19,6 +23,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
@@ -42,18 +47,18 @@ class ArtworkResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-  protected static ?string $navigationLabel = 'Objekte';
+  protected static ?string $navigationLabel = 'Kunstobjekte';
 
-  protected static ?string $modelLabel = 'Objekt';
+  protected static ?string $modelLabel = 'Kunstobjekt';
 
-  protected static ?string $pluralModelLabel = 'Objekte';
+  protected static ?string $pluralModelLabel = 'Kunstobjekte';
 
   public static function form(Form $form): Form
   {
     return $form
       ->schema([
         Grid::make()->schema([
-          Section::make('Data')
+          Section::make('Objektdaten')
           ->schema([
 
             TextInput::make('description_de')
@@ -62,6 +67,78 @@ class ArtworkResource extends Resource
             TextInput::make('description_en')
             ->label('Titel (EN)')
             ->columnSpan('full'),
+            TextArea::make('info')
+            ->label('Kurztext')
+            ->columnSpan('full')
+            ->rows(3),
+            TextArea::make('info_arttrade')
+            ->label('Text Kunsthandel')
+            ->columnSpan('full')
+            ->rows(3),
+            TextInput::make('inventory_number')
+            ->label('Inventar Nr.')
+            ->columnSpan('full'),
+            TextInput::make('year')
+            ->label('Jahr')
+            ->mask('9999')
+            ->placeholder('1970'),
+
+            Grid::make('Dimensionen')
+            ->schema([
+              TextInput::make('height')
+              ->hint('cm')
+              ->label('Höhe')
+              ->columnSpan(6),
+              TextInput::make('width')
+              ->hint('cm')
+              ->label('Breite')
+              ->columnSpan(6),
+              TextInput::make('depth')
+              ->hint('cm')
+              ->label('Tiefe')
+              ->columnSpan(6),
+              TextInput::make('diameter')
+              ->hint('cm')
+              ->label('Durchmesser')
+              ->columnSpan(6),
+            ])->columns(12),
+            Select::make('artist_id')
+            ->label('Künstler')
+            ->options(Artist::all()->sortBy('artist_name')->pluck('artist_name', 'id'))
+            ->columnSpan('full')
+            ->searchable()
+            ->selectablePlaceholder(false),
+            TextInput::make('artist_inventory_number')
+            ->label('Künstler Inventar Nr.')
+            ->columnSpan('full'),
+            TextInput::make('litho_number')
+            ->label('Lithonummer')
+            ->columnSpan('full'),
+            Select::make('artwork_technique_id')
+            ->label('Technik')
+            ->options(ArtworkTechnique::all()->sortBy('description_de')->pluck('description_de', 'id'))
+            ->columnSpan('full')
+            ->searchable()
+            ->selectablePlaceholder(false),
+            Select::make('artwork_frame_id')
+            ->label('Rahmen')
+            ->options(ArtworkFrame::all()->sortBy('description_de')->pluck('description_de', 'id'))
+            ->columnSpan('full')
+            ->searchable()
+            ->selectablePlaceholder(false),
+            TextInput::make('location')
+            ->label('Standort')
+            ->columnSpan('full'),
+            Select::make('client_id')
+            ->label('Besitzer')
+            ->options(Client::all()->sortBy('fullname')->pluck('fullname', 'id'))
+            ->columnSpan('full')
+            ->searchable(),
+            Select::make('previous_client')
+            ->label('Eigentümer')
+            ->options(Client::all()->sortBy('fullname')->pluck('fullname', 'fullname'))
+            ->columnSpan('full')
+            ->searchable(),
 
           ])->columnSpan(7),
 
@@ -81,6 +158,59 @@ class ArtworkResource extends Resource
               ->columnSpan('full')
               ->selectablePlaceholder(false),
             ]),
+
+            Section::make('Preise')
+            ->collapsible()
+            ->schema([
+              TextInput::make('purchase_price_soll')
+              ->label('Einkaufspreis Soll'),
+              TextInput::make('purchase_price_ist')
+              ->label('Einkaufspreis Ist'),
+              TextInput::make('purchase_price_frame')
+              ->label('Einkaufspreis Rahmen'),
+              TextInput::make('sale_price_soll')
+              ->label('Verkaufspreis Soll'),
+              Toggle::make('show_exact_price')
+              ->label('Exakter Preis anzeigen')
+              ->inline(false),
+              TextInput::make('sale_price_internal')
+              ->label('Verkaufspreis Intern'),
+              TextInput::make('sale_price_ist')
+              ->label('Verkaufspreis Ist'),
+              TextInput::make('sale_price_frame')
+              ->label('Verkaufspreis Rahmen'),
+              // vat
+              Select::make('vat_type_id')
+              ->label('MwSt.')
+              ->options(VatType::all()->sortByDesc('description_de')->pluck('description_de', 'id'))
+              ->columnSpan('full'),
+              
+              TextInput::make('discount')
+              ->label('Rabatt')
+              ->columnSpan('full'),
+            ]),
+
+            Section::make('Historie')
+            ->collapsible()
+            ->schema([
+              DatePicker::make('date_in')
+              ->label('Datum Eingang')
+              ->native(false)
+              ->displayFormat('d.m.Y'),
+              DatePicker::make('date_out')
+              ->label('Datum Ausgang')
+              ->native(false)
+              ->displayFormat('d.m.Y'),
+              DatePicker::make('date_sold')
+              ->label('Datum Verkauft')
+              ->native(false)
+              ->displayFormat('d.m.Y'),
+              DatePicker::make('date_billed')
+              ->label('Datum Abgerechnet')
+              ->native(false)
+              ->displayFormat('d.m.Y'),
+            ]),
+
           ])->columnSpan(5),
           
 

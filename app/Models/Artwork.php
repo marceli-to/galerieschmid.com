@@ -25,6 +25,7 @@ class Artwork extends Model implements HasMedia
     'height',
     'width',
     'depth',
+    'diameter',
     'year',
     'date_in',
     'date_out',
@@ -40,6 +41,7 @@ class Artwork extends Model implements HasMedia
     'show_exact_price',
     'discount',
     'info',
+    'info_arttrade',
     'bank_account_number',
     'bank_account_info',
     'order',
@@ -66,10 +68,10 @@ class Artwork extends Model implements HasMedia
     'sale_price_ist' => 'decimal:2',
     'sale_price_internal' => 'decimal:2',
     'sale_price_frame' => 'decimal:2',
-    'date_in' => 'date:Y-m-d',
-    'date_out' => 'date:Y-m-d',
-    'date_sold' => 'date:Y-m-d',
-    'date_billed' => 'date:Y-m-d',
+    'date_in' => 'date:d.m.Y',
+    'date_out' => 'date:d.m.Y',
+    'date_sold' => 'date:d.m.Y',
+    'date_billed' => 'date:d.m.Y',
   ];
 
   public function user(): BelongsTo
