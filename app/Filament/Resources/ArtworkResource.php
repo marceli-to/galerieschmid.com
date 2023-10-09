@@ -74,11 +74,19 @@ class ArtworkResource extends Resource
 
       TextColumn::make('inventoryState.description_de')
       ->label('Bestandesstatus')
+      ->badge()
       ->searchable()
       ->sortable(),
 
       TextColumn::make('artworkState.description_de')
       ->label('Status')
+      ->badge()
+      ->color(static function ($state): string {
+        if ($state === 'inaktiv') {
+            return 'warning';
+        }
+        return 'success';
+      })
       ->searchable()
       ->sortable(),
     ])
