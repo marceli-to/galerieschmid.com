@@ -24,6 +24,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
@@ -38,6 +39,7 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -67,6 +69,22 @@ class ArtworkResource extends Resource
             TextInput::make('description_en')
             ->label('Titel (EN)')
             ->columnSpan('full'),
+            SpatieMediaLibraryFileUpload::make('image')
+            ->label('Bild')
+            ->collection('artwork_images')
+            ->image()
+            ->imageEditor()
+            ->downloadable()
+            ->multiple()
+            ->reorderable()
+            ->helperText('Erlaubte Dateitypen: JPG, PNG')
+            ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
+              // remove extension from file name
+              $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+              // build new file name with an added unique id
+              $name = $fileName . '-' . uniqid() . '.' . $file->extension();
+              return (string) str($name);
+            }),
             TextArea::make('info')
             ->label('Kurztext')
             ->columnSpan('full')
@@ -82,7 +100,6 @@ class ArtworkResource extends Resource
             ->label('Jahr')
             ->mask('9999')
             ->placeholder('1970'),
-
             Grid::make('Dimensionen')
             ->schema([
               TextInput::make('height')
@@ -213,9 +230,6 @@ class ArtworkResource extends Resource
 
           ])->columnSpan(5),
           
-
-          
-
         ])->columns(12)
       ]);
   }

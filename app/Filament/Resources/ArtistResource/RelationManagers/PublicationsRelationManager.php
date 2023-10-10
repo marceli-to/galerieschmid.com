@@ -78,7 +78,7 @@ class PublicationsRelationManager extends RelationManager
 
         SpatieMediaLibraryFileUpload::make('image')
         ->collection('artist_publications')
-        ->label('Image')
+        ->label('Bild')
         ->image()
         ->imageEditor()
         ->downloadable()

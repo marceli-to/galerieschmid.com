@@ -119,7 +119,6 @@ class Artwork extends Model implements HasMedia
     return $this->hasMany(ArtworkAdditionalField::class);
   }
 
-
   public function registerMediaConversions(Media $media = null): void
   {
     $this
