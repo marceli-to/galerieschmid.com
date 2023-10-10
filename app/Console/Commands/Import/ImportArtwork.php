@@ -4,6 +4,8 @@ use Illuminate\Console\Command;
 use App\Models\Artwork;
 use App\Models\ArtworkTechnique;
 use App\Models\ArtworkFrame;
+use App\Models\ArtworkAttribute;
+use App\Models\Attribute;
 use App\Models\ArtworkAdditionalField;
 use App\Models\Client;
 use App\Models\Artist;
@@ -77,6 +79,31 @@ class ImportArtwork extends Command
           'publish' => $item->STATUS,
           'user_id' => 1,
         ]);
+
+        if ($item->ATTRIBUTES)
+        {
+          // $item->ATTRIBUTES can be a comma separated string
+          // split the string and add each attribute to ArtworkAttribute
+          $attributes = explode(',', $item->ATTRIBUTES);
+          foreach($attributes as $attribute)
+          {
+            // Check if the attribute exists in the new database
+            $a = Attribute::find($attribute);
+
+            if ($a)
+            {
+              ArtworkAttribute::create([
+                'artwork_id' => $artwork->id,
+                'attribute_id' => $a->id,
+              ]);
+            }
+            else
+            {
+              $this->logError('Artwork - [Attribute] ' . $attribute . ' not found for artwork id: ' . $item->OBJEKTE_ID . ' (Artwork: ' . $item->DESCRX . ')');
+            }
+ 
+          }
+        }
 
         // Set technique
         if ($item->TECHNIK)

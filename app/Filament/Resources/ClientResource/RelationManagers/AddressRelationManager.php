@@ -110,16 +110,18 @@ class AddressRelationManager extends RelationManager
       ])
       ->headerActions([
         Tables\Actions\CreateAction::make('create')
-          ->mutateFormDataUsing(function (array $data): array {
-            $data['user_id'] = auth()->id();
-            return $data;
+        ->modalWidth('3xl')
+        ->mutateFormDataUsing(function (array $data): array {
+          $data['user_id'] = auth()->id();
+          return $data;
         }),
       ])
       ->actions([
         Tables\Actions\EditAction::make('edit')
-          ->mutateRecordDataUsing(function (array $data): array {
-            $data['user_id'] = auth()->id();
-            return $data;
+        ->modalWidth('3xl')
+        ->mutateRecordDataUsing(function (array $data): array {
+          $data['user_id'] = auth()->id();
+          return $data;
         }),
         Tables\Actions\DeleteAction::make(),
       ])

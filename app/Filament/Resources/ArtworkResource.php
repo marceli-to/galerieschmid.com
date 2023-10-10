@@ -79,9 +79,7 @@ class ArtworkResource extends Resource
             ->reorderable()
             ->helperText('Erlaubte Dateitypen: JPG, PNG')
             ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
-              // remove extension from file name
               $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-              // build new file name with an added unique id
               $name = $fileName . '-' . uniqid() . '.' . $file->extension();
               return (string) str($name);
             }),
@@ -305,6 +303,7 @@ class ArtworkResource extends Resource
   public static function getRelations(): array
   {
     return [
+      RelationManagers\AttributesRelationManager::class,
       RelationManagers\AdditionalFieldRelationManager::class,
     ];
   }

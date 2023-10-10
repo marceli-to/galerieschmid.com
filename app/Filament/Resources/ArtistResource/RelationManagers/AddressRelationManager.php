@@ -97,6 +97,7 @@ class AddressRelationManager extends RelationManager
       ])
       ->headerActions([
         Tables\Actions\CreateAction::make('create')
+          ->modalWidth('3xl')
           ->mutateFormDataUsing(function (array $data): array {
             $data['user_id'] = auth()->id();
             return $data;
@@ -104,6 +105,7 @@ class AddressRelationManager extends RelationManager
       ])
       ->actions([
         Tables\Actions\EditAction::make('edit')
+          ->modalWidth('3xl')
           ->mutateRecordDataUsing(function (array $data): array {
             $data['user_id'] = auth()->id();
             return $data;

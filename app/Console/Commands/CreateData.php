@@ -17,11 +17,12 @@ class CreateData extends Command
     'import:objectframes',
     'import:objecttechnique',
     'import:objectstates',
+    'import:attributes',
     'import:artists',
     'import:clients',
     'import:artistpublications',
     'import:artwork',
-    'import:contentarticle'
+    'import:contentarticle',
     //'import:artworkimages',
   ];
 

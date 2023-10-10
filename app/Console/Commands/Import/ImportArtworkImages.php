@@ -33,7 +33,6 @@ class ImportArtworkImages extends Command
         // get the mime type
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-
         if ($artwork->image)
         {
           $pathToFile = storage_path('app/import/file_data/objekte/' . $artwork->id . '/img/' . $artwork->image);

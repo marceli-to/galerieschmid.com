@@ -111,6 +111,7 @@ class PublicationsRelationManager extends RelationManager
       ])
       ->headerActions([
         Tables\Actions\CreateAction::make('create')
+          ->modalWidth('2xl')
           ->mutateFormDataUsing(function (array $data): array {
             $data['user_id'] = auth()->id();
             return $data;
@@ -118,6 +119,7 @@ class PublicationsRelationManager extends RelationManager
       ])
       ->actions([
         Tables\Actions\EditAction::make('edit')
+          ->modalWidth('2xl')
           ->mutateRecordDataUsing(function (array $data): array {
             $data['user_id'] = auth()->id();
             return $data;

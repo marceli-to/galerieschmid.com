@@ -1,12 +1,12 @@
 <?php
-namespace App\Filament\Resources\ArtworkStateResource\Pages;
-use App\Filament\Resources\ArtworkStateResource;
+namespace App\Filament\Resources\AttributeResource\Pages;
+use App\Filament\Resources\AttributeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditArtworkState extends EditRecord
+class EditAttribute extends EditRecord
 {
-  protected static string $resource = ArtworkStateResource::class;
+  protected static string $resource = AttributeResource::class;
 
   protected function getHeaderActions(): array
   {

@@ -52,13 +52,14 @@ class AdditionalFieldRelationManager extends RelationManager
       ])
       ->headerActions([
         Tables\Actions\CreateAction::make('create')
+          ->modalWidth('lg')
           ->mutateFormDataUsing(function (array $data): array {
             $data['user_id'] = auth()->id();
             return $data;
         }),
       ])
       ->actions([
-        Tables\Actions\EditAction::make(),
+        Tables\Actions\EditAction::make()->modalWidth('lg'),
         Tables\Actions\DeleteAction::make(),
       ])
       ->bulkActions([
