@@ -178,6 +178,7 @@ class ArtistResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
+      ->striped()
       ->columns([
         SpatieMediaLibraryImageColumn::make('image')
         ->label('Portrait')

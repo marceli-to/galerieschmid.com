@@ -32,6 +32,10 @@ class Artist extends Model implements HasMedia
     'user_id'
   ];
 
+  protected $appends = [
+    'fullname'
+  ];
+
   public function user(): BelongsTo
   {
     return $this->belongsTo(User::class);

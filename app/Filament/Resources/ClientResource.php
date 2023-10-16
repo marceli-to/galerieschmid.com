@@ -153,6 +153,7 @@ class ClientResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
+      ->striped()
       ->columns([
         TextColumn::make('firstname')
         ->label('Vorname')

@@ -120,6 +120,11 @@ class Artwork extends Model implements HasMedia
     return $this->belongsTo(InventoryState::class);
   }
 
+  public function exhibitions(): BelongsToMany
+  {
+    return $this->belongsToMany(Exhibition::class, 'artwork_exhibition')->withPivot(['position'])->withTimestamps();
+  }
+
   public function additional_fields(): HasMany
   {
     return $this->hasMany(ArtworkAdditionalField::class);

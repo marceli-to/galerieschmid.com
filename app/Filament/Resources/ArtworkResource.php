@@ -211,18 +211,22 @@ class ArtworkResource extends Resource
               DatePicker::make('date_in')
               ->label('Datum Eingang')
               ->native(false)
+              ->closeOnDateSelection()
               ->displayFormat('d.m.Y'),
               DatePicker::make('date_out')
               ->label('Datum Ausgang')
               ->native(false)
+              ->closeOnDateSelection()
               ->displayFormat('d.m.Y'),
               DatePicker::make('date_sold')
               ->label('Datum Verkauft')
               ->native(false)
+              ->closeOnDateSelection()
               ->displayFormat('d.m.Y'),
               DatePicker::make('date_billed')
               ->label('Datum Abgerechnet')
               ->native(false)
+              ->closeOnDateSelection()
               ->displayFormat('d.m.Y'),
             ]),
 
@@ -235,6 +239,7 @@ class ArtworkResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
+    ->striped()
     ->columns([
       SpatieMediaLibraryImageColumn::make('image')
       ->label('Bild')
