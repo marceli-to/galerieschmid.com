@@ -26,6 +26,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -197,6 +198,17 @@ class ClientResource extends Resource
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
+          // BulkAction::make('exportClientsToCsv')
+          // ->action(function ($records, array $data) {
+          //   return response()->streamDownload(function () use ($records) {
+          //     echo \Pdf::loadHtml(
+          //       \Blade::render('pdf.artwork-label', ['records' => $records])
+          //     )->stream();
+          //   }, 'galerieschmid-kuenstler.pdf');
+          // })
+          // ->label('Kunden exportieren')
+          // ->icon('heroicon-o-document-arrow-down')
+          // ->deselectRecordsAfterCompletion(),
         ]),
       ]);
   }

@@ -42,6 +42,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification; 
 
 class ArtworkResource extends Resource
 {
@@ -288,9 +289,15 @@ class ArtworkResource extends Resource
       ->sortable(),
     ])
     ->filters([
+      SelectFilter::make('artist_id')
+      ->label('Künstler')
+      ->relationship('artist', 'artist_name', fn (Builder $query) => $query->withTrashed()),
       SelectFilter::make('artwork_state_id')
       ->label('Objektstatus')
-      ->relationship('artworkState', 'description_de', fn (Builder $query) => $query->withTrashed())
+      ->relationship('artworkState', 'description_de', fn (Builder $query) => $query->withTrashed()),
+      SelectFilter::make('inventory_state_id')
+      ->label('Bestandesstatus')
+      ->relationship('inventoryState', 'description_de', fn (Builder $query) => $query->withTrashed()),
     ])
     ->actions([
       ActionGroup::make([
@@ -301,6 +308,59 @@ class ArtworkResource extends Resource
     ->bulkActions([
       Tables\Actions\BulkActionGroup::make([
         Tables\Actions\DeleteBulkAction::make(),
+        BulkAction::make('changeArtworkFields')
+        ->action(function ($records, array $data) {
+          foreach ($records as $record) {
+            if (isset($data['location'])) {
+              $record->location = $data['location'];
+            }
+            if (isset($data['inventory_state_id'])) {
+              $record->inventory_state_id = $data['inventory_state_id'];
+            }
+            if (isset($data['date_in'])) {
+              $record->date_in = $data['date_in'];
+            }
+            if (isset($data['date_out'])) {
+              $record->date_out = $data['date_out'];
+            }
+            if (isset($data['date_billed'])) {
+              $record->date_billed = $data['date_billed'];
+            }
+            $record->save();
+          }
+          Notification::make() 
+            ->title('Änderungen gespeichert')
+            ->success()
+            ->send();
+        })
+        ->form([
+            TextInput::make('location')
+              ->label('Standort'),
+            Select::make('inventory_state_id')
+              ->label('Bestandesstatus')
+              ->options(InventoryState::query()->pluck('description_de', 'id')),
+            DatePicker::make('date_in')
+              ->label('Datum Eingang')
+              ->native(false)
+              ->closeOnDateSelection()
+              ->displayFormat('d.m.Y'),
+            DatePicker::make('date_out')
+              ->label('Datum Ausgang')
+              ->native(false)
+              ->closeOnDateSelection()
+              ->displayFormat('d.m.Y'),
+            DatePicker::make('date_billed')
+              ->label('Datum Abgerechnet')
+              ->native(false)
+              ->closeOnDateSelection()
+              ->displayFormat('d.m.Y'),
+        ])
+        ->label('Ausgewählte mutieren')
+        ->icon('heroicon-o-pencil-square')
+        ->deselectRecordsAfterCompletion()
+        ->modalWidth('lg')
+
+
       ]),
     ]);
   }

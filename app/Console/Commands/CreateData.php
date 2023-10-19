@@ -25,6 +25,7 @@ class CreateData extends Command
     'import:contentarticle',
     'import:exhibitions',
     'import:exhibitionartwork',
+    'import:impressions',
     //'import:artworkimages',
   ];
 

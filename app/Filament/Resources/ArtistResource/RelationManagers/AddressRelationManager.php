@@ -33,10 +33,10 @@ class AddressRelationManager extends RelationManager
         ->schema([
           TextArea::make('address')
           ->label('Adresse')
-          ->columnSpan('full'),
+          ->columnSpan(6),
           TextArea::make('address_additional')
           ->label('Adresszusatz')
-          ->columnSpan('full'),
+          ->columnSpan(6),
         ])->columns(12),
 
         Grid::make()

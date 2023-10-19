@@ -64,7 +64,7 @@ class AddressRelationManager extends RelationManager
           ->maxLength(255)
           ->columnSpan(6),
           TextInput::make('state')
-          ->label('State')
+          ->label('Kanton/Bundesland')
           ->maxLength(255)
           ->columnSpan(6),
           TextInput::make('country')

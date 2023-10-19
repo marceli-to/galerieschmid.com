@@ -38,15 +38,15 @@ class ContentArticleResource extends Resource
 {
   protected static ?string $model = ContentArticle::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
   protected static ?string $navigationGroup = 'Content';
 
-  protected static ?string $navigationLabel = 'Inhaltselemente';
+  protected static ?string $navigationLabel = 'Inhalte';
 
-  protected static ?string $modelLabel = 'Inhaltselement';
+  protected static ?string $modelLabel = 'Inhalt';
 
-  protected static ?string $pluralModelLabel = 'Inhaltselemente';
+  protected static ?string $pluralModelLabel = 'Inhalte';
 
   public static function form(Form $form): Form
   {

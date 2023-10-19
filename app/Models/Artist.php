@@ -69,4 +69,9 @@ class Artist extends Model implements HasMedia
     $this->addMediaCollection('artist_portraits');
     $this->addMediaCollection('artist_files');
   }
+
+  public function getFullnameAttribute(): string
+  {
+    return $this->firstname . ' ' . $this->lastname;
+  }
 }
