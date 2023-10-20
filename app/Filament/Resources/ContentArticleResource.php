@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Filament\Resources;
-
 use App\Filament\Resources\ContentArticleResource\Pages;
 use App\Filament\Resources\ContentArticleResource\RelationManagers;
 use App\Models\ContentArticle;

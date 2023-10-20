@@ -6,7 +6,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListArtworkFrames extends ListRecords
 {
-    
   protected static string $resource = ArtworkFrameResource::class;
 
   protected function getHeaderActions(): array
