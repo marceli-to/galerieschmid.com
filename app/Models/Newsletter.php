@@ -16,6 +16,11 @@ class Newsletter extends Model
     'show_in_archive',
     'language_id',
     'user_id',
+    'created_at',
+  ];
+
+  protected $casts = [
+    'created_at' => 'date:d.m.Y',
   ];
 
   public function user(): BelongsTo

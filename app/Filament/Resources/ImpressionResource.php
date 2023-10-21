@@ -41,7 +41,7 @@ class ImpressionResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-  protected static ?string $navigationGroup = 'Content';
+  protected static ?string $navigationGroup = 'Seiteninhalt';
 
   protected static ?string $navigationLabel = 'Impressionen';
 

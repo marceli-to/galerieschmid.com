@@ -18,6 +18,7 @@ class NewsletterArticle extends Model implements HasMedia
     'title',
     'text',
     'position',
+    'newsletter_id',
     'user_id',
   ];
 

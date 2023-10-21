@@ -26,6 +26,11 @@ class CreateData extends Command
     'import:exhibitions',
     'import:exhibitionartwork',
     'import:impressions',
+    'create:languages',
+    'import:newsletter',
+    'import:newsletterarticle',
+    'import:newsletterlists',
+    'import:newslettersubscribers',
     //'import:artworkimages',
   ];
 

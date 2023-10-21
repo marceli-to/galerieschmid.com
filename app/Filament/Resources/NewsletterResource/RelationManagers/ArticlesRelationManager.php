@@ -81,7 +81,7 @@ class ArticlesRelationManager extends RelationManager
           ->label('Titel'),
         TextColumn::make('text')
           ->label('Text')
-          ->words(10)
+          ->words(12)
           ->html(),
         TextColumn::make('position')
           ->label('Position'),

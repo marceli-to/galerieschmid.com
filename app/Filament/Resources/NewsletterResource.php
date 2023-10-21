@@ -73,7 +73,7 @@ class NewsletterResource extends Resource
               Toggle::make('active')
               ->columnSpan(6)
               ->label('Aktiv?'),
-              Toggle::make('show_in_archiv')
+              Toggle::make('show_in_archive')
               ->columnSpan(6)
               ->label('im Archiv zeigen?')
             ])->columns(12)
@@ -86,6 +86,7 @@ class NewsletterResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
+      ->defaultSort('created_at', 'DESC')
       ->columns([
         TextColumn::make('title')
         ->label('Titel/Betreff')

@@ -37,7 +37,7 @@ class NewsletterLanguageResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-language';
 
-  protected static ?string $navigationGroup = 'Newsletter';
+  protected static ?string $navigationGroup = 'Settings';
 
   protected static ?string $navigationLabel = 'Sprachen';
 

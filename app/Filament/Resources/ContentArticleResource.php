@@ -38,13 +38,13 @@ class ContentArticleResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-  protected static ?string $navigationGroup = 'Content';
+  protected static ?string $navigationGroup = 'Seiteninhalt';
 
-  protected static ?string $navigationLabel = 'Inhalte';
+  protected static ?string $navigationLabel = 'Texte';
 
-  protected static ?string $modelLabel = 'Inhalt';
+  protected static ?string $modelLabel = 'Text';
 
-  protected static ?string $pluralModelLabel = 'Inhalte';
+  protected static ?string $pluralModelLabel = 'Texte';
 
   public static function form(Form $form): Form
   {
