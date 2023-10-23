@@ -133,8 +133,9 @@ class NewsletterResource extends Resource
               )
             ->required(),
         ])
-        ->action(function (array $data): void {
+        ->action(function (array $data, $record): void {
           $response = (new AddListSubscribersToQueue())->execute(
+            Newsletter::find($record->id),
             NewsletterList::find($data['newsletter_list_id'])
           );
 

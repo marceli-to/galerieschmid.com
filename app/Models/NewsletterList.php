@@ -25,4 +25,9 @@ class NewsletterList extends Model
     return $this->belongsToMany(NewsletterSubscriber::class, 'newsletter_list_newsletter_subscriber', 'list_id', 'subscriber_id');
   }
 
+  // get confirmed subscribers for a list
+  public function confirmedSubscribers()
+  {
+    return $this->newsletterSubscribers()->where('confirmed', 1);
+  }
 }
