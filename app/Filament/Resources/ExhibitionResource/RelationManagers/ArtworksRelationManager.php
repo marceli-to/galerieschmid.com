@@ -63,7 +63,7 @@ class ArtworksRelationManager extends RelationManager
         ->form(fn (Tables\Actions\AttachAction $action): array => [
           $action->getRecordSelect(),
           Forms\Components\TextInput::make('position')->required(),
-      ])
+        ])
         ->recordSelectSearchColumns(['inventory_number', 'description_de', 'order'])
       ])
       ->actions([

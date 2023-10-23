@@ -20,7 +20,7 @@ class NewsletterList extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function subscribers(): BelongsToMany
+  public function newsletterSubscribers(): BelongsToMany
   {
     return $this->belongsToMany(NewsletterSubscriber::class, 'newsletter_list_newsletter_subscriber', 'list_id', 'subscriber_id');
   }

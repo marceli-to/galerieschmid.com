@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources;
 use App\Filament\Resources\NewsletterSubscriberResource\Pages;
-use App\Filament\Resources\NewsletterSubscriberResource\RelationManagers;
 use App\Models\NewsletterSubscriber;
 use App\Models\NewsletterLanguage;
 use App\Models\NewsletterList;
@@ -103,8 +102,10 @@ class NewsletterSubscriberResource extends Resource
               ]),
               Section::make('Listen')
               ->schema([
-                CheckboxList::make('lists')
+                CheckboxList::make('newsletterLists')
+                  ->label('Zugewiesene Listen')
                   ->options(NewsletterList::all()->pluck('description', 'id'))
+                  ->relationship('newsletterLists', 'description')
               ])
           ])->columnSpan(5)
 
@@ -119,6 +120,10 @@ class NewsletterSubscriberResource extends Resource
     return $table
       ->defaultSort('lastname', 'asc')
       ->columns([
+        // salutation
+        TextColumn::make('salutation')
+          ->label('Anrede'),
+
         // firstname
         TextColumn::make('firstname')
           ->label('Vorname')
@@ -136,11 +141,6 @@ class NewsletterSubscriberResource extends Resource
           ->label('E-Mail')
           ->searchable()
           ->sortable(),
-        
-        // salutation as badge
-        TextColumn::make('salutation')
-          ->label('Anrede')
-          ->badge(),
       ])
       ->filters([
       ])

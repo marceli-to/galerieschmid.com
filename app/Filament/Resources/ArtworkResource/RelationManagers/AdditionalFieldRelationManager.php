@@ -24,6 +24,8 @@ class AdditionalFieldRelationManager extends RelationManager
   
   protected static ?string $pluralModelLabel = 'Zusatzfelder';
 
+  protected static ?string $tabItemLabel = 'Zusatzfelder';
+
   public function form(Form $form): Form
   {
     return $form

@@ -46,17 +46,12 @@ class NewsletterListResource extends Resource
   {
     return $form
       ->schema([
-        Grid::make('Listen')
-        ->columns(12)
+        Section::make('Daten')
         ->schema([
-          Section::make('Daten')
-          ->schema([
-            TextInput::make('description')
-            ->label('Beschreibung')
-            ->required()
-            ->maxLength(255),
-          ])
-          ->columnSpan(7)
+          TextInput::make('description')
+          ->label('Beschreibung')
+          ->required()
+          ->maxLength(255),
         ])
       ]);
   }
@@ -65,9 +60,14 @@ class NewsletterListResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('description')
+        TextColumn::make('description')
           ->searchable()
           ->sortable(),
+        TextColumn::make('newsletterSubscribers')
+          ->label('Abonnenten')
+          ->badge()
+          ->getStateUsing(fn ($record): string => $record->newsletterSubscribers()->count())
+
       ])
       ->filters([
       ])
@@ -84,6 +84,8 @@ class NewsletterListResource extends Resource
   public static function getRelations(): array
   {
     return [
+      RelationManagers\SubscribersRelationManager::class,
+
     ];
   }
 

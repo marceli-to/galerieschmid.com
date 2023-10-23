@@ -2,8 +2,11 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\NewsletterResource\Pages;
 use App\Filament\Resources\NewsletterResource\RelationManagers;
+use App\Actions\Newsletter\AddListSubscribersToQueue;
 use App\Models\Newsletter;
 use App\Models\NewsletterLanguage;
+use App\Models\NewsletterList;
+use Filament\Notifications\Notification;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Grid;
@@ -17,6 +20,9 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
+use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -25,6 +31,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -107,7 +114,36 @@ class NewsletterResource extends Resource
       ->filters([
       ])
       ->actions([
-        Tables\Actions\EditAction::make(),
+        EditAction::make(),
+
+        Action::make('send')
+        ->label('Versenden')
+        ->icon('heroicon-o-inbox-arrow-down')
+        ->color('danger')
+        ->requiresConfirmation()
+        ->modalWidth('lg')
+        ->modalHeading('Versand an Abonnenten starten')
+        ->modalDescription('Bitte wählen Sie die Liste aus, an die der Newsletter versendet werden soll.')
+        ->modalSubmitActionLabel('Versand starten')
+        ->form([
+            Select::make('newsletter_list_id')
+            ->label('Liste auswählen')
+            ->options(
+                NewsletterList::has('newsletterSubscribers')->get()->pluck('description', 'id')
+              )
+            ->required(),
+        ])
+        ->action(function (array $data): void {
+          $response = (new AddListSubscribersToQueue())->execute(
+            NewsletterList::find($data['newsletter_list_id'])
+          );
+
+          Notification::make()
+            ->title('Versand gestartet')
+            ->body('Der Versand an die Liste <strong>' . $response['description'] . '</strong> mit <strong>' . $response['subscribers'] . ' Abonnenten</strong> wurde gestartet.')
+            ->success()
+            ->send();
+        })
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
@@ -130,5 +166,6 @@ class NewsletterResource extends Resource
       'create' => Pages\CreateNewsletter::route('/create'),
       'edit' => Pages\EditNewsletter::route('/{record}/edit'),
     ];
-  }    
+  }
+
 }

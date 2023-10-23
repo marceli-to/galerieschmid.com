@@ -36,9 +36,9 @@ class NewsletterSubscriber extends Model
     return $this->belongsTo(Language::class);
   }
 
-  public function lists(): BelongsToMany
+  public function newsletterLists(): BelongsToMany
   {
-    return $this->belongsToMany(NewsletterList::class, 'newsletter_list_newsletter_subscriber', 'list_id', 'subscriber_id')->withTimestamps();
+    return $this->belongsToMany(NewsletterList::class, 'newsletter_list_newsletter_subscriber', 'subscriber_id', 'list_id')->withTimestamps();
   }
 
 }

@@ -31,6 +31,7 @@ class CreateData extends Command
     'import:newsletterarticle',
     'import:newsletterlists',
     'import:newslettersubscribers',
+    'import:newsletterlistsubscribers',
     //'import:artworkimages',
   ];
 
