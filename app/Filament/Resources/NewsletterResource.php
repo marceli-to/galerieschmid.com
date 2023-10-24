@@ -29,6 +29,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\Action;
@@ -99,9 +100,9 @@ class NewsletterResource extends Resource
         ->label('Titel/Betreff')
         ->searchable()
         ->sortable(),
-        TextColumn::make('language.description')
-        ->label('Sprache')
-        ->sortable(),
+        // TextColumn::make('language.description')
+        // ->label('Sprache')
+        // ->sortable(),
         IconColumn::make('active')
         ->label('Aktiv')
         ->sortable()
@@ -110,41 +111,56 @@ class NewsletterResource extends Resource
         ->label('Erstellt am')
         ->date('d.m.Y')
         ->sortable(),
-      ])
+        BadgeColumn::make('queued')
+          ->label('Versandstatus')
+          ->color('warning')
+          ->getStateUsing(function($record): string {
+            $queued = $record->queued()->count();
+            $processed = $record->processed()->count();
+            if ($queued > 0)
+            {
+              return $processed . ' / ' . $queued;
+            }
+            return '';
+          }),
+        // TextColumn::make('processed')
+        //   ->label('Versendet')
+        //   ->badge()
+        //   ->getStateUsing(fn ($record): string => $record->processed()->count())
+        ])
       ->filters([
       ])
       ->actions([
         EditAction::make(),
-
         Action::make('send')
-        ->label('Versenden')
-        ->icon('heroicon-o-inbox-arrow-down')
-        ->color('danger')
-        ->requiresConfirmation()
-        ->modalWidth('lg')
-        ->modalHeading('Versand an Abonnenten starten')
-        ->modalDescription('Bitte wählen Sie die Liste aus, an die der Newsletter versendet werden soll.')
-        ->modalSubmitActionLabel('Versand starten')
-        ->form([
-            Select::make('newsletter_list_id')
-            ->label('Liste auswählen')
-            ->options(
-                NewsletterList::has('newsletterSubscribers')->get()->pluck('description', 'id')
-              )
-            ->required(),
-        ])
-        ->action(function (array $data, $record): void {
-          $response = (new AddListSubscribersToQueue())->execute(
-            Newsletter::find($record->id),
-            NewsletterList::find($data['newsletter_list_id'])
-          );
+          ->label('Versenden')
+          ->icon('heroicon-o-inbox-arrow-down')
+          ->color('warning')
+          ->requiresConfirmation()
+          ->modalWidth('lg')
+          ->modalHeading('Versand an Abonnenten starten')
+          ->modalDescription('Bitte wählen Sie die Liste aus, an die der Newsletter versendet werden soll.')
+          ->modalSubmitActionLabel('Versand starten')
+          ->form([
+              Select::make('newsletter_list_id')
+              ->label('Liste auswählen')
+              ->options(
+                  NewsletterList::has('newsletterSubscribers')->get()->pluck('description', 'id')
+                )
+              ->required(),
+          ])
+          ->action(function (array $data, $record): void {
+            $response = (new AddListSubscribersToQueue())->execute(
+              Newsletter::find($record->id),
+              NewsletterList::find($data['newsletter_list_id'])
+            );
 
           Notification::make()
             ->title('Versand gestartet')
             ->body('Der Versand an die Liste <strong>' . $response['description'] . '</strong> mit <strong>' . $response['subscribers'] . ' Abonnenten</strong> wurde gestartet.')
             ->success()
             ->send();
-        })
+        }),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([

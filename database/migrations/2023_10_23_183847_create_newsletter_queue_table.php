@@ -19,6 +19,7 @@ return new class extends Migration
         $table->foreignId('newsletter_id')->constrained();
         $table->foreignId('newsletter_subscriber_id')->nullable()->constrained();
         $table->timestamp('processed_at')->nullable();
+        $table->softDeletes();
         $table->timestamps();
       });
     }

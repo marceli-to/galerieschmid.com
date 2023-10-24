@@ -37,4 +37,16 @@ class Newsletter extends Model
   {
     return $this->belongsTo(NewsletterLanguage::class);
   }
+
+  // relationship for queued items
+  public function queued(): HasMany
+  {
+    return $this->hasMany(NewsletterQueue::class);
+  }
+
+  // relationship for queued and processed items
+  public function processed(): HasMany
+  {
+    return $this->hasMany(NewsletterQueue::class)->where('processed', '1');
+  }
 }

@@ -40,8 +40,10 @@ class ImportNewslettersubscribers extends Command
           'id' => $item->id,
           'firstname' => $item->firstname,
           'lastname' => $item->lastname,
-          'email' => $item->email,
-          'hash' => $item->hash,
+          // generate random email address
+          'email' => \Str::random(8).'@'.\Str::random(6) . '.com',
+          // 'email' => $item->email,
+          'hash' => \Str::uuid(),
 
           // get salutation from enum
           'salutation' => match ($item->genderId) {
