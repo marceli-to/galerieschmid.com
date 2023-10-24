@@ -23,6 +23,7 @@ return new class extends Migration
         $table->date('confirmed_at')->nullable();
         $table->foreignId('language_id')->nullable()->constrained('newsletter_languages');
         $table->foreignId('user_id')->nullable()->constrained('users');
+        $table->softDeletes();
         $table->timestamps();
       });
     }

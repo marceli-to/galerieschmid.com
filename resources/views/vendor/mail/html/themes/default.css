@@ -145,10 +145,6 @@ table.header__content {
   width: 100%;
 }
 
-.footer table {
-  background-color: #F6F6F6;
-}
-
 .footer table td {
   line-height: 1.35 !important;
   padding: 5px;
@@ -263,4 +259,13 @@ table.header__content {
   display: block;
   height: auto;
   width: 120px;
+}
+
+table.footer  {
+  background-color: #F6F6F6;
+}
+
+table.footer  a {
+  color: #000000;
+  text-decoration: none !important;
 }
