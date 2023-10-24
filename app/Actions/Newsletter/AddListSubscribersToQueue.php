@@ -12,12 +12,17 @@ class AddListSubscribersToQueue
     // get all subscribers from the list
     $subscribers = $newsletterList->confirmedSubscribers()->get();
 
+    // batch uuid
+    $batchUuid = \Str::uuid();
+
     // loop through the subscribers
     foreach ($subscribers as $subscriber)
     {
       $queue = NewsletterQueue::create([
+        'batch' => $batchUuid,
         'email' => $subscriber->email,
         'newsletter_id' => $newsletter->id,
+        'newsletter_list_id' => $newsletterList->id,
         'newsletter_subscriber_id' => $subscriber->id,
       ]);
     }

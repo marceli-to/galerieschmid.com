@@ -11,11 +11,13 @@ class NewsletterQueue extends Model
   protected $table = 'newsletter_queue';
 
   protected $fillable = [
+    'batch',
     'email',
     'errors',
     'processed',
     'processed_at',
     'newsletter_id',
+    'newsletter_list_id',
     'newsletter_subscriber_id',
   ];
 
@@ -33,6 +35,11 @@ class NewsletterQueue extends Model
     return $this->belongsTo(NewsletterSubscriber::class, 'newsletter_subscriber_id');
   }
 
+  public function list(): BelongsTo
+  {
+    return $this->belongsTo(NewsletterList::class, 'newsletter_list_id');
+  }
+  
   public function scopeProcessed($query)
   {
     return $query->where('processed', 1);
@@ -47,4 +54,12 @@ class NewsletterQueue extends Model
   {
     return $query->where('newsletter_id', $newsletterId)->where('processed', 1)->count();
   }
+
+  // group by batch
+  public function scopeByBatch($query)
+  {
+    return $query->where('processed', 0)->groupBy('batch');
+  }
+
+
 }

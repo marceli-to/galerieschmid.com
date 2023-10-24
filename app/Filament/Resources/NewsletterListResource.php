@@ -61,6 +61,7 @@ class NewsletterListResource extends Resource
     return $table
       ->columns([
         TextColumn::make('description')
+          ->label('Beschreibung')
           ->searchable()
           ->sortable(),
         TextColumn::make('newsletterSubscribers')

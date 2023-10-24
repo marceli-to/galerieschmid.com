@@ -13,10 +13,12 @@ return new class extends Migration
     {
       Schema::create('newsletter_queue', function (Blueprint $table) {
         $table->id();
+        $table->string('batch');
         $table->string('email');
         $table->text('errors')->nullable();
         $table->tinyInteger('processed')->default(0);
         $table->foreignId('newsletter_id')->constrained();
+        $table->foreignId('newsletter_list_id')->nullable()->constrained();
         $table->foreignId('newsletter_subscriber_id')->nullable()->constrained();
         $table->timestamp('processed_at')->nullable();
         $table->softDeletes();
