@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class NewsletterSubscriber extends Model
 {
-
   protected $fillable = [
     'id',
     'firstname',

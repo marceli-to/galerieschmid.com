@@ -30,7 +30,7 @@ class NewsletterQueue extends Model
 
   public function subscriber(): BelongsTo
   {
-    return $this->belongsTo(NewsletterSubscriber::class);
+    return $this->belongsTo(NewsletterSubscriber::class, 'newsletter_subscriber_id');
   }
 
   public function scopeProcessed($query)
@@ -40,7 +40,7 @@ class NewsletterQueue extends Model
 
   public function scopeUnprocessed($query)
   {
-    return $query->where('processed', 1);
+    return $query->where('processed', 0);
   }
 
   public function scopeProcessedCount($query, $newsletterId)

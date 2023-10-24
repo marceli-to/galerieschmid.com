@@ -131,36 +131,46 @@ class NewsletterResource extends Resource
       ->filters([
       ])
       ->actions([
-        EditAction::make(),
-        Action::make('send')
-          ->label('Versenden')
-          ->icon('heroicon-o-inbox-arrow-down')
-          ->color('warning')
-          ->requiresConfirmation()
-          ->modalWidth('lg')
-          ->modalHeading('Versand an Abonnenten starten')
-          ->modalDescription('Bitte wählen Sie die Liste aus, an die der Newsletter versendet werden soll.')
-          ->modalSubmitActionLabel('Versand starten')
-          ->form([
-              Select::make('newsletter_list_id')
-              ->label('Liste auswählen')
-              ->options(
-                  NewsletterList::has('newsletterSubscribers')->get()->pluck('description', 'id')
-                )
-              ->required(),
-          ])
-          ->action(function (array $data, $record): void {
-            $response = (new AddListSubscribersToQueue())->execute(
-              Newsletter::find($record->id),
-              NewsletterList::find($data['newsletter_list_id'])
-            );
+          Action::make('preview')
+            ->label('Vorschau')
+            ->color('success')
+            ->icon('heroicon-o-eye')
+            ->url(fn ($record): string => route('newsletter.preview', ['newsletter' => $record->id]))
+            ->openUrlInNewTab(),
+            
+          ActionGroup::make([
+            Action::make('send')
+              ->label('Versenden')
+              ->icon('heroicon-o-inbox-arrow-down')
+              ->color('warning')
+              ->requiresConfirmation()
+              ->modalWidth('lg')
+              ->modalHeading('Versand an Abonnenten starten')
+              ->modalDescription('Bitte wählen Sie die Liste aus, an die der Newsletter versendet werden soll.')
+              ->modalSubmitActionLabel('Versand starten')
+              ->form([
+                  Select::make('newsletter_list_id')
+                  ->label('Liste auswählen')
+                  ->options(
+                      NewsletterList::has('newsletterSubscribers')->get()->pluck('description', 'id')
+                    )
+                  ->required(),
+              ])
+              ->action(function (array $data, $record): void {
+                $response = (new AddListSubscribersToQueue())->execute(
+                  Newsletter::find($record->id),
+                  NewsletterList::find($data['newsletter_list_id'])
+                );
+      
+              Notification::make()
+                ->title('Versand gestartet')
+                ->body('Der Versand an die Liste <strong>' . $response['description'] . '</strong> mit <strong>' . $response['subscribers'] . ' Abonnenten</strong> wurde gestartet.')
+                ->success()
+                ->send();
+          }),
+          EditAction::make(),
 
-          Notification::make()
-            ->title('Versand gestartet')
-            ->body('Der Versand an die Liste <strong>' . $response['description'] . '</strong> mit <strong>' . $response['subscribers'] . ' Abonnenten</strong> wurde gestartet.')
-            ->success()
-            ->send();
-        }),
+        ]),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
