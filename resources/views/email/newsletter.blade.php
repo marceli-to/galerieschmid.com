@@ -10,4 +10,5 @@
     @endforeach
   @endif
 </div>
+@dump($data)
 </x-mail::message>
