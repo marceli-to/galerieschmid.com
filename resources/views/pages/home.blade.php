@@ -3,7 +3,6 @@
 @section('content')
 
 <section class="grid__cell grid__cell--1_3 grid-order--3">
-
   <h2>{{ __('Aktuelle Ausstellung') }}</h2>
   <article class="teaser teaser--exhibition teaser--current">
     @if ($exhibitions['current'])
@@ -19,7 +18,11 @@
         </p>
         @if ($exhibitions['current']->media->first())
           <figure>
-            <img src="{{$exhibitions['current']->media->first()->getUrl('cover') }}" alt="">
+            <img 
+            src="{{ $exhibitions['current']->media->first()->getUrl('cover') }}" 
+            width="1200"
+            height="900"
+            alt="{{ $exhibitions['current']->title_de }}">
           </figure>
         @endif
       </a>
@@ -59,7 +62,6 @@
       </article>	
     @endforeach
   @endif
-
 </section>
 
 <section class="grid__cell grid__cell--1_3 grid-order--1">
@@ -70,7 +72,7 @@
         @foreach($artists as $artist)
           <li>
             <a 
-              href="{{ route('page.artist.show', ['slug' => \Str::slug($artist->fullname), 'artist' => $artist->id]) }}" 
+              href="{{ route('page.artist.show', ['slug' => \Str::slug($artist->full_name), 'artist' => $artist->id]) }}" 
               data-touch 
               title="{{ $artist->full_name }}">
               {{ $artist->full_name }}
