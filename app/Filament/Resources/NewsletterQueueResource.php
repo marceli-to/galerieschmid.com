@@ -74,6 +74,10 @@ class NewsletterQueueResource extends Resource
         ->label('Empfänger')
         ->searchable()
         ->sortable(),
+        TextColumn::make('newsletter.title')
+        ->label('Newsletter')
+        ->searchable()
+        ->sortable(),
         TextColumn::make('list.description')
         ->label('Liste')
         ->searchable()
@@ -98,7 +102,10 @@ class NewsletterQueueResource extends Resource
           })
       ])
       ->actions([
-        DeleteAction::make(),
+        DeleteAction::make()
+        ->label('Löschen')
+        ->modalHeading('Eintrag aus Warteschlange entfernen')
+        ->modalDescription('Sind Sie sicher, dass Sie dies tun möchten?'),
       ])
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([

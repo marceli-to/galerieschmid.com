@@ -6,6 +6,6 @@ class ClearQueue
 {
   public function execute()
   {
-    NewsletterQueue::query()->delete();
+    NewsletterQueue::where('processed', 0)->delete();
   }
 }
