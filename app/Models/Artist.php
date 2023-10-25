@@ -56,6 +56,11 @@ class Artist extends Model implements HasMedia
     return $this->hasMany(ArtistPublication::class);
   }
 
+  public function artwork(): HasMany
+  {
+    return $this->hasMany(Artwork::class)->orderBy('position')->orderBy('id', 'DESC')->where('artwork_state_id', 1)->where('publish', 1);
+  }
+
   public function scopePublished($query)
   {
     return $query->where('publish', 1);

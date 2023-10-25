@@ -76,6 +76,7 @@ class ImportArtwork extends Command
           'bank_account_number' => $item->KONTONR ?? null,
           'bank_account_info' => $item->BANK ?? null,
           'discount' => $item->RABATT ?? null,
+          'position' => $item->SORT ?? -1,
           'publish' => $item->STATUS,
           'user_id' => 1,
         ]);

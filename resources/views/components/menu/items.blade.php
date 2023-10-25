@@ -1,5 +1,5 @@
 <li>
-  <a href="{{ route('page.artist') }}" class="{{ Route::is('page.artist') ? 'is-active' : '' }}" data-touch="">Künstler</a>
+  <a href="{{ route('page.artist') }}" class="{{ Route::is('page.artist*') ? 'is-active' : '' }}" data-touch="">Künstler</a>
 </li>
 <li>
   <a href="{{ route('page.exhibition') }}" class="{{ Route::is('page.exhibition') ? 'is-active' : '' }}" data-touch="">Ausstellungen</a>

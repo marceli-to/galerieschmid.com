@@ -3,6 +3,7 @@
 @endif
 @livewireScripts
 <script src="{{ asset('legacy/js/script.js') }}?v={{ date('dmY', time()) }}"></script>
+<script>SlideshowUi.init({index: 0});</script>
 @vite('resources/js/app.js')
 </body>
 <!-- made with ❤ by jamon.digital & marceli.to -->

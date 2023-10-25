@@ -2737,6 +2737,7 @@ nav {
 }
 /* line 26, ../../.source/source/sass/layout/_navigation.scss */
 .nav-list a.is-active {
+  color: #D9001C;
   -moz-transform: translate(10px, 0);
   -ms-transform: translate(10px, 0);
   -webkit-transform: translate(10px, 0);

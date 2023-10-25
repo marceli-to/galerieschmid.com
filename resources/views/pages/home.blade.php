@@ -66,21 +66,6 @@
 
 <section class="grid__cell grid__cell--1_3 grid-order--1">
   <h2>{{ __('Künstler') }}</h2>
-  <nav class="menu-artists">
-    @if ($artists)
-      <ul class="nav-list">
-        @foreach($artists as $artist)
-          <li>
-            <a 
-              href="{{ route('page.artist.show', ['slug' => \Str::slug($artist->full_name), 'artist' => $artist->id]) }}" 
-              data-touch 
-              title="{{ $artist->full_name }}">
-              {{ $artist->full_name }}
-            </a>
-          </li>
-        @endforeach
-      </ul>
-    @endif
-  </nav>
+  <x-artists.list :artists="$artists" />
 </section>	
 @endsection

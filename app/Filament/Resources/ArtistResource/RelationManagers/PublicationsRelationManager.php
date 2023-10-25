@@ -105,6 +105,8 @@ class PublicationsRelationManager extends RelationManager
         Tables\Columns\TextColumn::make('title_de')
         ->label('Titel'),
         Tables\Columns\TextColumn::make('text_de')
+        ->words(10)
+        ->html()
         ->label('Text'),
       ])
       ->filters([
