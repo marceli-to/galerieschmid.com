@@ -24,7 +24,7 @@ return new class extends Migration
       $table->string('email')->nullable();
       $table->tinyInteger('newsletter_subscriber')->default(0);
       $table->tinyInteger('publish')->default(0);
-      $table->tinyInteger('order')->default(-1);
+      $table->tinyInteger('position')->default(-1);
       $table->foreignId('artist_type_id')->nullable()->constrained();
       $table->foreignId('user_id')->nullable()->constrained();
       $table->softDeletes();

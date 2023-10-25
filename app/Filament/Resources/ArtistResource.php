@@ -122,7 +122,6 @@ class ArtistResource extends Resource
                 SpatieMediaLibraryFileUpload::make('image')
                 ->collection('artist_portraits')
                 ->label('Bild')
-                //->directory('artists')
                 ->image()
                 ->imageEditor()
                 ->downloadable()
@@ -179,6 +178,8 @@ class ArtistResource extends Resource
   {
     return $table
       ->striped()
+      ->reorderable('position')
+      ->defaultSort('position', 'ASC')
       ->columns([
         SpatieMediaLibraryImageColumn::make('image')
         ->label('Portrait')
@@ -197,6 +198,9 @@ class ArtistResource extends Resource
         TextColumn::make('email')
         ->label('E-Mail')
         ->searchable()
+        ->sortable(),
+        TextColumn::make('position')
+        ->label('Position')
         ->sortable(),
         IconColumn::make('publish')
         ->label('Publiziert')

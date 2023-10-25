@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
       fallbackLocale: 'en',
     );
 
+    setLocale(LC_ALL, 'de_CH.utf8');
+    setlocale (LC_TIME, 'de_CH.utf8');
+    \Carbon\Carbon::setLocale('de_CH.utf8');
+
     // Set global mailto address
     if ($this->app->environment('local') || $this->app->environment('staging'))
     {

@@ -1,0 +1,395 @@
+@import url(reset.css); /* RESET all CSS definitions */
+@import url(forms.css); /* FORMS CSS */
+
+
+span.editor {
+	display:block;
+	cursor:pointer;
+	border:1px solid #E9E9E9;
+}
+span.editor:hover {
+	border:1px solid red;
+}
+
+/* FONTS
+---------------------------------------------------------------------- */
+@font-face {
+    font-family: 'EurostileExtended2';
+    src: url('fonts/eurostile-extendedtwo-webfont.eot');
+    src: url('fonts/eurostile-extendedtwo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/eurostile-extendedtwo-webfont.woff') format('woff'),
+         url('fonts/eurostile-extendedtwo-webfont.ttf') format('truetype'),
+         url('fonts/eurostile-extendedtwo-webfont.svg#EurostileExtended2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'UniversCondensed';
+    src: url('fonts/univers-condensed-webfont.eot');
+    src: url('fonts/univers-condensed-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/univers-condensed-webfont.woff') format('woff'),
+         url('fonts/univers-condensed-webfont.ttf') format('truetype'),
+         url('fonts/univers-condensed-webfont.svg#Univers57Condensed') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'UniversBoldCondensed';
+    src: url('fonts/univers-condensedbold-webfont.eot');
+    src: url('fonts/univers-condensedbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/univers-condensedbold-webfont.woff') format('woff'),
+         url('fonts/univers-condensedbold-webfont.ttf') format('truetype'),
+         url('fonts/univers-condensedbold-webfont.svg#Univers67BoldCondensed') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* DEFAULT STYLING
+---------------------------------------------------------------------- */
+
+p,ul,dl,ol,td,#content_wrapper div { font-family: 'UniversCondensed', Verdana, Arial, Helvetica, sans-serif; font-size: 13px; color:#333333;}
+p,ul,dl,ol,table { margin-bottom: 18px; }
+
+ul { list-style:url(../../img/web/bullet.jpg); }
+ul li { margin-left:16px; }
+ol { list-style:lower-roman; }
+ol li { list-style-position:inside; }
+
+hr { height:0; border:none; border-top:1px solid #D6D6D6; margin-bottom:22px;  }
+
+
+abbr { border-bottom:1px dotted #ccc; }
+strong { font-family: 'UniversBoldCondensed'; }
+em { font-style:italic; }
+sup { font-size:0.8em; position:relative; bottom:0.3em; }
+
+.tt_none { text-transform:none; }
+
+p.download_pdf { background:url(../../img/web/pdf.gif) no-repeat 0 5px; padding-left:30px; height:25px; padding-top:5px; } 
+
+p.pagination span { font-weight:normal; color:#999; padding:2px;}
+p.pagination a:link,
+p.pagination a:visited { font-weight:normal; color:#999; text-decoration:none; padding:2px; }
+p.pagination a:hover,
+p.pagination a:focus { color:black; }
+
+
+/* HEADINGS
+---------------------------------------------------------------------- */
+
+h1,h2,h3,h4 {line-height:1.0em; font-weight:normal; margin:0; padding:0; }
+
+h1 { font-family: "EurostileExtended2", Verdana, Arial, Helvetica; font-size: 24px; margin-bottom: 18px; color:#333333; text-transform: lowercase;}
+h2 { font-family: "EurostileExtended2", Verdana, Arial, Helvetica; text-transform:uppercase; font-size: 13px; color:#666666; margin-bottom: 10px; }
+h3 { font-family: 'EurostileExtended2', Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color:#666666; line-height:18px; margin-bottom:7px; text-transform: uppercase}
+h4 { font-family: 'UniversCondensed', Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; line-height:18px; margin-bottom:12px; }
+
+
+
+/* LINKS
+---------------------------------------------------------------------- */
+
+a:link,
+a:visited { color:#666666; }
+a:hover,
+a:focus { color:#000000; }
+
+div#content_wrapper a:link,
+div#content_wrapper a:visited,
+div#content_wrapper a:hover,
+div#content_wrapper a:focus { text-decoration:none; }
+
+
+/* IMAGES
+---------------------------------------------------------------------- */
+
+img {  }
+
+img.class {  }
+
+
+
+/* GENERIC LAYOUT
+---------------------------------------------------------------------- */
+
+div#page { width:980px; margin:0 auto; }
+
+div#content_wrapper { overflow:hidden; padding-top:30px; margin-top:56px; position:relative; border-top:1px solid #D6D6D6; }
+
+.end { margin-right:0; }
+
+
+/* LOGO ART
+---------------------------------------------------------------------- */
+
+div#branding { border-top:0px solid #D7D5CA; position:relative; overflow:hidden; height:65px; }
+div#branding h1 { margin:12px 0 0 0; }
+div#branding h1 a { display: block; width: 400px; height: 39px; text-indent: -9999em; background:url(../../img/web/logo-galerie-am-park.png) no-repeat left top; }
+
+
+/* NAVIGATION
+---------------------------------------------------------------------- */
+
+#nav_top { list-style: none; margin-bottom: 30px; font-family: 'UniversCondensed', Verdana, Arial, Helvetica, "Times New Roman", Times, serif; text-transform:uppercase; overflow:hidden; font-size: 13px; background:#F6F6F6; position:relative; }
+#nav_top li { float:left; margin:0 12px 0 10px; padding:4px 0; }
+#nav_top li a:link,
+#nav_top li a:visited { text-decoration:none; }
+#nav_top .nav_top_curr a:link,
+#nav_top .nav_top_curr a:visited { color:#2C2C2C; }
+
+
+/* SEARCH LINK */
+#nav_top li#search { width:150px; position:absolute; right:0; top:0; padding:4px 0; margin-right:12px; }
+#nav_top li#search form { margin:0; overflow:hidden;}
+#nav_top li#search form label { display:none; }
+#nav_top li#search form input { float:left; padding:0; } /*search field and lupe.gif*/
+#nav_top li#search form input#keywords { background:#fff; border:1px solid #ccc; width:125px; padding:2px; } /*search field*/
+#nav_top li#search form input#keywords:hover { border-color:#999; }
+#nav_top li#search form input.submit { width:10px; height:10px; margin:4px 0 0 0; padding-left:5px; } /* lupe.gif */
+
+/* SUBNAVIGATION */
+#nav_sub { position:absolute; padding-left:10px; }
+#nav_sub ul { list-style:none; font-family: 'UniversCondensed', Verdana, Arial, Helvetica, "Times New Roman", Times, serif; font-size:12px; margin:0; padding:0; text-transform: uppercase }
+#nav_sub ul li { float:left; margin:0 20px 0 0; }
+#nav_sub li a:link,
+#nav_sub li a:visited { color:#666666; text-decoration:none; }
+#nav_sub .nav_sub_curr a:link,
+#nav_sub .nav_sub_curr a:visited { color:#000000; }
+
+
+
+/* FOOTER
+---------------------------------------------------------------------- */
+
+div#siteinfo { border-top:1px solid #D6D6D6; margin:30px 0; overflow:hidden; clear:both; font-size:12px; }
+ 
+div#siteinfo p#copyright { float:left; margin:5px 0; padding:0; font-family: 'UniversCondensed', Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #666666;}
+
+
+
+/* HOME PAGE
+---------------------------------------------------------------------- */
+
+#content_wrapper.home { padding:0; margin:0; border-top:none; }
+#content_wrapper.home h1 a:link,
+#content_wrapper.home h1 a:visited { text-decoration:none; }
+#content_wrapper.home h3 { font-size: 13px; }
+#content_wrapper.home a:link,
+#content_wrapper.home a:visited {  }
+
+
+#content_wrapper.home #home_image { float:left; width:640px; overflow-x:hidden; padding:0; margin:0; min-height: 450px; height: auto !important; height: 450px; }
+#content_wrapper.home #home_content { float:right; width:320px; position:relative; top: -3px;}
+#content_wrapper.home #home_content h2 { font-size: 12px;}
+#content_wrapper.home #home_footer { width:320px; float: right; right:0;}
+
+
+/* ARTISTS
+---------------------------------------------------------------------- */
+
+#content_wrapper.artists_overview #left { float:left; width:800px;} /*we need: 4*180 li + 4*20 padding + 10 safety margin = 810*/
+#content_wrapper.artists_overview #right { float:right; width:160px;  margin-right:0; x-overflow:hidden;}
+#content_wrapper.artists_overview #artists_list { list-style:none; }
+#content_wrapper.artists_overview #artists_list li { margin:0 20px 20px 0; float:left; }
+#content_wrapper.artists_overview #artists_list li a:link,
+#content_wrapper.artists_overview #artists_list li a:visited { display:block; width: 225px; height: 165px; text-decoration:none; position:relative; font-family: "UniversCondensed", Verdana, Arial, Helvetica; font-size: 13px; color:#333; }
+#content_wrapper.artists_overview #artists_list li a:hover span,
+#content_wrapper.artists_overview #artists_list li a:focus span { color:#000; background:#fff; }
+#content_wrapper.artists_overview #artists_list li a span { font-size: 16px; position:absolute; bottom:0px; left:0; background:#fff; padding:0px 4px; width: 221px; }
+
+
+#content_wrapper.artists_bio #left { width:400px; float:left; margin-right:100px; }
+#content_wrapper.artists_bio #right{ width:480px; float:right; margin-right:0; x-overflow:hidden; }
+#content_wrapper.artists_bio .artist_portrait { float: left; margin: 5px 10px 5px 0;}
+
+
+#content_wrapper.artists_showcase #left { float:left; width:370px; } /*we need: 3*100 li + 3*20 padding + 10 safety margin = 370*/
+#content_wrapper.artists_showcase #right { float:right; width:480px;  margin-right:0; x-overflow:hidden;}
+
+#content_wrapper.artists_showcase #showcase_list { list-style:none; }
+#content_wrapper.artists_showcase #showcase_list li { margin:0 20px 20px 0; float:left; display:block; cursor:pointer; width:100px; height:100px; text-decoration:none; position:relative;}
+#content_wrapper.artists_showcase #showcase_list li:hover {	position: relative;}
+#content_wrapper.artists_showcase #showcase_list li span { display: none; }
+#content_wrapper.artists_showcase #showcase_list li:hover span { line-height: 14px; white-space: nowrap; display: block; position: absolute; top: 100px; left: -2px; width: auto; padding: 2px; margin: 0; z-index: 100; background: #fff;}
+
+#content_wrapper.artists_showcase #showcase_image_title { color:#666666; }
+#content_wrapper.artists_showcase #showcase_image a:link,
+#content_wrapper.artists_showcase #showcase_image a:visited { color:black; text-decoration:none; }
+
+#content_wrapper.artists_publications #left { width:620px; float:left; margin-right:100px; }
+#content_wrapper.artists_publications #right{ width:240px; float:right; margin-right:0; x-overflow:hidden; }
+#content_wrapper.artists_publications h2 { margin-bottom: 5px; }
+#content_wrapper.artists_publications #left .pub-wrapper { padding-bottom: 12px; }
+#content_wrapper.artists_publications #left .pub-image-wrapper { float: left;margin: 0 16px 0 0; text-align: center;	width: 120px; }
+#content_wrapper.artists_publications #left .pub-image-wrapper img { background: #d1d1d1; border: 1px solid #999; padding: 3px; width: 120px; }
+#content_wrapper.artists_publications #left .pub-text-wrapper { float: left; width: 480px;  }
+#content_wrapper.artists_publications #left .pub-text-wrapper p { margin: 0; }
+#content_wrapper.artists_publications #left .pub-wrapper #pub-order { float: right; margin-top: 20px; }
+#content_wrapper.artists_publications #formPublication label { margin: 2px 0; }
+#content_wrapper.artists_publications #formPublication .form-element-textarea textarea { font-family: Verdana; font-size: 10px; }
+#content_wrapper.artists_publications .form-error { color: red !important; }
+#content_wrapper.artists_publications #publicationBasket { margin: 0 0 10px 0;}
+
+
+
+#content_wrapper.object_details #left { float:left; width: 640px; x-overflow:hidden;}
+#content_wrapper.object_details #right { float:right; width: 240px;  margin-right:0; x-overflow:hidden;}
+#content_wrapper.object_details p,
+#content_wrapper.object_details div  { color:#666666; }
+
+#content_wrapper.object_details #formConcern label { margin: 2px 0; }
+#content_wrapper.object_details	#formConcern .form-element-textarea textarea { font-family: Verdana; font-size: 10px; }
+#content_wrapper.object_details .form-error { color: red !important; }
+
+#content_wrapper.artists_showcase p.pagination { clear:left; text-align:left; border-top:1px solid #D6D6D6; padding-top:15px;  width:340px; font-weight:bold; }
+
+#content_wrapper.newsletter #left { float:left; width:480px; }
+#content_wrapper.newsletter #right { float:right; width:400px;  margin-right:0; x-overflow:hidden;}
+
+#content_wrapper.newsletter label { margin: 2px 0; }
+#content_wrapper.newsletter .form-error { color: red !important; }
+#content_wrapper.newsletter .form-submit { margin: 10px 0 0 0; }
+
+
+/* SHOWS
+---------------------------------------------------------------------- */
+
+
+#content_wrapper.shows_detail #left { float:left; width:480px; }
+#content_wrapper.shows_detail #right { float:right; width:400px;  margin-right:0; x-overflow:hidden;}
+
+#content_wrapper.shows_detail h3 { font-size: 13px; color: #666; }
+#content_wrapper.shows_detail #detail_image p { color:#666666;}
+#content_wrapper.shows_detail #detail_image a:link,
+#content_wrapper.shows_detail #detail_image a:visited { color:#000000; }
+#content_wrapper.shows_detail #detail_thumbs { list-style:none; }
+#content_wrapper.shows_detail #detail_thumbs li { margin:0 30px 20px 0; float:left; display:block; cursor:pointer; width:80px; height:60px; text-decoration:none; position:relative;}
+#content_wrapper.shows_detail #detail_thumbs li:hover {	position: relative;}
+#content_wrapper.shows_detail #detail_thumbs li span { display: none; }
+#content_wrapper.shows_detail #detail_thumbs li:hover span { line-height: 14px; white-space: nowrap; display: block; position: absolute; top: 60px; left: -2px; width: auto; padding: 2px; margin: 0 0 0 0; z-index: 100; background: none;}
+
+
+#content_wrapper.shows_overview #left { float:left; width:640px; }
+#content_wrapper.shows_overview #right { float:right; width:240px;  margin-right:0; x-overflow:hidden;}
+
+#content_wrapper.shows_overview ul.shows_list { list-style:none; }
+#content_wrapper.shows_overview ul.shows_list li { margin-left:0; border-bottom:1px solid #d9d9d9; margin-bottom:30px; padding-bottom:5px; }
+#content_wrapper.shows_overview ul.shows_list li.li_image { width: 160px; }
+#content_wrapper.shows_overview ul.shows_list li.li_content { padding-left:160px; overflow:hidden; }
+#content_wrapper.shows_overview ul.shows_list li.li_content img { width:140px; float:left; position:relative; left:-160px; margin:0 -160px 20px 0; }
+#content_wrapper.shows_overview ul.shows_list li h1 { margin-bottom: 12px; text-transform: lowercase }
+#content_wrapper.shows_overview ul.shows_list li h2 { margin-bottom: 12px; font-size: 12px; }
+#content_wrapper.shows_overview ul.shows_list li h3,
+#content_wrapper.shows_overview ul.shows_list li h3 a {  font-size: 13px; margin-bottom:12px; color:#666;}
+#content_wrapper.shows_overview ul.shows_list li p { cursor:pointer; }
+
+/* NEWS
+---------------------------------------------------------------------- */
+
+
+#content_wrapper.news #left { float:left; width:980px; }
+
+#content_wrapper.news ul.news_list { list-style:none; }
+#content_wrapper.news ul.news_list li { margin-left:0; border-bottom:1px solid #d9d9d9; margin-bottom:30px; padding-bottom:5px; }
+#content_wrapper.news ul.news_list li.li_image { width: 340px; }
+#content_wrapper.news ul.news_list li.li_content { padding-left:340px; overflow:hidden; }
+#content_wrapper.news ul.news_list li.li_content img { width: 320px; float:left; position:relative; left:-340px; margin:0 -340px 20px 0; }
+#content_wrapper.news ul.news_list li h2 { margin-bottom:20px; }
+#content_wrapper.news ul.news_list li h3 { margin-bottom:20px; color:black; }
+#content_wrapper.news ul.news_list li p { }
+
+
+/* ABOUT
+---------------------------------------------------------------------- */
+
+#content_wrapper.about #left { width:400px; float:left; margin-right:100px; }
+#content_wrapper.about #right { width:480px; float:left; margin-right:0; }
+#content_wrapper.about #about_image { margin-bottom:20px; }
+#content_wrapper.about #about_image img { display: none; }
+#content_wrapper.about #gallery_image { margin:0; }
+#content_wrapper.about #about_map { width:240px; height:180px; float:right; margin-left:15px; margin-bottom:15px; border:1px solid #ccc; }
+#content_wrapper.about #about_map_address { }
+#content_wrapper.about ul { list-style:none; }
+#content_wrapper.about li { margin: 0; }
+#content_wrapper.about .about_video {margin-bottom: 15px;}
+
+/* KUNSTHANDEL
+---------------------------------------------------------------------- */
+
+#content_wrapper.arttrade #left { width:400px; float:left; margin-right:100px; }
+#content_wrapper.arttrade #right { width:480px; float:left; margin-right:0; }
+#content_wrapper.arttrade #image { margin-bottom:20px; }
+
+/* Partner
+---------------------------------------------------------------------- */
+
+#content_wrapper.partner .partner_wrapper {  }
+#content_wrapper.partner .left { float:left; width:200px;}
+#content_wrapper.partner .right { float:right; width:760px;  margin-right:0; x-overflow:hidden;}
+#content_wrapper.partner .image { width: 200px; margin-bottom:20px; }
+#content_wrapper.partner .image img { display: block; height: auto !important; width: 200px !important; margin-bottom: 0px; }
+
+
+/* ART FAIRS
+---------------------------------------------------------------------- */
+/*
+div#artfairs_main { padding:0 10px; }
+div#artfairs_main h2 { color:#333; font-size:18px; }
+ul.artfairs { list-style:none; margin:0; }
+ul.artfairs li { margin-bottom:20px; margin-left:0; overflow:hidden; border-bottom:1px solid #d9d9d9; }
+ul.artfairs li.heading { border:none; margin:0; padding-top:15px; }
+ul.artfairs li.image { padding-left:240px; }
+ul.artfairs li.image img { float:left; position:relative; left:-240px; margin-right:-240px; margin-bottom:20px; width:220px;}
+
+*/
+
+
+
+/* SEARCH RESULTS
+---------------------------------------------------------------------- */
+
+#content_wrapper.search #left { float:left; width:560px; }
+
+#content_wrapper.search ul.search_list { list-style:none; }
+#content_wrapper.search ul.search_list li { margin-left:0; border-bottom:1px solid #d9d9d9; margin-bottom:20px; padding-bottom:5px; }
+#content_wrapper.search ul.search_list li p { margin:2px; }
+
+#content_wrapper.search ul.search_list li a { text-decoration:underline;font-size:14px;color:blue; }
+
+#content_wrapper.search ul.search_list li p.search_category {  color:gray; }
+#content_wrapper.search ul.search_list li p.search_text { color:black; }
+#content_wrapper.search ul.search_list li p.search_url { color:green; }
+rch_list li a { text-decoration:underline;font-size:14px;color:blue; }
+
+#content_wrapper.search ul.search_list li p.search_category {  color:gray; }
+#content_wrapper.search ul.search_list li p.search_text { color:black; }
+#content_wrapper.search ul.search_list li p.search_url { color:green; }
+
+.input_web { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+.clearfix {
+	*zoom: 1;
+}
+
+.clearfix:before {
+	content: ' ';
+	display: table;
+}
+
+.clearfix:after {
+	content: ' ';
+	display: table;
+	clear: both;
+}
+
+
+/*
+body { font-family:"Times New Roman", Times, serif; color:#333; font-size:11px; line-height:18px; }
+a:link,
+a:visited { color:#666; }
+a:hover,
+a:focus { color:#333; }
+*/

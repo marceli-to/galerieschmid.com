@@ -67,9 +67,7 @@ class ArtworksRelationManager extends RelationManager
         ->recordSelectSearchColumns(['inventory_number', 'description_de', 'order'])
       ])
       ->actions([
-        Tables\Actions\EditAction::make('edit')->modalWidth('2xl'),
         Tables\Actions\DetachAction::make('detach')->label('Entfernen'),
-        //Tables\Actions\DeleteAction::make(),
       ])
       ->bulkActions([
         // Tables\Actions\BulkActionGroup::make([

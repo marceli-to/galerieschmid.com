@@ -1,0 +1,21 @@
+
+form { margin-bottom:18px; }
+
+label { display:block; overflow:hidden; margin-bottom:15px; }
+label span { display:block; width:60px; float:left; margin-right:20px; }
+
+input[type="text"],
+textarea,
+select { border:none; background:#eee; font-size:11px; padding:5px; width:290px; }
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus { background-color:#ddd; }
+
+input[type="submit"] { border:none; background:#ddd; letter-spacing:1px; font-size:11px; padding:4px; }
+input[type="submit"]:hover { background-color:#ccc; }
+input[type="button"] { border:none; background:#ddd; letter-spacing:1px; font-size:11px; padding:4px; }
+
+fieldset.action { border-top:#e9e9e9 1px solid; padding-top:18px; overflow:hidden; }
+fieldset.action input[type="submit"] { float:right; }
+fieldset.action p.disclaimer { color:#999; font-size:11px; }

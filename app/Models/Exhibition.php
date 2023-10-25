@@ -4,10 +4,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Exhibition extends Model
+class Exhibition extends Model implements HasMedia
 {
-  use SoftDeletes;
+  use SoftDeletes, InteractsWithMedia;
 
   protected $fillable = [
     'id',
@@ -36,6 +40,10 @@ class Exhibition extends Model
     'date_show_to' => 'date:d.m.Y',
   ];
 
+  protected $appends = [
+    'periode'
+  ];
+
   public function user(): BelongsTo
   {
     return $this->belongsTo(User::class);
@@ -44,6 +52,43 @@ class Exhibition extends Model
   public function artworks(): BelongsToMany
   {
     return $this->belongsToMany(Artwork::class, 'artwork_exhibition')->withPivot(['position'])->withTimestamps();
+  }
+
+  public function scopeActive($query)
+  {
+    return $query->where('active', 1);
+  }
+
+  public function scopeUpcoming($query)
+  {
+    return $query->where('date_start', '<=', now())
+      ->where('date_end', '>=', now())
+      ->orWhere('date_start', '>', now())
+      ->where('date_end', '>', now());
+  }
+
+  public function scopeArchived($query)
+  {
+    return $query->where('date_start', '<', now())->where('date_end', '<', now());
+  }
+
+  public function getPeriodeAttribute()
+  {
+    if ($this->date_start && $this->date_end)
+    {
+      return \Carbon\Carbon::parse($this->date_start)->translatedFormat('j. F Y') . ' &mdash; ' . \Carbon\Carbon::parse($this->date_end)->translatedFormat('j. F Y');
+    }
+  }
+
+  public function registerMediaConversions(Media $media = null): void
+  {
+    $this->addMediaConversion('preview')->fit(Manipulations::FIT_CROP, 300, 300)->nonQueued();
+    $this->addMediaConversion('cover')->fit(Manipulations::FIT_MAX, 1200, 900)->nonQueued();
+  }
+
+  public function registerMediaCollections(): void
+  {
+    $this->addMediaCollection('exhibition_cover');
   }
 
 }

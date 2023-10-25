@@ -65,7 +65,7 @@ class ImpressionResource extends Resource
             ->downloadable()
             ->helperText('Erlaubte Dateitypen: JPG, PNG')
             ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
-              return (string) str('galerieschmid-kuenstler-portrait-' . uniqid() . '.' . $file->extension());
+              return (string) str('galerieschmid-impression-' . uniqid() . '.' . $file->extension());
             }),
             TextInput::make('title')
             ->label('Titel'),

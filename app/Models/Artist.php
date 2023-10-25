@@ -27,7 +27,7 @@ class Artist extends Model implements HasMedia
     'email',
     'newsletter_subscriber',
     'publish',
-    'order',
+    'position',
     'artist_type_id',
     'user_id'
   ];
@@ -54,6 +54,11 @@ class Artist extends Model implements HasMedia
   public function publications(): HasMany
   {
     return $this->hasMany(ArtistPublication::class);
+  }
+
+  public function scopePublished($query)
+  {
+    return $query->where('publish', 1);
   }
 
   public function registerMediaConversions(Media $media = null): void

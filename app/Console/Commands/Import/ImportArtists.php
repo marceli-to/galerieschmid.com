@@ -50,6 +50,7 @@ class ImportArtists extends Command
           'email' => $item->EMAIL ?? NULL,
           'newsletter_subscriber' => $item->NEWSLETTER_SUBSCRIBE ?? NULL,
           'artist_type_id' => $item->KUENSTLER_TYPE ?? NULL,
+          'position' => $item->POS ?? -1,
           'publish' => $item->STATUS,
           'user_id' => 1,
         ]);

@@ -117,6 +117,24 @@ class ExhibitionResource extends Resource
               ->columnSpan(6)
               ->label('Aktiv'),
             ]),
+
+
+            Section::make('Cover')
+              ->collapsible()
+              ->schema([
+                SpatieMediaLibraryFileUpload::make('image')
+                ->collection('exhibition_cover')
+                ->label('Bild')
+                ->image()
+                ->imageEditor()
+                ->downloadable()
+                ->helperText('Erlaubte Dateitypen: JPG, PNG')
+                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $get): string {
+                  return (string) str('galerieschmid-ausstellung-cover-' . uniqid() . '.' . $file->extension());
+                }),
+              ]),
+
+
             Section::make('Daten')
             ->collapsible()
             ->schema([

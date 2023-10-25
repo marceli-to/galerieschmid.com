@@ -1,0 +1,43 @@
+/* Helpers
+ * -------------------- */
+/**
+ * Variables
+ * -----------------------------------------------------------------------------
+ */
+/* Colors
+ * -------------------- */
+/* Gutter
+ * -------------------- */
+/* Paths
+ * -------------------- */
+/* Font sizes
+ * -------------------- */
+/* Layout
+ * -------------------- */
+/* Pace
+ * http://github.hubspot.com/pace/docs/welcome/
+ * -------------------- */
+/* line 11, ../../.source/source/sass/pace.scss */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* line 19, ../../.source/source/sass/pace.scss */
+.pace-inactive {
+  display: none;
+}
+
+/* line 23, ../../.source/source/sass/pace.scss */
+.pace .pace-progress {
+  background-color: #D9001C;
+  height: 2px;
+  position: fixed;
+  right: 100%;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+}
