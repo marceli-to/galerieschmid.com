@@ -18,7 +18,7 @@
     <div class="swiper-wrapper">
       @if ($impressions && $impressions->count() > 0)
         @foreach($impressions as $impression)
-          <x-media.slide :url="$impression->media->first()->getUrl('preview')" />
+          <x-media.slide :url="$impression->media->first()->getUrl('detail')" />
         @endforeach
       @endif
     </div>

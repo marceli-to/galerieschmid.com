@@ -14,11 +14,7 @@
           @foreach($artist->artwork as $index => $artwork)
             @if ($artwork->media->first())
               <x-media.slide :url="$artwork->media->first()->getUrl('detail')">
-                <figcaption>
-                  <strong>{{ $artwork->description_de }}</strong><br>
-                  {{ $artwork->artworkTechnique ? $artwork->artworkTechnique->description_de : '' }}
-                  {{ $artwork->litho_number ? ', ' . $artwork->litho_number : '' }}
-                </figcaption>
+                <x-artwork.caption :artwork="$artwork" />
               </x-media.slide>
             @endif
           @endforeach
@@ -33,10 +29,11 @@
     @endif
   @else
     <article class="thumbnail-grid js-thumbnail-grid">
-      @foreach($artist->artwork as $index => $artwork)
+      @php $i = 0; @endphp
+      @foreach($artist->artwork as $artwork)
         @if ($artwork->media->first())
           <a 
-            href="/{{ __('kuenstler') }}/{{ __('werke') }}/{{ \Str::slug($artist->fullname)}}/{{ $artist->id }}/{{ $index }}" 
+            href="/{{ __('kuenstler') }}/{{ __('werke') }}/{{ \Str::slug($artist->fullname)}}/{{ $artist->id }}/{{ $i }}" 
             class="js-thumbnail">
             <x-media.image 
               :url="$artwork->media->first()->getUrl('listing')" 
@@ -45,6 +42,7 @@
               height="600">
             </x-media.image>
           </a>
+          @php $i++; @endphp
         @endif
       @endforeach
     </article>

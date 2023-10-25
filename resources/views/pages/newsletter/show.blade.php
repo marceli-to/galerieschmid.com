@@ -6,9 +6,11 @@
 @vite('resources/css/app.css')
 </head>
 <body class="mx-auto w-full max-w-[640px] font-newsletter p-10 text-[14px]">
-  <div class="bg-crimson text-white leading-none fixed right-15 top-15 p-10 w-auto inline-block">
-    <span class="text-[18px]">Vorschau</span>
-  </div>
+  @if ($isPreview)
+    <div class="bg-crimson text-white leading-none fixed right-15 top-15 p-10 w-auto inline-block">
+      <span class="text-[18px]">Vorschau</span>
+    </div>
+  @endif
   <main class="p-10">
     <header class="h-95 block">
       <x-newsletter.logo />

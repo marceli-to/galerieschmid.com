@@ -75,6 +75,10 @@ class Artwork extends Model implements HasMedia
     'date_billed' => 'date:d.m.Y',
   ];
 
+  protected $appends = [
+    'dimensions'
+  ];
+
   public function user(): BelongsTo
   {
     return $this->belongsTo(User::class);
@@ -140,6 +144,34 @@ class Artwork extends Model implements HasMedia
   public function registerMediaCollections(): void
   {
     $this->addMediaCollection('artwork_images');
+  }
+
+  public function getDimensionsAttribute(): mixed
+  {
+    $dimensions = [];
+    if ($this->height)
+    {
+      $dimensions[] = str_replace('.00', '', $this->height);
+    }
+    if ($this->width)
+    {
+      $dimensions[] = str_replace('.00', '', $this->width);
+    }
+    if ($this->depth)
+    {
+      $dimensions[] = str_replace('.00', '', $this->depth);
+    }
+    if ($this->diameter)
+    {
+      $dimensions[] = str_replace('.00', '', $this->diameter);
+    }
+
+    if (count($dimensions) === 0)
+    {
+      return NULL;
+    }
+
+    return implode(' x ', $dimensions) . ' cm';
   }
 
 }

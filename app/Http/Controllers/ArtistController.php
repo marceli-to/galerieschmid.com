@@ -34,5 +34,22 @@ class ArtistController extends Controller
       'artists' => (new GetArtistList())->execute(),
     ]);
   }
+
+  /**
+   * Shows the artist works page
+   * 
+   * @param  string $slug
+   * @param  Artist $artist
+   * @param  int $index
+   * @return \Illuminate\Http\Response
+   */
+
+  public function works($slug, Artist $artist, $index = 0)
+  {
+    return view('pages.artists.works', [
+      'artist' => (new GetArtist())->execute($artist),
+      'slideIndex' => $index,
+    ]);
+  }
 }
 

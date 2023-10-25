@@ -1227,7 +1227,7 @@ form.contact-form label.is-floating {
 }
 /* line 133, ../../.source/source/sass/components/_forms.scss */
 form.contact-form label.has-error {
-  color: #378aee;
+  color: #d9534f;
 }
 /* line 138, ../../.source/source/sass/components/_forms.scss */
 form.contact-form input[type=text] {

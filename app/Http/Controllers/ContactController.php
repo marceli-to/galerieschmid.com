@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Actions\Content\GetItem;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -11,7 +12,10 @@ class ContactController extends Controller
    */
   public function index()
   { 
-    return view('pages.contact');
+    return view('pages.contact', [
+      'contact_opening_hours' => (new GetItem())->execute('contact_opening_hours'),
+      'contact_address' => (new GetItem())->execute('contact_address'),
+    ]);
   }
 
 }

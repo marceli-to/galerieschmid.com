@@ -19,5 +19,4 @@ class AboutController extends Controller
       'impressions' => (new GetImpressions())->execute(),
     ]);
   }
-
 }

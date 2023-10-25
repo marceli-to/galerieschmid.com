@@ -16,11 +16,13 @@ class Newsletter extends Model
     'show_in_archive',
     'language_id',
     'user_id',
+    'sent_at',
     'created_at',
   ];
 
   protected $casts = [
     'created_at' => 'date:d.m.Y',
+    'sent_at' => 'date:d.m.Y',
   ];
 
   public function user(): BelongsTo
@@ -38,15 +40,18 @@ class Newsletter extends Model
     return $this->belongsTo(NewsletterLanguage::class);
   }
 
-  // relationship for queued items
   public function queued(): HasMany
   {
     return $this->hasMany(NewsletterQueue::class);
   }
 
-  // relationship for queued and processed items
   public function processed(): HasMany
   {
     return $this->hasMany(NewsletterQueue::class)->where('processed', '1');
+  }
+
+  public function scopeArchive($query)
+  {
+    return $query->where('show_in_archive', '1')->orderBy('created_at', 'desc');
   }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
       $table->string('title');
       $table->tinyInteger('active')->default(0);
       $table->tinyInteger('show_in_archive')->default(0);
+      $table->timestamp('sent_at')->nullable();
       $table->foreignId('language_id')->constrained('newsletter_languages');
       $table->foreignId('user_id')->constrained('users');
       $table->softDeletes();

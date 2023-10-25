@@ -45,9 +45,18 @@ class ImportContentArticle extends Command
     ]);
 
     ContentArticle::create([
-      'key' => 'opening_hours',
+      'key' => 'contact_opening_hours',
       'title_de' => 'Öffnungszeiten',
-      'text_de' => '<p>Do & Fr 11.00 - 16.00 Uhr<br>Sa 11.00 - 16.00 Uhr<br>So - Mi nach Vereinbarung</p>',
+      'text_de' => '<p>Die Galerie ist vom 09. Oktober 2023 bis anfangs Dezember 2023 wegen Sanierung der Liegenschaft am Bundesplatz 14 geschlossen.</p><p>The gallery is closed from 09. Oktober 2023 until begining of december 2023 due to renovation of the building Bundesplatz 14.</p><p>Kontakt:  info@galerieschmid.com / Stefan Schmid</p>',
+      'title_en' => null,
+      'text_en' => null,
+      'user_id' => 1,
+    ]);
+
+    ContentArticle::create([
+      'key' => 'contact_address',
+      'title_de' => 'Adresse',
+      'text_de' => '<p>Galerie Schmid<br>GAP ART AG<br>Bundesplatz 14<br>6300 Zug</p><p>T + 41  (0)41 711 08 02<br>M  +41 (0)79 784 71 49<br>info@galerieschmid.com<br>www.galerieschmid.com</p><p>Der Eingang zur Galerie befindet sich in der Gotthardstrasse - hinter dem Bundesplatz.</p>',
       'title_en' => null,
       'text_en' => null,
       'user_id' => 1,

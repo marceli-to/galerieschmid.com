@@ -40,6 +40,7 @@ class ImportNewsletters extends Command
           $newsletter = $this->model::create([
             'id' => $item->id,
             'title' => html_entity_decode($item->title),
+            'sent_at' => date('Y-m-d H:i:s', $item->dateSent),
             'created_at' => date('Y-m-d H:i:s', $item->dateCreate),
             'active' => $item->isActive ?? 0,
             'show_in_archive' => $item->showInArchive ?? 0,

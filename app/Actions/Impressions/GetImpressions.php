@@ -6,6 +6,6 @@ class GetImpressions
 {
   public function execute()
   {
-    return Impression::published()->get();
+    return Impression::published()->orderBy('position')->get();
   }
 }

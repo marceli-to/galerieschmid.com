@@ -24,6 +24,7 @@ use App\Models\Newsletter;
 // Page routes
 Route::get('/', [HomeController::class, 'index'])->name('page.home');
 Route::get('/kuenstler', [ArtistController::class, 'index'])->name('page.artist');
+Route::get('/kuenstler/werke/{slug?}/{artist}/{index?}', [ArtistController::class, 'works'])->name('page.artist.works');
 Route::get('/kuenstler/{slug?}/{artist}', [ArtistController::class, 'show'])->name('page.artist.show');
 
 Route::get('/ausstellungen', [ExhibitionController::class, 'index'])->name('page.exhibition');
@@ -36,8 +37,6 @@ Route::get('/artwork-label', [PdfController::class, 'createArtworkLabel']);
 
 // Newsletter routes
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('page.newsletter');
-Route::get('/newsletter/preview/{newsletter}', function (Newsletter $newsletter) {
-  $newsletter = Newsletter::with('articles.media')->find($newsletter->id);
-  return view('pages.newsletter.preview', compact('newsletter'));
-})->name('newsletter.preview');
+Route::get('/newsletter/archiv/{newsletter}', [NewsletterController::class, 'archive'])->name('page.newsletter.archive');
+Route::get('/newsletter/preview/{newsletter}', [NewsletterController::class, 'preview'])->name('page.newsletter.preview');
 
