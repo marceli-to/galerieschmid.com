@@ -31,8 +31,8 @@ class Impression extends Model implements HasMedia
 
   public function registerMediaConversions(Media $media = null): void
   {
-    $this->addMediaConversion('preview')->fit(Manipulations::FIT_CROP, 300, 300)->nonQueued();
-    $this->addMediaConversion('detail')->fit(Manipulations::FIT_MAX, 1600, 1200)->nonQueued();
+    $this->addMediaConversion('preview')->fit(Manipulations::FIT_CROP, 300, 300);
+    $this->addMediaConversion('detail')->fit(Manipulations::FIT_MAX, 1600, 1200);
   }
 
   public function registerMediaCollections(): void

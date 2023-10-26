@@ -12,7 +12,7 @@
       <a href="javascript:;" class="slider-btn slider-btn--next js-btn-slide-next">&nbsp;</a>			
       <div class="swiper-wrapper">
         @foreach($artists as $artist)
-          @php $artwork = $artist->artwork->random(); @endphp
+          @php $artwork = $artist->artworksActive->random(); @endphp
           @if ($artwork && $artwork->media->first())
            <x-media.slide :url="$artwork->media->first()->getUrl('detail')" />
           @endif

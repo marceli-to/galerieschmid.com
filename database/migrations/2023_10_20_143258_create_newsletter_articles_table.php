@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string('title');
       $table->text('text')->nullable();
-      $table->tinyInteger('position')->default(0);
+      $table->integer('position')->default(0);
       $table->foreignId('user_id')->constrained();
       $table->foreignId('newsletter_id')->constrained();
       $table->softDeletes();

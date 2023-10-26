@@ -6,6 +6,6 @@ class GetArtistList
 {
   public function execute()
   {
-    return Artist::published()->with('artwork')->orderBy('position')->get();
+    return Artist::published()->with('artworksActive')->orderBy('position')->get();
   }
 }

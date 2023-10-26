@@ -21,7 +21,7 @@ class ImportArtworkImages extends Command
   {
     $this->info('Artwork image update started...');
 
-    $artworks = $this->model::where('image', '!=', null)->limit(1000)->get();
+    $artworks = $this->model::where('image', '!=', null)->limit(700)->get();
 
     // allowed mime types
     $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -35,6 +35,7 @@ class ImportArtworkImages extends Command
 
         if ($artwork->image)
         {
+          $this->info('Start with image ' . $artwork->image);
           $pathToFile = storage_path('app/import/file_data/objekte/' . $artwork->id . '/img/' . $artwork->image);
 
           // check import folder too
@@ -59,11 +60,13 @@ class ImportArtworkImages extends Command
             else
             {
               $artwork->copyMedia($pathToFile)->toMediaCollection('artwork_images');
+              $this->info('Copied image ' . $artwork->image);
             }
           }
 
           $artwork->image = NULL;
           $artwork->save();
+          $this->info('Set image to NULL ' . $artwork->image);
         }
       }
     }

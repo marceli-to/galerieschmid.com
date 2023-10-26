@@ -5,13 +5,13 @@
   <h2>{{ __('Werke') }}</h2>
   @if (Agent::isMobile() && !Agent::isTablet())
     <div class="slider artist-showcase swiper-container js-slider">
-      @if ($artist->artwork && $artist->artwork->count() > 1)
+      @if ($artist->artworksActive && $artist->artworksActive->count() > 1)
         <a href="javascript:;" class="slider-btn slider-btn--prev js-btn-slide-prev">&nbsp;</a>
         <a href="javascript:;" class="slider-btn slider-btn--next js-btn-slide-next">&nbsp;</a>			
       @endif
       <div class="swiper-wrapper">
-        @if ($artist->artwork && $artist->artwork->count() > 1)
-          @foreach($artist->artwork as $index => $artwork)
+        @if ($artist->artworksActive && $artist->artworksActive->count() > 1)
+          @foreach($artist->artworksActive as $index => $artwork)
             @if ($artwork->media->first())
               <x-media.slide :url="$artwork->media->first()->getUrl('detail')">
                 <x-artwork.caption :artwork="$artwork" />
@@ -21,7 +21,7 @@
         @endif
       </div>
     </div>
-    @if ($artist->artwork && $artist->artwork->count() > 1)
+    @if ($artist->artworksActive && $artist->artworksActive->count() > 1)
       <div class="slider-footer">
         <div class="slider-counter js-slider-pagination"></div>
         <div class="slider-caption js-slider-caption"></div>
@@ -30,7 +30,7 @@
   @else
     <article class="thumbnail-grid js-thumbnail-grid">
       @php $i = 0; @endphp
-      @foreach($artist->artwork as $artwork)
+      @foreach($artist->artworksActive as $artwork)
         @if ($artwork->media->first())
           <a 
             href="/{{ __('kuenstler') }}/{{ __('werke') }}/{{ \Str::slug($artist->fullname)}}/{{ $artist->id }}/{{ $i }}" 

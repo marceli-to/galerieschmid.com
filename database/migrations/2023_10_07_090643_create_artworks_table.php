@@ -41,7 +41,7 @@ return new class extends Migration
       $table->text('info_arttrade')->nullable();
       $table->string('bank_account_number')->nullable();
       $table->text('bank_account_info')->nullable();
-      $table->tinyInteger('position')->default(-1);
+      $table->integer('position')->default(-1);
       $table->tinyInteger('publish')->default(0);
       $table->foreignId('artwork_state_id')->constrained();
       $table->foreignId('artwork_technique_id')->nullable()->constrained();

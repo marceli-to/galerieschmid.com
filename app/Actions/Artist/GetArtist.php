@@ -6,6 +6,6 @@ class GetArtist
 {
   public function execute(Artist $artist)
   {
-    return Artist::with('publications', 'artwork.artworkTechnique', 'artwork.artworkFrame')->find($artist->id);
+    return Artist::with('publications', 'artworksActive.artworkTechnique', 'artworksActive.artworkFrame')->find($artist->id);
   }
 }

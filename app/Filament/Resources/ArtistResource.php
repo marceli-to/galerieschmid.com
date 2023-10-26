@@ -263,6 +263,7 @@ class ArtistResource extends Resource
   public static function getRelations(): array
   {
     return [
+      RelationManagers\ArtworksRelationManager::class,
       RelationManagers\AddressRelationManager::class,
       RelationManagers\PublicationsRelationManager::class,
     ];

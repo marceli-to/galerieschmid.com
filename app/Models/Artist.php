@@ -56,9 +56,14 @@ class Artist extends Model implements HasMedia
     return $this->hasMany(ArtistPublication::class);
   }
 
-  public function artwork(): HasMany
+  public function artworksActive(): HasMany
   {
     return $this->hasMany(Artwork::class)->orderBy('position')->orderBy('id', 'DESC')->where('artwork_state_id', 1)->where('publish', 1);
+  }
+
+  public function artworks(): HasMany
+  {
+    return $this->hasMany(Artwork::class)->orderBy('position')->orderBy('id', 'DESC');
   }
 
   public function scopePublished($query)
@@ -71,7 +76,7 @@ class Artist extends Model implements HasMedia
     $this
       ->addMediaConversion('preview')
       ->fit(Manipulations::FIT_CROP, 300, 300)
-      ->nonQueued();
+      ;
   }
 
   public function registerMediaCollections(): void
