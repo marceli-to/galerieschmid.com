@@ -18,8 +18,6 @@ return new class extends Migration
         $table->string('email');
         $table->string('hash')->nullable();
         $table->string('salutation')->nullable();
-        $table->tinyInteger('confirmed')->default(0);
-        $table->tinyInteger('active')->default(0);
         $table->date('confirmed_at')->nullable();
         $table->foreignId('language_id')->nullable()->constrained('newsletter_languages');
         $table->foreignId('user_id')->nullable()->constrained('users');

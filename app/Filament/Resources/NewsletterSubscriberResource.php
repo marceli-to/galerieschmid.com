@@ -141,6 +141,13 @@ class NewsletterSubscriberResource extends Resource
           ->label('E-Mail')
           ->searchable()
           ->sortable(),
+
+        // created_at (date format: d.m.Y H:i:s)
+        TextColumn::make('created_at')
+          ->label('Anmeldung am')
+          ->date('d.m.Y H:i:s')
+          ->searchable()
+          ->sortable(),
       ])
       ->filters([
       ])

@@ -53,8 +53,6 @@ class ImportNewslettersubscribers extends Command
             '3' => Salutation::UNBEKANNT,
           },
           'language_id' => $item->languageId,
-          'confirmed' => $item->isConfirmed,
-          'active' => $item->isActive,
           'confirmed_at' => date('Y-m-d H:i:s', $item->dateConfirmation),
           'created_at' => date('Y-m-d H:i:s', $item->dateCreate),
           'user_id' => 1,

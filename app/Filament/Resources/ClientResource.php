@@ -172,8 +172,10 @@ class ClientResource extends Resource
         ->label('Ort')
         ->searchable(),
         TextColumn::make('gallery')
+        ->label('Galerie')
         ->badge(),
         IconColumn::make('active')
+        ->label('Aktiv')
         ->sortable()
         ->boolean(),
       ])

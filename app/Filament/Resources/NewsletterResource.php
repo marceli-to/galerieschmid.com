@@ -2,7 +2,7 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\NewsletterResource\Pages;
 use App\Filament\Resources\NewsletterResource\RelationManagers;
-use App\Actions\Newsletter\AddListSubscribersToQueue;
+use App\Services\Newsletter as NewsletterService;
 use App\Models\Newsletter;
 use App\Models\NewsletterLanguage;
 use App\Models\NewsletterList;
@@ -157,7 +157,7 @@ class NewsletterResource extends Resource
                   ->required(),
               ])
               ->action(function (array $data, $record): void {
-                $response = (new AddListSubscribersToQueue())->execute(
+                $response = (new NewsletterService())->queue(
                   Newsletter::find($record->id),
                   NewsletterList::find($data['newsletter_list_id'])
                 );

@@ -52,6 +52,9 @@ class NewsletterListResource extends Resource
           ->label('Beschreibung')
           ->required()
           ->maxLength(255),
+          Toggle::make('public')
+          ->columnSpan(6)
+          ->label('Öffentliche Liste'),
         ])
       ]);
   }
@@ -64,6 +67,9 @@ class NewsletterListResource extends Resource
           ->label('Beschreibung')
           ->searchable()
           ->sortable(),
+          IconColumn::make('public')
+          ->label('Öffentlich')
+          ->boolean(),
         TextColumn::make('newsletterSubscribers')
           ->label('Abonnenten')
           ->badge()

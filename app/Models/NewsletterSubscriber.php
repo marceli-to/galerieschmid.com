@@ -16,8 +16,6 @@ class NewsletterSubscriber extends Model
     'email',
     'hash',
     'salutation',
-    'confirmed',
-    'active',
     'confirmed_at',
     'created_at',
     'language_id',

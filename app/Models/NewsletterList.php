@@ -12,6 +12,7 @@ class NewsletterList extends Model
   protected $fillable = [
     'id',
     'description',
+    'public',
     'user_id',
   ];
 
@@ -25,9 +26,13 @@ class NewsletterList extends Model
     return $this->belongsToMany(NewsletterSubscriber::class, 'newsletter_list_newsletter_subscriber', 'list_id', 'subscriber_id');
   }
 
-  // get confirmed subscribers for a list
   public function confirmedSubscribers()
   {
-    return $this->newsletterSubscribers()->where('confirmed', 1);
+    return $this->newsletterSubscribers()->whereNotNull('confirmed_at');
+  }
+
+  public function scopePublic($query)
+  {
+    return $query->where('public', 1);
   }
 }

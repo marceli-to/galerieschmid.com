@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Resources\NewsletterQueueResource\Pages;
 use App\Filament\Resources\NewsletterQueueResource;
-use App\Actions\Newsletter\ClearQueue;
+use App\Services\Newsletter as NewsletterService;
 use Filament\Notifications\Notification;
 use Filament\Actions;
 use Filament\Actions\Action;
@@ -21,11 +21,8 @@ class ListNewsletterQueues extends ListRecords
       ->color('danger')
       ->requiresConfirmation()
       ->action(function(): void {
-        (new ClearQueue())->execute();
-        Notification::make()
-          ->title('Warteschlange geleert!')
-          ->success()
-          ->send();
+        (new NewsletterService())->clearQueue();
+        Notification::make()->title('Warteschlange geleert!')->success()->send();
       }),
     ];
   }

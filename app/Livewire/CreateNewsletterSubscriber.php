@@ -3,6 +3,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Rule; 
 use Livewire\Component;
 use App\Models\NewsletterSubscriber;
+use App\Services\Newsletter as NewsletterService;
 
 class CreateNewsletterSubscriber extends Component
 {
@@ -18,19 +19,14 @@ class CreateNewsletterSubscriber extends Component
   public function save()
   {
     $this->validate();
-    
-    $subscriber = NewsletterSubscriber::create(
-      $this->only([
-        'lastname', 
-        'firstname',
-        'email',
-      ])
-    );
 
-    $subscriber->active = 1;
-    $subscriber->save();
+    (new NewsletterService())->subscribe([
+      'firstname' => $this->firstname,
+      'lastname' => $this->lastname,
+      'email' => $this->email,
+    ]);
 
-    session()->flash('status', 'Inquiry was submitted');
+    session()->flash('status', 'success');
     $this->reset();
     $this->render();
   }

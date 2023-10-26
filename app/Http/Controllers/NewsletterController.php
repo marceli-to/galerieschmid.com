@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Actions\Newsletter\GetArchive;
-use App\Actions\Newsletter\GetNewsletter;
+use App\Services\Newsletter as NewsletterService;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,7 @@ class NewsletterController extends Controller
   public function index()
   { 
     return view('pages.newsletter.index', [
-      'newsletters' => (new GetArchive())->execute(),
+      'newsletters' => (new NewsletterService())->get('archive'),
     ]);
   }
 
@@ -28,7 +27,7 @@ class NewsletterController extends Controller
   public function preview(Newsletter $newsletter)
   {
     return view('pages.newsletter.show', [
-      'newsletter' => (new GetNewsletter())->execute($newsletter),
+      'newsletter' => (new NewsletterService())->find($newsletter),
       'isPreview' => true,
     ]);
   }
@@ -42,7 +41,7 @@ class NewsletterController extends Controller
   public function archive(Newsletter $newsletter)
   {
     return view('pages.newsletter.show', [
-      'newsletter' => (new GetNewsletter())->execute($newsletter),
+      'newsletter' => (new NewsletterService())->find($newsletter),
       'isPreview' => false,
     ]);
   }

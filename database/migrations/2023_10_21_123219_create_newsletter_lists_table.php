@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('newsletter_lists', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->tinyInteger('public')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
