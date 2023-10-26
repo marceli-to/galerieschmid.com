@@ -51,7 +51,7 @@ class Exhibition extends Model implements HasMedia
 
   public function artworks(): BelongsToMany
   {
-    return $this->belongsToMany(Artwork::class, 'artwork_exhibition')->withPivot(['position'])->withTimestamps();
+    return $this->belongsToMany(Artwork::class, 'artwork_exhibition')->where('artwork_state_id', 1)->withPivot(['sort'])->withTimestamps();
   }
 
   public function scopeActive($query)

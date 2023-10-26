@@ -39,7 +39,7 @@ class ImportExhibitionArtwork extends Command
           'id' => $item->id,
           'exhibition_id' => $item->fk_ausstellungen_id ?? NULL,
           'artwork_id' => $item->fk_objekte_id ?? NULL,
-          'position' => $item->sort ?? NULL,
+          'sort' => $item->sort ?? NULL,
         ]);
       }
     }

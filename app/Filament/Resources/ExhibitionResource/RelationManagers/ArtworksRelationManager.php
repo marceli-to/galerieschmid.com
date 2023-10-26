@@ -46,7 +46,7 @@ class ArtworksRelationManager extends RelationManager
         ->collection('artwork_images')
         ->circular()
         ->conversion('preview'),
-        TextColumn::make('position')
+        TextColumn::make('sort')
         ->sortable()
         ->label('Position'),
         TextColumn::make('description_de')
@@ -54,17 +54,17 @@ class ArtworksRelationManager extends RelationManager
         TextColumn::make('artist.artist_name')
         ->label('Künstler'),
       ])
-      ->reorderable('position')
-      ->defaultSort('position', 'ASC')
+      ->reorderable('sort')
+      ->defaultSort('sort', 'ASC')
       ->filters([
       ])
       ->headerActions([
         Tables\Actions\AttachAction::make('attach')
         ->form(fn (Tables\Actions\AttachAction $action): array => [
           $action->getRecordSelect(),
-          Forms\Components\TextInput::make('position')->required(),
+          Forms\Components\TextInput::make('sort')->required(),
         ])
-        ->recordSelectSearchColumns(['inventory_number', 'description_de', 'order'])
+        ->recordSelectSearchColumns(['inventory_number', 'description_de', 'position'])
       ])
       ->actions([
         Tables\Actions\DetachAction::make('detach')->label('Entfernen'),

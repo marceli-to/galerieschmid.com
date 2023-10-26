@@ -13,7 +13,7 @@ return new class extends Migration
     {
       Schema::create('artwork_exhibition', function (Blueprint $table) {
         $table->id();
-        $table->integer('position')->default(0);
+        $table->integer('sort')->default(0);
         $table->foreignId('artwork_id')->constrained()->onDelete('cascade');
         $table->foreignId('exhibition_id')->constrained()->onDelete('cascade');
         $table->timestamps();

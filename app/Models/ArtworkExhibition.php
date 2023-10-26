@@ -10,7 +10,7 @@ class ArtworkExhibition extends Model
   protected $fillable = [
     'artwork_id',
     'exhibition_id',
-    'position'
+    'sort'
   ];
 
   public function artwork(): BelongsTo
