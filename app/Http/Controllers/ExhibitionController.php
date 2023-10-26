@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
+use App\Actions\Exhibition\GetExhibitionList;
 use Illuminate\Http\Request;
 
 class ExhibitionController extends Controller
 {
+
   /**
    * Shows the exhibitions page
    * 
@@ -11,7 +13,8 @@ class ExhibitionController extends Controller
    */
   public function index()
   { 
-    return view('pages.exhibitions');
+    return view('pages.exhibitions.index', [
+      'exhibitions' => (new GetExhibitionList())->execute()
+    ]);
   }
-
 }

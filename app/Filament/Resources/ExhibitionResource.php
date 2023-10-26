@@ -60,9 +60,11 @@ class ExhibitionResource extends Resource
               ->schema([
                 TextInput::make('title_de')
                 ->label('Titel / Künstler')
+                ->required()
                 ->columnSpan('full'),
                 TextInput::make('subtitle_de')
                 ->label('Subtitel / Thema')
+                ->required()
                 ->columnSpan('full'),
                 TextArea::make('summary_de')
                 ->label('Zusammenfassung')

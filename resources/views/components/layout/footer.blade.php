@@ -1,6 +1,6 @@
 @props(['slideIndex' => 0])
 @if (Route::is('page.contact'))
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEusGhp2vS00IdyyHBTFDxwlAtelBtAng"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
 @endif
 @livewireScripts
 <script src="{{ asset('legacy/js/script.js') }}?v={{ date('dmY', time()) }}"></script>

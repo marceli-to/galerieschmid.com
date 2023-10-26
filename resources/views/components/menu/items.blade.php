@@ -2,7 +2,7 @@
   <a href="{{ route('page.artist') }}" class="{{ Route::is('page.artist*') ? 'is-active' : '' }}" data-touch="">Künstler</a>
 </li>
 <li>
-  <a href="{{ route('page.exhibition') }}" class="{{ Route::is('page.exhibition') ? 'is-active' : '' }}" data-touch="">Ausstellungen</a>
+  <a href="{{ route('page.exhibition') }}" class="{{ Route::is('page.exhibition*') ? 'is-active' : '' }}" data-touch="">Ausstellungen</a>
 </li>
 <li>
   <a href="{{ route('page.about') }}" class="{{ Route::is('page.about') ? 'is-active' : '' }}" data-touch="">Über uns</a>

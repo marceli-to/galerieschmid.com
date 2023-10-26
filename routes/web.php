@@ -23,11 +23,14 @@ use App\Models\Newsletter;
 
 // Page routes
 Route::get('/', [HomeController::class, 'index'])->name('page.home');
+
 Route::get('/kuenstler', [ArtistController::class, 'index'])->name('page.artist');
 Route::get('/kuenstler/werke/{slug?}/{artist}/{index?}', [ArtistController::class, 'works'])->name('page.artist.works');
 Route::get('/kuenstler/{slug?}/{artist}', [ArtistController::class, 'show'])->name('page.artist.show');
 
 Route::get('/ausstellungen', [ExhibitionController::class, 'index'])->name('page.exhibition');
+Route::get('/ausstellungen/{slug?}/{exhibition?}', [ExhibitionController::class, 'show'])->name('page.exhibition.show');
+
 Route::get('/ueber-uns', [AboutController::class, 'index'])->name('page.about');
 Route::get('/kontakt', [ContactController::class, 'index'])->name('page.contact');
 Route::get('/suche', [SearchController::class, 'index'])->name('page.search');

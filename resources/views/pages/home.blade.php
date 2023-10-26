@@ -33,35 +33,7 @@
 
 <section class="grid__cell grid__cell--1_3 grid-order--2">
   <h2>{{ __('Ausstellungen') }}</h2>
-
-  @if ($exhibitions['upcoming'])
-    @foreach($exhibitions['upcoming'] as $exhibition)
-      <article class="teaser teaser--exhibition" data-touch>
-        <a href="">
-          <p>
-            {{ $exhibition->subtitle_de }}<br>
-            {{ $exhibition->title_de }}<br>
-            {!! $exhibition->periode !!}
-          </p>
-        </a>		
-      </article>	
-    @endforeach
-  @endif
-
-  @if ($exhibitions['archived'])
-    <h2>{{ __('Vergangene Ausstellungen') }}</h2>
-    @foreach($exhibitions['archived'] as $exhibition)
-      <article class="teaser teaser--exhibition" data-touch>
-        <a href="">
-          <p>
-            {{ $exhibition->subtitle_de }}<br>
-            {{ $exhibition->title_de }}<br>
-            {!! $exhibition->periode !!}
-          </p>
-        </a>		
-      </article>	
-    @endforeach
-  @endif
+  <x-exhibitions.list :exhibitions="$exhibitions" />
 </section>
 
 <section class="grid__cell grid__cell--1_3 grid-order--1">

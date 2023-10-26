@@ -171,7 +171,7 @@ class Artwork extends Model implements HasMedia
       return NULL;
     }
 
-    return implode(' x ', $dimensions) . ' cm';
+    return implode('x', $dimensions) . ' cm';
   }
 
 }

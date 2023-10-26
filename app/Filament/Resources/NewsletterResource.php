@@ -135,7 +135,7 @@ class NewsletterResource extends Resource
             ->label('Vorschau')
             ->color('success')
             ->icon('heroicon-o-eye')
-            ->url(fn ($record): string => route('newsletter.preview', ['newsletter' => $record->id]))
+            ->url(fn ($record): string => route('page.newsletter.preview', ['newsletter' => $record->id]))
             ->openUrlInNewTab(),
             
           ActionGroup::make([
