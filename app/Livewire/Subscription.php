@@ -5,7 +5,7 @@ use Livewire\Component;
 use App\Models\NewsletterSubscriber;
 use App\Services\Newsletter as NewsletterService;
 
-class CreateNewsletterSubscriber extends Component
+class Subscription extends Component
 {
   #[Rule('required')]
   public $firstname;
@@ -13,26 +13,25 @@ class CreateNewsletterSubscriber extends Component
   #[Rule('required')]
   public $lastname;
 
-  #[Rule('required', 'email')]
+  #[Rule('required|email')]
   public $email;
 
   public function save()
   {
     $this->validate();
-
     (new NewsletterService())->subscribe([
       'firstname' => $this->firstname,
       'lastname' => $this->lastname,
       'email' => $this->email,
     ]);
 
-    session()->flash('status', 'success');
+    session()->flash('subscribed', true);
     $this->reset();
     $this->render();
   }
 
   public function render()
   {
-    return view('livewire.create-newsletter-subscriber');
+    return view('livewire.subscription');
   }
 }

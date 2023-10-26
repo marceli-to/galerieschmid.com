@@ -3,7 +3,7 @@ namespace App\Console\Commands\Newsletter;
 use Illuminate\Console\Command;
 use App\Models\NewsletterQueue;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\Newsletter;
+use App\Notifications\Newsletter\Newsletter;
 
 class NewsletterSend extends Command
 {

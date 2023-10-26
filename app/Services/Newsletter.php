@@ -5,6 +5,8 @@ use App\Models\NewsletterList as NewsletterListModel;
 use App\Models\NewsletterQueue as NewsletterQueueModel;
 use App\Models\NewsletterSubscriber as NewsletterSubscriberModel;
 use App\Models\NewsletterListNewsletterSubscriber as NewsletterListNewsletterSubscriberModel;
+use App\Notifications\Newsletter\Verification;
+use Illuminate\Support\Facades\Notification;
 
 class Newsletter
 {
@@ -61,7 +63,7 @@ class Newsletter
       }
       else
       {
-        // @todo: send confirmation email
+        $this->sendVerificationNotification($subscriber);
       }
     }
     else
@@ -70,13 +72,28 @@ class Newsletter
         'firstname' => $data['firstname'],
         'lastname' => $data['lastname'],
         'email' => $data['email'],
+        'hash' => \Str::uuid(),
         'language_id' => 1,
       ]);
-      // @todo: send confirmation email
+      $this->sendVerificationNotification($subscriber);
+
     }
    
     return $subscriber;
   }
+
+  /** 
+   * Unsubscribe a subscriber
+   * 
+   * @param NewsletterSubscriberModel $newsletterSubscriber
+   * @return void
+   */
+  
+  public function unsubscribe(NewsletterSubscriberModel $newsletterSubscriber): void
+  {
+    $newsletterSubscriber->delete();
+  }
+
 
   /**
    * Add subscribers from a list to the queue
@@ -191,4 +208,29 @@ class Newsletter
     }
   }
   
+  /**
+   * Send verification notification
+   * @param NewsletterSubscriberModel $newsletterSubscriber
+   * @return void
+   */
+  
+  public function sendVerificationNotification(NewsletterSubscriberModel $newsletterSubscriber): void
+  {
+    Notification::route('mail', $newsletterSubscriber->email)->notify(new Verification($newsletterSubscriber));
+  }
+
+  /**
+   * Verify a subscriber
+   * 
+   * @param NewsletterSubscriberModel $newsletterSubscriber
+   * @return void
+   */
+
+  public function verify(NewsletterSubscriberModel $newsletterSubscriber): void
+  {
+    $newsletterSubscriber->restore();
+    $newsletterSubscriber->confirmed_at = now();
+    $newsletterSubscriber->save();
+    $this->addToLists($newsletterSubscriber);
+  }
 }

@@ -224,6 +224,11 @@ table.header__content {
   padding-bottom: 40px;
 }
 
+.newsletter.newsletter--verification {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .newsletter h2 {
   padding-bottom: 15px;
 }

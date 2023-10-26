@@ -40,6 +40,8 @@ Route::get('/artwork-label', [PdfController::class, 'createArtworkLabel']);
 
 // Newsletter routes
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('page.newsletter');
+Route::get('/newsletter/bestaetigung-email/{subscriber:hash}', [NewsletterController::class, 'verify'])->name('page.newsletter.verify')->withTrashed();
+Route::get('/newsletter/abmeldung/{subscriber:hash}', [NewsletterController::class, 'unsubscribe'])->name('page.newsletter.unsubscribe')->withTrashed();
 Route::get('/newsletter/archiv/{newsletter}', [NewsletterController::class, 'archive'])->name('page.newsletter.archive');
 Route::get('/newsletter/preview/{newsletter}', [NewsletterController::class, 'preview'])->name('page.newsletter.preview');
 

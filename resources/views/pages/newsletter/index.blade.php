@@ -3,8 +3,20 @@
 @section('content')
 <section class="grid__cell grid__cell--2_3 grid-order--2 grid__cell--last">
   <h2>{{ __('Newsletter abonnieren') }}</h2>
-  @livewire('create-newsletter-subscriber')
+  @if (session()->has('verified'))
+    <x-notification 
+      :show="true"
+      type="success" 
+      :message="'Vielen Dank, Ihre E-Mail-Adresse ist bestätigt.'" />
+  @endif
 
+  @if (session()->has('unsubscribed'))
+    <x-notification 
+      :show="true"
+      type="success" 
+      :message="'Sie haben sich erfolgreich vom Newsletter abgemeldet.'" />
+  @endif
+  @livewire('subscription')
 </section>
   
 <section class="grid__cell grid__cell--1_3 grid-order--1">

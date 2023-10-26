@@ -12,7 +12,7 @@
       <a href="https://www.galerieschmid.com" class="text-small" target="_blank">www.galerieschmid.com</a>
     </td>
     <td>
-      <a href="{{ $data['subscriber']->hash }}">
+      <a href="{{ route('page.newsletter.unsubscribe',['subscriber' => $data['subscriber']->hash]) }}">
         Newsletter abmelden
       </a>
     </td>

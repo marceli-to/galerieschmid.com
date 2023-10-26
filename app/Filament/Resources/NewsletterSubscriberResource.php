@@ -88,25 +88,22 @@ class NewsletterSubscriberResource extends Resource
           ])->columnSpan(7),
 
           Group::make()->schema([
-            Section::make('Einstellungen')
-            ->schema([
-              Grid::make()
-              ->schema([
-                Toggle::make('active')
-                  ->columnSpan(6)
-                  ->label('Aktiv?'),
-                Toggle::make('confirmed')
-                  ->columnSpan(6)
-                  ->label('Bestätigt?')
-              ])->columns(12)
-              ]),
-              Section::make('Listen')
+            // Section::make('Einstellungen')
+            // ->schema([
+            //   Grid::make()
+            //   ->schema([
+            //     Toggle::make('confirmed')
+            //       ->columnSpan(6)
+            //       ->label('Bestätigt?')
+            //   ])->columns(12)
+            // ]),
+            Section::make('Listen')
               ->schema([
                 CheckboxList::make('newsletterLists')
                   ->label('Zugewiesene Listen')
                   ->options(NewsletterList::all()->pluck('description', 'id'))
                   ->relationship('newsletterLists', 'description')
-              ])
+            ])
           ])->columnSpan(5)
 
 
