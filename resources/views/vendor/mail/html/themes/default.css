@@ -54,9 +54,9 @@ h2 {
 }
 
 p {
-  font-size: 13px;
-  line-height: 1.3em;
-  margin-top: 0;
+  font-size: 14px;
+  margin: 0 !important;
+  padding-bottom: 20px;
   text-align: left;
 }
 
@@ -224,11 +224,6 @@ table.header__content {
   padding-bottom: 40px;
 }
 
-.newsletter.newsletter--verification {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
 .newsletter h2 {
   padding-bottom: 15px;
 }
@@ -241,7 +236,7 @@ table.header__content {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
-  padding: 5px 0 15px 0;
+  padding: 5px 0 25px 0;
 }
 
 .newsletter .newsletter__separator {
@@ -273,4 +268,42 @@ table.footer  {
 table.footer  a {
   color: #000000;
   text-decoration: none !important;
+}
+
+
+.notification .notification__heading {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  padding: 5px 0 25px 0;
+}
+
+.notification.notification--verification {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.notification.notification--contact-form .table table {
+  margin: 0 !important;
+}
+
+.notification.notification--contact-form .table table td {
+  color: #000000 !important;
+  padding: 5px 0 !important
+}
+
+.notification.notification--contact-form table td:first-child {
+  padding-right: 20px;
+  font-weight: 700 !important;
+  width: 125px !important;
+}
+
+.notification.notification--contact-form ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.notification.notification--contact-form li {
+  list-style-type: circle;
+  margin-left: 15px;
 }

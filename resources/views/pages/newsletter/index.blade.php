@@ -5,14 +5,12 @@
   <h2>{{ __('Newsletter abonnieren') }}</h2>
   @if (session()->has('verified'))
     <x-notification 
-      :show="true"
       type="success" 
       :message="'Vielen Dank, Ihre E-Mail-Adresse ist bestätigt.'" />
   @endif
 
   @if (session()->has('unsubscribed'))
     <x-notification 
-      :show="true"
       type="success" 
       :message="'Sie haben sich erfolgreich vom Newsletter abgemeldet.'" />
   @endif

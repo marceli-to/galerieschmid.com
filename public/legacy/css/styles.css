@@ -1090,6 +1090,7 @@ form {
 }
 /* line 9, ../../.source/source/sass/components/_forms.scss */
 form input[type=text],
+form input[type=email],
 form input[type=text]:disabled,
 form textarea {
   background-color: transparent;
@@ -1102,6 +1103,7 @@ form textarea {
 }
 /* line 19, ../../.source/source/sass/components/_forms.scss */
 form input[type=text]:focus,
+form input[type=email]:focus,
 form input[type=text]:disabled:focus,
 form textarea:focus {
   outline: none !important;
@@ -1230,7 +1232,8 @@ form.contact-form label.has-error {
   color: #d9534f;
 }
 /* line 138, ../../.source/source/sass/components/_forms.scss */
-form.contact-form input[type=text] {
+form.contact-form input[type=text],
+form.contact-form input[type=email] {
   border-bottom: 1px solid #000000;
   padding: 5px 0;
 }

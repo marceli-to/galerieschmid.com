@@ -17,6 +17,6 @@
   {{-- <article class="text-media googlemaps" id="js-maps"></article> --}}
 </section>
 <section class="grid__cell grid__cell--2_3 grid-order--2">
-  
+  @livewire('contact')
 </section>
 @endsection

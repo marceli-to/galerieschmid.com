@@ -76,19 +76,7 @@
             <div class="media-block__text">
               <h3>{{ $publication->title_de }}</h3>
               {!! $publication->text_de !!}
-              <a 
-                href="javascript:;" 
-                class="btn btn--add-order js-btn-add" 
-                data-id="{{ $publication->id }}" 
-                data-item='{"id":"{{ $publication->id }}", "title":"{{ $publication->title_de }}","artist":"{{ $publication->fullname }}"}'>
-                Publikation bestellen
-              </a>
-              <a 
-                href="javascript:;" 
-                class="btn btn--remove-order js-btn-remove" 
-                data-storage="gs-pub-{{ $publication->id }}" 
-                style="display: none;">Aus dem Warenkorb entfernen
-              </a>
+              @livewire('cart-item', ['publication' => $publication])
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@
   </div>
 
   @slot('footer')
-    @component('mail::footer', ['data' => $data])
+    @component('mail::footer', ['data' => $data, 'unsubscribe' => true])
     @endcomponent
   @endslot
 @endcomponent

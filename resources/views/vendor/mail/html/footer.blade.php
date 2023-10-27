@@ -11,11 +11,13 @@
       <a href="mailto:info@galerieschmid.com" class="text-small" target="_blank">info@galerieschmid.com</a><br>
       <a href="https://www.galerieschmid.com" class="text-small" target="_blank">www.galerieschmid.com</a>
     </td>
-    <td>
-      <a href="{{ route('page.newsletter.unsubscribe',['subscriber' => $data['subscriber']->hash]) }}">
-        Newsletter abmelden
-      </a>
-    </td>
+      <td>
+        @if($unsubscribe)
+          <a href="{{ route('page.newsletter.unsubscribe',['subscriber' => $data['subscriber']->hash]) }}">
+            Newsletter abmelden
+          </a>
+        @endif
+      </td>
   </table>
 </td>
 </tr>
