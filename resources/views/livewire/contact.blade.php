@@ -36,11 +36,11 @@
     </div>
     <div class="form-row">
       <label class="@error('phone') has-error @enderror">Telefon</label>
-      <input type="text" wire:model="phone" required>
+      <input type="text" wire:model="phone">
     </div>
     <div class="form-row">
       <label class="@error('mobile') has-error @enderror">Mobile</label>
-      <input type="text" wire:model="mobile" required>
+      <input type="text" wire:model="mobile">
     </div>
     <div class="form-row hover:cursor-pointer">
       <input type="checkbox" name="newsletter" id="newsletter-checkbox" value="1">
