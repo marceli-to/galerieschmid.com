@@ -7,7 +7,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -37,10 +37,10 @@ class AddressRelationManager extends RelationManager
           Toggle::make('primary')
           ->label('Primäre Adresse?')
           ->columnSpan('full'),
-          TextArea::make('address')
+          Textarea::make('address')
           ->label('Adresse')
           ->columnSpan(6),
-          TextArea::make('address_additional')
+          Textarea::make('address_additional')
           ->label('Adresszusatz')
           ->columnSpan(6),
         ])->columns(12),

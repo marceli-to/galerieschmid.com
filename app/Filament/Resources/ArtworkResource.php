@@ -18,7 +18,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Tabs;
@@ -84,11 +84,11 @@ class ArtworkResource extends Resource
               $name = $fileName . '-' . uniqid() . '.' . $file->extension();
               return (string) str($name);
             }),
-            TextArea::make('info')
+            Textarea::make('info')
             ->label('Kurztext')
             ->columnSpan('full')
             ->rows(3),
-            TextArea::make('info_arttrade')
+            Textarea::make('info_arttrade')
             ->label('Text Kunsthandel')
             ->columnSpan('full')
             ->rows(3),

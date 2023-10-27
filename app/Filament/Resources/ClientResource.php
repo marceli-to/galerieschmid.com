@@ -11,7 +11,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Tabs;
@@ -119,7 +119,7 @@ class ClientResource extends Resource
                 ->columnSpan('full')
                 ->maxLength(255),
 
-                TextArea::make('letter_salutation')
+                Textarea::make('letter_salutation')
                 ->label('Briefanrede')
                 ->columnSpan('full')
                 ->rows(3),
@@ -129,7 +129,7 @@ class ClientResource extends Resource
                 ->columnSpan('full')
                 ->maxLength(255),
 
-                TextArea::make('remarks')
+                Textarea::make('remarks')
                 ->label('Bemerkungen')
                 ->columnSpan('full')
                 ->rows(3)
@@ -142,7 +142,7 @@ class ClientResource extends Resource
             ->collapsible()
             ->collapsed()
             ->schema([
-              TextArea::make('artists')
+              Textarea::make('artists')
               ->label('Liste der Künstler')
               ->columnSpan('full')
               ->rows(3),

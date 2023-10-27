@@ -10,7 +10,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
@@ -66,7 +66,7 @@ class ExhibitionResource extends Resource
                 ->label('Subtitel / Thema')
                 ->required()
                 ->columnSpan('full'),
-                TextArea::make('summary_de')
+                Textarea::make('summary_de')
                 ->label('Zusammenfassung')
                 ->columnSpan('full')
                 ->rows(3),
@@ -78,7 +78,7 @@ class ExhibitionResource extends Resource
                   'bulletList',
                   'link',
                 ]),
-                TextArea::make('keywords_de')
+                Textarea::make('keywords_de')
                 ->label('Keywords')
                 ->columnSpan('full')
                 ->rows(3),
@@ -91,7 +91,7 @@ class ExhibitionResource extends Resource
               TextInput::make('subitle_en')
                 ->label('Subtitel')
                 ->columnSpan('full'),
-              TextArea::make('summary_en')
+              Textarea::make('summary_en')
                 ->label('Zusammenfassung')
                 ->columnSpan('full')
                 ->rows(3),
@@ -103,7 +103,7 @@ class ExhibitionResource extends Resource
                   'bulletList',
                   'link',
                 ]),
-                TextArea::make('keywords_en')
+                Textarea::make('keywords_en')
                 ->label('Keywords')
                 ->columnSpan('full')
                 ->rows(3),
