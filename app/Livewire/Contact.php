@@ -5,6 +5,7 @@ use Livewire\Component;
 use \App\Models\ArtistPublication;
 use App\Notifications\ContactForm;
 use Illuminate\Support\Facades\Notification;
+use App\Services\Newsletter as NewsletterService;
 
 class Contact extends Component
 {
@@ -40,6 +41,16 @@ class Contact extends Component
       'mobile' => $this->mobile,
       'publications' => ArtistPublication::whereIn('id', session('cart'))->get(),
     ]));
+
+    // Subscribe to Newsletter
+    if (isset($this->newsletter))
+    {
+      (new NewsletterService())->subscribe([
+        'firstname' => $this->firstname,
+        'lastname' => $this->lastname,
+        'email' => $this->email,
+      ]);
+    }
 
     // empty cart
     session()->forget('cart');

@@ -2,7 +2,6 @@
 namespace App\Livewire;
 use Livewire\Attributes\Rule; 
 use Livewire\Component;
-use App\Models\NewsletterSubscriber;
 use App\Services\Newsletter as NewsletterService;
 
 class Subscription extends Component
