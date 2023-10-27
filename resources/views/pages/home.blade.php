@@ -6,7 +6,7 @@
   <h2>{{ __('Aktuelle Ausstellung') }}</h2>
   <article class="teaser teaser--exhibition teaser--current">
     @if ($exhibitions['current'])
-      <a href="">
+      <a href="{{ route('page.exhibition.show', ['slug' => \Str::slug($exhibitions['current']->title_de), 'exhibition' => $exhibitions['current']->id]) }}" title="{{ $exhibitions['current']->title_de }}">
         <p>
           {{ $exhibitions['current']->subtitle_de }}<br>
           {{ $exhibitions['current']->title_de }}<br>

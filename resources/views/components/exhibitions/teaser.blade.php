@@ -1,6 +1,6 @@
 @props(['exhibition', 'activeExhibitionId' => null])
 <article class="teaser teaser--exhibition {{ !Route::is('page.home') && $activeExhibitionId == $exhibition->id ? 'is-active' : '' }}" data-touch>
-  <a href="{{ route('page.exhibition.show', ['slug' => \Str::slug($exhibition->title_de), 'exhibition' => $exhibition->id]) }}">
+  <a href="{{ route('page.exhibition.show', ['slug' => \Str::slug($exhibition->title_de), 'exhibition' => $exhibition->id]) }}" title="{{ $exhibition->title_de }}">
     <p>
       {{ $exhibition->subtitle_de }}<br>
       {{ $exhibition->title_de }}<br>
