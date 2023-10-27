@@ -43,7 +43,7 @@
       <input type="text" wire:model="mobile">
     </div>
     <div class="form-row hover:cursor-pointer">
-      <input type="checkbox" name="newsletter" id="newsletter-checkbox" value="1">
+      <input type="checkbox" name="newsletter" id="newsletter-checkbox" wire:model="newsletter">
       <label class="checkbox-label" for="newsletter-checkbox" class="hover:!cursor-pointer">
         Newsletter abonnieren
       </label>

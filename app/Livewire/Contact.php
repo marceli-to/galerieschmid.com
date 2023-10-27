@@ -26,6 +26,8 @@ class Contact extends Component
   
   public $mobile;
 
+  public $newsletter;
+
   public function save()
   {
     $this->validate();
