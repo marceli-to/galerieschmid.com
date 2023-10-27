@@ -39,7 +39,7 @@ class Contact extends Component
       'location' => $this->location,
       'phone' => $this->phone,
       'mobile' => $this->mobile,
-      'publications' => ArtistPublication::whereIn('id', session('cart'))->get(),
+      'publications' => session()->has('cart') ? ArtistPublication::whereIn('id', session('cart'))->get() : [],
     ]));
 
     // Subscribe to Newsletter
