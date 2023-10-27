@@ -45,7 +45,10 @@ class Contact extends Component
     session()->forget('cart');
     session()->flash('submitted', true);
     $this->reset();
-    $this->render();
+    //$this->render();
+
+    // Redirect to route page.contact
+    return redirect()->route('page.contact');
   }
 
   public function mount()
