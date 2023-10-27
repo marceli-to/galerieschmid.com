@@ -1,5 +1,5 @@
 <div>
-  @if (isset($publications) && $publications->count() > 0)
+  @if ($publications && $publications->count() > 0)
     <div class="mb-25">
       <h2 class="mb-5">Publikationen</h2>
       @foreach($publications as $publication)

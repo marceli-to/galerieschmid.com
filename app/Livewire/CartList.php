@@ -19,7 +19,10 @@ class CartList extends Component
 
   public function mount()
   {
-    $this->publications = ArtistPublication::whereIn('id', session('cart'))->get();
+    if (session()->has('cart'))
+    {
+      $this->publications = ArtistPublication::whereIn('id', session('cart'))->get();
+    }
   }
 
   public function render()
