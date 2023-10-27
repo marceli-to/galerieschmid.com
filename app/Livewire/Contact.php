@@ -41,6 +41,8 @@ class Contact extends Component
       'publications' => ArtistPublication::whereIn('id', session('cart'))->get(),
     ]));
 
+    // empty cart
+    session()->forget('cart');
     session()->flash('submitted', true);
     $this->reset();
     $this->render();
