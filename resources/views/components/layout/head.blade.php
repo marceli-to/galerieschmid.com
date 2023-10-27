@@ -19,9 +19,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 <script src="{{ asset('legacy/js/modernizr.min.js') }}?v={{ date('dmY', time()) }}"></script>
+@vite('resources/css/app.css')
 @livewireStyles
 <link rel="stylesheet" href="{{ asset('legacy/css/styles.css') }}?v={{ date('dmY', time()) }}">
-@vite('resources/css/app.css')
 </head>
 <body>
 <x-search.overlay />
