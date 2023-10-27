@@ -45,7 +45,7 @@ class Contact extends Component
     ]));
 
     // Subscribe to Newsletter
-    if (isset($this->newsletter))
+    if (isset($this->newsletter) && $this->newsletter)
     {
       (new NewsletterService())->subscribe([
         'firstname' => $this->firstname,
