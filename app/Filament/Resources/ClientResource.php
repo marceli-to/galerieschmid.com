@@ -111,7 +111,8 @@ class ClientResource extends Resource
                 ->label('Galerie')
                 ->options(Gallery::class)
                 ->columnSpan('full')
-                ->selectablePlaceholder(false),
+                ->required()
+                ->selectablePlaceholder(true),
 
                 TextInput::make('language')
                 ->label('Sprache')

@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\ArtistResource\Pages;
 use App\Filament\Resources\ArtistResource;
 use Filament\Actions;
+use App\Services\Newsletter;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateArtist extends CreateRecord
@@ -12,6 +13,29 @@ class CreateArtist extends CreateRecord
   {
     $data['artist_name'] = (isset($data['firstname']) ? $data['firstname'] . ' ' : '') . $data['lastname'];
     $data['user_id'] = auth()->user()->id;
+
+    if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL))
+    {
+      if (isset($data['newsletter_subscriber']))
+      {
+        if ($data['newsletter_subscriber'])
+        {
+          $subscriber = (new Newsletter())->subscribe([
+            'email' => $data['email'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+          ], TRUE);
+        }
+        else
+        {
+          if ($subscriber = (new Newsletter())->findSubscriber($data['email']))
+          {
+            (new Newsletter())->unsubscribe($subscriber);
+          }
+        }
+      }
+    }
+
     return $data;
   }
 

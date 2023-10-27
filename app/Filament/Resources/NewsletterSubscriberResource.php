@@ -62,16 +62,13 @@ class NewsletterSubscriberResource extends Resource
             ->label('Anrede')
             ->options(Salutation::class)
             ->columnSpan('full')
-            ->required()
             ->selectablePlaceholder(false),
             TextInput::make('firstname')
               ->label('Vorname')
-              ->required()
               ->columnSpan('full')
               ->maxLength(255),
             TextInput::make('lastname')
               ->label('Name')
-              ->required()
               ->columnSpan('full')
               ->maxLength(255),
             TextInput::make('email')
@@ -84,19 +81,20 @@ class NewsletterSubscriberResource extends Resource
             Select::make('language_id')
               ->label('Sprache')
               ->required()
+              ->columnSpan('full')
               ->options(NewsletterLanguage::all()->pluck('description', 'id')),
           ])->columnSpan(7),
 
           Group::make()->schema([
-            // Section::make('Einstellungen')
-            // ->schema([
-            //   Grid::make()
-            //   ->schema([
-            //     Toggle::make('confirmed')
-            //       ->columnSpan(6)
-            //       ->label('Bestätigt?')
-            //   ])->columns(12)
-            // ]),
+            Section::make('Einstellungen')
+            ->schema([
+              Grid::make()
+              ->schema([
+                Toggle::make('confirmed_at')
+                  ->columnSpan(6)
+                  ->label('Bestätigt?')
+              ])->columns(12)
+            ]),
             Section::make('Listen')
               ->schema([
                 CheckboxList::make('newsletterLists')
@@ -115,7 +113,7 @@ class NewsletterSubscriberResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
-      ->defaultSort('lastname', 'asc')
+      ->defaultSort('created_at', 'desc')
       ->columns([
         // salutation
         TextColumn::make('salutation')
@@ -139,14 +137,22 @@ class NewsletterSubscriberResource extends Resource
           ->searchable()
           ->sortable(),
 
-        // created_at (date format: d.m.Y H:i:s)
         TextColumn::make('created_at')
           ->label('Anmeldung am')
           ->date('d.m.Y H:i:s')
           ->searchable()
           ->sortable(),
+
+          IconColumn::make('confirmed_at')
+          ->label('Bestätigt')
+          ->sortable()
+          ->boolean(),
       ])
       ->filters([
+        Filter::make('confirmed_at')
+        ->label('Bestätigt')
+        ->toggle()
+        ->query(fn (Builder $query): Builder => $query->whereNotNull('confirmed_at')),
       ])
       ->actions([
         ActionGroup::make([

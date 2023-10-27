@@ -46,40 +46,55 @@ class Newsletter
    * @return NewsletterSubscriberModel
    */
   
-  public function subscribe(Array $data = []): NewsletterSubscriberModel
+  public function subscribe(Array $data = [], $confirm = FALSE): NewsletterSubscriberModel
   {
     // find or create the subscriber
     if ($this->isSubscriber($data['email']))
     {
       $subscriber = $this->findSubscriber($data['email']);
-      $subscriber->firstname = $data['firstname'];
-      $subscriber->lastname = $data['lastname'];
+      $subscriber->salutation = $data['salutation'] ?? $subscriber->salutation;
+      $subscriber->firstname = $data['firstname'] ?? $subscriber->firstname;
+      $subscriber->lastname = $data['lastname'] ?? $subscriber->lastname;
+      $subscriber->confirmed_at = $confirm ? now() : NULL;
+      $subscriber->save();
       $subscriber->restore();
-
-      // Add to list if confirmed
-      if ($subscriber->confirmed_at)
-      {
-        $this->addToLists($subscriber);
-      }
-      else
-      {
-        $this->sendVerificationNotification($subscriber);
-      }
     }
     else
     {
       $subscriber = NewsletterSubscriberModel::create([
-        'firstname' => $data['firstname'],
-        'lastname' => $data['lastname'],
+        'salutation' => $data['salutation'] ?? NULL,
+        'firstname' => $data['firstname'] ?? NULL,
+        'lastname' => $data['lastname'] ?? NULL,
         'email' => $data['email'],
         'hash' => \Str::uuid(),
         'language_id' => 1,
+        'confirmed_at' => $confirm ? now() : NULL,
       ]);
-      $this->sendVerificationNotification($subscriber);
+    }
 
+    if ($subscriber->confirmed_at)
+    {
+      $this->addToLists($subscriber);
+    }
+    else
+    {
+      $this->sendVerificationNotification($subscriber);
     }
    
     return $subscriber;
+  }
+
+  /**
+   * Confirm a subscriber
+   * 
+   * @param NewsletterSubscriberModel $newsletterSubscriber
+   * @return void
+   */
+  
+  public function confirm(NewsletterSubscriberModel $newsletterSubscriber): void
+  {
+    $newsletterSubscriber->confirmed_at = now();
+    $newsletterSubscriber->save();
   }
 
   /** 
@@ -91,9 +106,12 @@ class Newsletter
   
   public function unsubscribe(NewsletterSubscriberModel $newsletterSubscriber): void
   {
+    foreach ($newsletterSubscriber->newsletterLists as $newsletterList)
+    {
+      $this->removeFromList($newsletterList, $newsletterSubscriber);
+    }
     $newsletterSubscriber->delete();
   }
-
 
   /**
    * Add subscribers from a list to the queue
@@ -157,7 +175,7 @@ class Newsletter
    * @return NewsletterSubscriberModel
    */
 
-  public function findSubscriber($email): NewsletterSubscriberModel
+  public function findSubscriber($email): NewsletterSubscriberModel|null
   {
     return NewsletterSubscriberModel::withTrashed()->where('email', $email)->first();
   }

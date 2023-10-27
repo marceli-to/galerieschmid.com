@@ -10,7 +10,7 @@ class EditNewsletterSubscriber extends EditRecord
 
   protected function mutateFormDataBeforeSave(array $data): array
   {
-    if (isset($data['confirmed']) && $data['confirmed'])
+    if (isset($data['confirmed_at']) && $data['confirmed_at'])
     {
       $data['confirmed_at'] = now();
     }

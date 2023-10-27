@@ -10,7 +10,7 @@ class CreateNewsletterSubscriber extends CreateRecord
 
   protected function mutateFormDataBeforeCreate(array $data): array
   {
-    if (isset($data['confirmed']) && $data['confirmed'])
+    if (isset($data['confirmed_at']) && $data['confirmed_at'])
     {
       $data['confirmed_at'] = now();
     }

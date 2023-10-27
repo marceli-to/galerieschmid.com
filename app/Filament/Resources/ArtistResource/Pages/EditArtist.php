@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\ArtistResource\Pages;
 use App\Filament\Resources\ArtistResource;
 use Filament\Actions;
+use App\Services\Newsletter;
 use Filament\Resources\Pages\EditRecord;
 
 class EditArtist extends EditRecord
@@ -17,6 +18,28 @@ class EditArtist extends EditRecord
       if (!preg_match("~^(?:f|ht)tps?://~i", $data['website']))
       {
         $data['website'] = "http://" . $data['website'];
+      }
+    }
+
+    if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL))
+    {
+      if (isset($data['newsletter_subscriber']))
+      {
+        if ($data['newsletter_subscriber'])
+        {
+          $subscriber = (new Newsletter())->subscribe([
+            'email' => $data['email'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+          ], TRUE);
+        }
+        else
+        {
+          if ($subscriber = (new Newsletter())->findSubscriber($data['email']))
+          {
+            (new Newsletter())->unsubscribe($subscriber);
+          }
+        }
       }
     }
     return $data;
