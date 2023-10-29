@@ -89,9 +89,21 @@ class ArtworksRelationManager extends RelationManager
         // Tables\Actions\EditAction::make('edit')->label('Bearbeiten'),
       ])
       ->bulkActions([
-        // Tables\Actions\BulkActionGroup::make([
-        //   Tables\Actions\DeleteBulkAction::make(),
-        // ]),
+        Tables\Actions\BulkActionGroup::make([
+          Tables\Actions\DeleteBulkAction::make(),
+          Tables\Actions\BulkAction::make('exportArtistsToPdf')
+          ->action(function ($records, array $data) {
+            return response()->streamDownload(function () use ($records) {
+              echo \Pdf::loadHtml(
+                \Blade::render('pdf.artwork-label', ['records' => $records])
+              )->stream();
+            }, 'galerieschmid-etiketten-'. \Str::slug($records[0]->artist->fullname).'-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+          })
+          ->label('Etiketten erstellen')
+          ->icon('heroicon-o-document-arrow-down')
+          ->color('warning')
+          ->deselectRecordsAfterCompletion(),   
+        ]),
       ]);
   }
 }

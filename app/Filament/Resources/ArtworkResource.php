@@ -358,7 +358,20 @@ class ArtworkResource extends Resource
         ->label('Ausgewählte mutieren')
         ->icon('heroicon-o-pencil-square')
         ->deselectRecordsAfterCompletion()
-        ->modalWidth('lg')
+        ->modalWidth('lg'),
+
+        BulkAction::make('exportArtistsToPdf')
+        ->action(function ($records, array $data) {
+          return response()->streamDownload(function () use ($records) {
+            echo \Pdf::loadHtml(
+              \Blade::render('pdf.artwork-label', ['records' => $records])
+            )->stream();
+          }, 'galerieschmid-etiketten-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+        })
+        ->label('Etiketten erstellen')
+        ->icon('heroicon-o-document-arrow-down')
+        ->color('warning')
+        ->deselectRecordsAfterCompletion(),        
 
 
       ]),
