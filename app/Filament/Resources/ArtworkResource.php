@@ -241,6 +241,7 @@ class ArtworkResource extends Resource
   {
     return $table
     ->striped()
+    ->defaultSort('updated_at', 'DESC')
     ->columns([
       SpatieMediaLibraryImageColumn::make('image')
       ->label('Bild')

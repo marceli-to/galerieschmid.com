@@ -34,7 +34,7 @@ class Newsletter
   {
     if ($type === 'archive')
     {
-      NewsletterModel::archive()->get();
+      return NewsletterModel::archive()->get();
     }
     return NewsletterModel::get();
   }

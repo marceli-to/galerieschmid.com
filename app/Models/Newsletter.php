@@ -52,6 +52,6 @@ class Newsletter extends Model
 
   public function scopeArchive($query)
   {
-    return $query->where('show_in_archive', '1')->orderBy('created_at', 'desc');
+    return $query->where('show_in_archive', '1')->where('created_at', '>=', now()->subYears(3))->orderBy('created_at', 'desc');
   }
 }
