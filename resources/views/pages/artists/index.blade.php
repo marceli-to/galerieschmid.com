@@ -6,16 +6,24 @@
     <h2 class="js-artist-name">
       {{ $artists[0]->fullname ? $artists[0]->fullname : '' }}
     </h2>
-    
+
     <div class="slider slider--exhibition swiper-container js-slider is-artist-slider">
       <a href="javascript:;" class="slider-btn slider-btn--prev js-btn-slide-prev">&nbsp;</a>
       <a href="javascript:;" class="slider-btn slider-btn--next js-btn-slide-next">&nbsp;</a>			
       <div class="swiper-wrapper">
         @foreach($artists as $artist)
-          @php $artwork = $artist->artworksActive->random(); @endphp
-          @if ($artwork && $artwork->media->first())
-           <x-media.slide :url="$artwork->media->first()->getUrl('detail')" />
-          @endif
+          @php 
+            $artwork = $artist->artworksActive;
+            foreach ($artwork->shuffle() as $a)
+            {
+              if ($a->media->first())
+              {
+                $artwork = $a;
+                break;
+              }
+            }
+          @endphp
+          <x-media.slide :url="$artwork->media->first()->getUrl('detail')" />
         @endforeach
       </div>
     </div>
