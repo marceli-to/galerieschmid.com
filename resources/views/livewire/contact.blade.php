@@ -42,6 +42,10 @@
       <label class="@error('mobile') has-error @enderror">Mobile</label>
       <input type="text" wire:model="mobile">
     </div>
+    <div class="form-row">
+      <label class="@error('message') has-error @enderror">Mitteilung</label>
+      <textarea wire:model="message"></textarea>
+    </div>
     <div class="form-row hover:cursor-pointer">
       <input type="checkbox" name="newsletter" id="newsletter-checkbox" wire:model="newsletter">
       <label class="checkbox-label" for="newsletter-checkbox" class="hover:!cursor-pointer">

@@ -36,6 +36,10 @@
           <td>Mobile</td>
           <td>{{ $data['mobile'] }}</td>
         </tr>
+        <tr>
+          <td>Mitteilung</td>
+          <td>{{ $data['message'] }}</td>
+        </tr>
       </table>
     </div>
     <br>

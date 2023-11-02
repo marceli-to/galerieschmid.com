@@ -26,6 +26,8 @@ class Contact extends Component
   
   public $mobile;
 
+  public $message;
+
   public $newsletter;
 
   public function save()
@@ -41,6 +43,7 @@ class Contact extends Component
       'location' => $this->location,
       'phone' => $this->phone,
       'mobile' => $this->mobile,
+      'message' => $this->message,
       'publications' => session()->has('cart') ? ArtistPublication::whereIn('id', session('cart'))->get() : [],
     ]));
 
