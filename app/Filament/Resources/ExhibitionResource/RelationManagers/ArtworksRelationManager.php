@@ -1,5 +1,7 @@
 <?php
 namespace App\Filament\Resources\ExhibitionResource\RelationManagers;
+use App\Models\Artwork;
+use App\Models\Artist;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
@@ -61,7 +63,23 @@ class ArtworksRelationManager extends RelationManager
       ->headerActions([
         Tables\Actions\AttachAction::make('attach')
         ->form(fn (Tables\Actions\AttachAction $action): array => [
-          $action->getRecordSelect(),
+          Select::make('artist_id')
+          ->label('Künstler')
+          ->options(Artist::has('artworksActive')->get()->sortBy('fullname')->pluck('fullname', 'id'))
+          ->required()
+          ->reactive(),
+
+          Select::make('recordId')
+          ->label('Kunstobjekt')
+          ->options(function(callable $get){
+            return Artwork::get()
+              ->where('artist_id',  $get('artist_id'))
+              ->whereNotIn('artwork_state_id', [3, 4])
+              ->sortBy('description_full')
+              ->pluck('description_full','id');
+          })
+          ->required()
+          ->reactive(),
           Forms\Components\TextInput::make('sort')->required(),
         ])
         ->recordSelectSearchColumns(['inventory_number', 'description_de', 'position'])

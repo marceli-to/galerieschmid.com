@@ -18,7 +18,7 @@ class EditClient extends EditRecord
     {
       if (!preg_match("~^(?:f|ht)tps?://~i", $data['website']))
       {
-        $data['website'] = "http://" . $data['website'];
+        $data['website'] = "https://" . $data['website'];
       }
     }
     if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL))
@@ -31,7 +31,7 @@ class EditClient extends EditRecord
             'email' => $data['email'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-          ], TRUE);
+          ], TRUE, 3);
         }
         else
         {

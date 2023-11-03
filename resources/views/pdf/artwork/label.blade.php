@@ -1,4 +1,5 @@
 @include('pdf.partials.header')
+@include('pdf.partials.css.portrait')
 @include('pdf.partials.css.labels')
 @php
 // group the records in groups of 2

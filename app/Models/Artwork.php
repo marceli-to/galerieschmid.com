@@ -76,7 +76,8 @@ class Artwork extends Model implements HasMedia
   ];
 
   protected $appends = [
-    'dimensions'
+    'dimensions',
+    'description_full'
   ];
 
   public function user(): BelongsTo
@@ -172,6 +173,11 @@ class Artwork extends Model implements HasMedia
     }
 
     return implode('x', $dimensions) . ' cm';
+  }
+
+  public function getDescriptionFullAttribute(): string
+  {
+    return $this->description_de . ' ('. $this->inventory_number .')';
   }
 
 }

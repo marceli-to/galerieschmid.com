@@ -24,7 +24,7 @@ class CreateArtist extends CreateRecord
             'email' => $data['email'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-          ], TRUE);
+          ], TRUE, 6);
         }
         else
         {

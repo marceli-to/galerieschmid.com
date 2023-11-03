@@ -152,6 +152,21 @@ class ImportArtwork extends Command
           }
         }
 
+        // // Set previous client
+        // if ($item->BESITZER_ALT)
+        // {
+        //   $previous_client = Client::where('lastname', $item->BESITZER_ALT)->orWhere('id', $item->BESITZER_ALT)->first();
+        //   if (!$previous_client)
+        //   {
+        //     $this->logError('Artwork - [Previous client] with id ' . $item->BESITZER_ID . ' not found for artwork id: ' . $item->OBJEKTE_ID . ' (Artwork: ' . $item->DESCRX . ')');
+        //   }
+        //   else
+        //   {
+        //     $artwork->previous_client = $previous_client->id;
+        //     $artwork->save();
+        //   }
+        // }
+
         // Set artist
         if ($item->KUENSTLER_ID)
         {

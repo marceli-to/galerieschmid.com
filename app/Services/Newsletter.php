@@ -46,7 +46,7 @@ class Newsletter
    * @return NewsletterSubscriberModel
    */
   
-  public function subscribe(Array $data = [], $confirm = FALSE): NewsletterSubscriberModel
+  public function subscribe(Array $data = [], $confirm = FALSE, $listId = 2): NewsletterSubscriberModel
   {
     // find or create the subscriber
     if ($this->isSubscriber($data['email']))
@@ -72,11 +72,9 @@ class Newsletter
       ]);
     }
 
-    if ($subscriber->confirmed_at)
-    {
-      $this->addToLists($subscriber);
-    }
-    else
+    $this->addToList($subscriber, NewsletterListModel::find($listId));
+
+    if (!$subscriber->confirmed_at)
     {
       $this->sendVerificationNotification($subscriber);
     }
@@ -192,7 +190,23 @@ class Newsletter
   }
 
   /**
-   * Add to a list (pivot)
+   * Add to a list
+   * 
+   * @param NewsletterListModel $newsletterList
+   * @param NewsletterSubscriberModel $newsletterSubscriber
+   * @return void
+   */
+
+   public function addToList(NewsletterSubscriberModel $newsletterSubscriber, NewsletterListModel $newsletterList): void
+   {
+      if (!$newsletterList->newsletterSubscribers()->where('subscriber_id', $newsletterSubscriber->id)->exists())
+      {
+        $newsletterList->newsletterSubscribers()->attach($newsletterSubscriber->id);
+      }
+   }
+
+  /**
+   * Add to all lists
    * 
    * @param NewsletterListModel $newsletterList
    * @param NewsletterSubscriberModel $newsletterSubscriber

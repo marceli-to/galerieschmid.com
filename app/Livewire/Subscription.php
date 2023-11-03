@@ -22,7 +22,7 @@ class Subscription extends Component
       'firstname' => $this->firstname,
       'lastname' => $this->lastname,
       'email' => $this->email,
-    ]);
+    ], FALSE, 2);
 
     session()->flash('subscribed', true);
     $this->reset();

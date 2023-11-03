@@ -1,6 +1,6 @@
 <style>
 @page {
-  size: A4;
+  size: a4 landscape;
   margin: 0;
   orientation: landscape;
 }

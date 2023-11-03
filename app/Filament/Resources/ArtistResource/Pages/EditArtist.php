@@ -31,7 +31,7 @@ class EditArtist extends EditRecord
             'email' => $data['email'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-          ], TRUE);
+          ], TRUE, 6);
         }
         else
         {

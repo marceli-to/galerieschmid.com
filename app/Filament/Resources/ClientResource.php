@@ -89,7 +89,6 @@ class ClientResource extends Resource
             TextInput::make('website')
             ->label('Webseite')
             ->columnSpan('full')
-            ->url()
             ->prefixIcon('heroicon-m-globe-alt'),
 
           ])->columnSpan(7),

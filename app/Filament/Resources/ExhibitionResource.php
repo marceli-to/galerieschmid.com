@@ -172,9 +172,6 @@ class ExhibitionResource extends Resource
       return $table
         ->striped()
         ->columns([
-          TextColumn::make('id')
-          ->label('ID')
-          ->searchable(),
           TextColumn::make('subtitle_de')
           ->label('Subtitel / Thema')
           ->searchable(),

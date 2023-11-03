@@ -84,6 +84,18 @@ li {
   text-align: left;
 }
 
+.valign-top {
+  vertical-align: top;
+}
+
+.valign-middle {
+  vertical-align: middle;
+}
+
+.valign-bottom {
+  vertical-align: bottom;
+}
+
 .clearfix:after {
   visibility: hidden;
   display: block;

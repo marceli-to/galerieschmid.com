@@ -23,7 +23,9 @@
               }
             }
           @endphp
-          <x-media.slide :url="$artwork->media->first()->getUrl('detail')" />
+          <x-media.slide :url="$artwork->media->first()->getUrl('detail')">
+            <x-artwork.caption :artwork="$artwork" />
+          </x-media.slide>
         @endforeach
       </div>
     </div>

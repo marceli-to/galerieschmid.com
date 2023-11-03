@@ -48,6 +48,7 @@ return new class extends Migration
       $table->foreignId('artwork_frame_id')->nullable()->constrained();
       $table->foreignId('vat_type_id')->nullable()->constrained();
       $table->foreignId('client_id')->nullable()->constrained();
+      $table->foreignId('previous_client_id')->nullable()->references('id')->on('clients');
       $table->string('previous_client')->nullable();
       $table->foreignId('inventory_state_id')->nullable()->constrained();
       $table->foreignId('artist_id')->nullable()->constrained();

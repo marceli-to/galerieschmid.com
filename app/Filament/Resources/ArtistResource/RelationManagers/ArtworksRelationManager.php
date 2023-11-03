@@ -91,18 +91,34 @@ class ArtworksRelationManager extends RelationManager
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
-          Tables\Actions\BulkAction::make('exportArtistsToPdf')
-          ->action(function ($records, array $data) {
-            return response()->streamDownload(function () use ($records) {
-              echo \Pdf::loadHtml(
-                \Blade::render('pdf.artwork-label', ['records' => $records])
-              )->stream();
-            }, 'galerieschmid-etiketten-'. \Str::slug($records[0]->artist->fullname).'-'. date('d-m-Y-H-i-s', time()) .'.pdf');
-          })
-          ->label('Etiketten erstellen')
-          ->icon('heroicon-o-document-arrow-down')
-          ->color('warning')
-          ->deselectRecordsAfterCompletion(),   
+
+          // Artwork labels
+          Tables\Actions\BulkAction::make('createArtworkLabel')
+            ->action(function ($records, array $data) {
+              return response()->streamDownload(function () use ($records) {
+                echo \Pdf::loadHtml(
+                  \Blade::render('pdf.artwork.label', ['records' => $records])
+                )->stream();
+              }, 'galerieschmid-objekt-etiketten-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+            })
+            ->label('Etiketten erstellen')
+            ->icon('heroicon-o-document-arrow-down')
+            ->deselectRecordsAfterCompletion(),  
+            
+          // Artwork list
+          Tables\Actions\BulkAction::make('createArtworkList')
+            ->action(function ($records, array $data) {
+              return response()->streamDownload(function () use ($records) {
+                echo \Pdf::loadHtml(
+                  \Blade::render('pdf.artwork.list', ['records' => $records])
+                )
+                ->setPaper('A4', 'landscape')
+                ->stream();
+              }, 'galerieschmid-objekt-liste-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+            })
+            ->label('Liste erstellen')
+            ->icon('heroicon-o-document-arrow-down')
+            ->deselectRecordsAfterCompletion(),   
         ]),
       ]);
   }

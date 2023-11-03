@@ -32,6 +32,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
@@ -146,13 +147,13 @@ class ArtworkResource extends Resource
             ->label('Standort')
             ->columnSpan('full'),
             Select::make('client_id')
-            ->label('Besitzer')
+            ->label('Kunde')
             ->options(Client::all()->sortBy('fullname')->pluck('fullname', 'id'))
             ->columnSpan('full')
             ->searchable(),
             Select::make('previous_client')
             ->label('Eigentümer')
-            ->options(Client::all()->sortBy('fullname')->pluck('fullname', 'fullname'))
+            ->options(Client::all()->sortBy('fullname')->pluck('fullname'))
             ->columnSpan('full')
             ->searchable(),
 
@@ -185,7 +186,7 @@ class ArtworkResource extends Resource
               TextInput::make('purchase_price_frame')
               ->label('Einkaufspreis Rahmen'),
               TextInput::make('sale_price_soll')
-              ->label('Verkaufspreis Soll'),
+              ->label('Spezialpreis (Rabatt)'),
               Toggle::make('show_exact_price')
               ->label('Exakter Preis anzeigen')
               ->inline(false),
@@ -302,6 +303,19 @@ class ArtworkResource extends Resource
     ])
     ->actions([
       ActionGroup::make([
+        Action::make('send')
+        ->label('Duplizieren')
+        ->icon('heroicon-o-clipboard-document')
+        ->action(function (array $data, $record): bool {
+          $record->description_de = $record->description_de . ' (Kopie)';
+          return $record->replicate()->save();
+        Notification::make()
+          ->title('Objekt dupliziert')
+          ->body('Das Objekt wurde dupliziert')
+          ->success()
+          ->send();
+        })
+        ->successRedirectUrl(route('filament.admin.resources.artworks.index')),
         EditAction::make(),
         DeleteAction::make(),
       ]),
@@ -361,19 +375,33 @@ class ArtworkResource extends Resource
         ->deselectRecordsAfterCompletion()
         ->modalWidth('lg'),
 
-        BulkAction::make('exportArtistsToPdf')
-        ->action(function ($records, array $data) {
-          return response()->streamDownload(function () use ($records) {
-            echo \Pdf::loadHtml(
-              \Blade::render('pdf.artwork-label', ['records' => $records])
-            )->stream();
-          }, 'galerieschmid-etiketten-'. date('d-m-Y-H-i-s', time()) .'.pdf');
-        })
-        ->label('Etiketten erstellen')
-        ->icon('heroicon-o-document-arrow-down')
-        ->color('warning')
-        ->deselectRecordsAfterCompletion(),        
-
+          // Artwork labels
+          BulkAction::make('createArtworkLabel')
+            ->action(function ($records, array $data) {
+              return response()->streamDownload(function () use ($records) {
+                echo \Pdf::loadHtml(
+                  \Blade::render('pdf.artwork.label', ['records' => $records])
+                )->stream();
+              }, 'galerieschmid-objekt-etiketten-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+            })
+            ->label('Etiketten erstellen')
+            ->icon('heroicon-o-document-arrow-down')
+            ->deselectRecordsAfterCompletion(),  
+            
+          // Artwork list
+          BulkAction::make('createArtworkList')
+            ->action(function ($records, array $data) {
+              return response()->streamDownload(function () use ($records) {
+                echo \Pdf::setPaper('A4', 'landscape')
+                ->loadHtml(
+                  \Blade::render('pdf.artwork.list', ['records' => $records])
+                )
+                ->stream();
+              }, 'galerieschmid-objekt-liste-'. date('d-m-Y-H-i-s', time()) .'.pdf');
+            })
+            ->label('Liste erstellen')
+            ->icon('heroicon-o-document-arrow-down')
+            ->deselectRecordsAfterCompletion(),   
 
       ]),
     ]);
