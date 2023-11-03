@@ -43,6 +43,17 @@ class ImportClients extends Command
           'alfa' => $item->ALFA ?? NULL,
           'firstname' => $item->VORNAME ?? NULL,
           'lastname' => $item->NAME ?? NULL,
+          'address' => $item->ADRESSE1_1 ?? NULL,
+          'address_additional' => $item->ADRESSE2_1 ?? NULL,
+          'street' => $item->STRASSE_1 ?? NULL,
+          'box' => $item->POSTFACH_1 ?? NULL,
+          'zip' => $item->PLZ_1 ?? NULL,
+          'city' => $item->ORT_1 ?? NULL,
+          'state' => $item->STATE_1 ?? NULL,
+          'country' => $item->LAND_1 ?? NULL,
+          'phone' => $item->TELEFON_P_1 ?? NULL,
+          'phone_business' => $item->TELEFON_G_1 ?? NULL,
+          'fax' => $item->FAX_1 ?? NULL,
           'website' => $item->HREF ?? NULL,
           'mobile' => $item->NATEL ?? NULL,
           'email' => $item->EMAIL ?? NULL,
@@ -57,36 +68,6 @@ class ImportClients extends Command
           'user_id' => 1,
         ]);
 
-        // Handle Addresses
-        if (
-          $item->ADRESSE1_1 ||
-          $item->ADRESSE2_1 ||
-          $item->STRASSE_1 ||
-          $item->POSTFACH_1 ||
-          $item->PLZ_1 ||
-          $item->ORT_1 ||
-          $item->LAND_1 ||
-          $item->TELEFON_P_1 ||
-          $item->TELEFON_G_1 ||
-          $item->FAX_1
-        ) {
-          $address = ClientAddress::create([
-            'address' => $item->ADRESSE1_1 ?? NULL,
-            'address_additional' => $item->ADRESSE2_1 ?? NULL,
-            'street' => $item->STRASSE_1 ?? NULL,
-            'box' => $item->POSTFACH_1 ?? NULL,
-            'zip' => $item->PLZ_1 ?? NULL,
-            'city' => $item->ORT_1 ?? NULL,
-            'state' => $item->STATE_1 ?? NULL,
-            'country' => $item->LAND_1 ?? NULL,
-            'phone' => $item->TELEFON_P_1 ?? NULL,
-            'phone_business' => $item->TELEFON_G_1 ?? NULL,
-            'fax' => $item->FAX_1 ?? NULL,
-            'primary' => 1,
-            'client_id' => $client->id,
-            'user_id' => 1,
-          ]);
-        }
 
         if (
           $item->ADRESSE1_2 ||

@@ -13,6 +13,8 @@ class EditArtist extends EditRecord
   {
     $data['user_id'] = auth()->user()->id;
     $data['artist_name'] = (isset($data['firstname']) ? $data['firstname'] . ' ' : '') . $data['lastname'];
+
+    // fix protocol for website
     if (isset($data['website']) && !empty($data['website']))
     {
       if (!preg_match("~^(?:f|ht)tps?://~i", $data['website']))
@@ -21,6 +23,7 @@ class EditArtist extends EditRecord
       }
     }
 
+    // subscribe to newsletter if checkbox is checked and email is valid
     if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL))
     {
       if (isset($data['newsletter_subscriber']))

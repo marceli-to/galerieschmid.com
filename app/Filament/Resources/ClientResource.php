@@ -73,7 +73,38 @@ class ClientResource extends Resource
             ->columnSpan('full')
             ->required()
             ->maxLength(255),
-                      
+
+            Textarea::make('address')
+            ->label('Adresse')
+            ->columnSpan('full'),
+            Textarea::make('address_additional')
+              ->label('Adresszusatz')
+              ->columnSpan('full'),
+            TextInput::make('street')
+              ->label('Strasse, Nr.')
+              ->maxLength(50)
+              ->columnSpan('full'),
+            TextInput::make('box')
+              ->label('Postfach')
+              ->maxLength(50)
+              ->columnSpan('full'),
+            TextInput::make('zip')
+              ->label('PLZ')
+              ->maxLength(50)
+              ->columnSpan('full'),
+            TextInput::make('city')
+              ->label('Ort')
+              ->maxLength(255)
+              ->columnSpan('full'),
+            TextInput::make('state')
+              ->label('Kanton/Bundesland')
+              ->maxLength(255)
+              ->columnSpan('full'),
+            TextInput::make('country')
+              ->label('Land')
+              ->maxLength(255)
+              ->columnSpan('full'),
+
             TextInput::make('email')
             ->label('E-Mail')
             ->columnSpan('full')
@@ -96,6 +127,7 @@ class ClientResource extends Resource
           Grid::make()->schema([
 
             Section::make('Einstellungen')
+              ->collapsible()
               ->schema([
                 
                 Toggle::make('active')
@@ -138,16 +170,16 @@ class ClientResource extends Resource
             ])->columnSpan(5)->columns(12),
 
             Section::make('Künstler')
-            ->collapsible()
-            ->collapsed()
-            ->schema([
-              Textarea::make('artists')
-              ->label('Liste der Künstler')
-              ->columnSpan('full')
-              ->rows(3),
-            ])->columnSpan(7),
+              ->collapsible()
+              ->collapsed()
+              ->schema([
+                Textarea::make('artists')
+                ->label('Liste der Künstler')
+                ->columnSpan('full')
+                ->rows(3),
+              ])->columnSpan(7),
 
-          ])->columns(12)
+          ])->columnSpan(5)->columns(12)
       ]);
   }
 
@@ -168,7 +200,7 @@ class ClientResource extends Resource
         ->label('E-Mail')
         ->searchable()
         ->sortable(),
-        TextColumn::make('primaryAddress.city')
+        TextColumn::make('city')
         ->label('Ort')
         ->searchable(),
         TextColumn::make('gallery')

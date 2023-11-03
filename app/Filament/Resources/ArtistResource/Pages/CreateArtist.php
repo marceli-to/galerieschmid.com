@@ -14,6 +14,16 @@ class CreateArtist extends CreateRecord
     $data['artist_name'] = (isset($data['firstname']) ? $data['firstname'] . ' ' : '') . $data['lastname'];
     $data['user_id'] = auth()->user()->id;
 
+    // fix protocol for website
+    if (isset($data['website']) && !empty($data['website']))
+    {
+      if (!preg_match("~^(?:f|ht)tps?://~i", $data['website']))
+      {
+        $data['website'] = "https://" . $data['website'];
+      }
+    }
+
+    // subscribe to newsletter if checkbox is checked and email is valid
     if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL))
     {
       if (isset($data['newsletter_subscriber']))

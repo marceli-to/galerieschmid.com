@@ -34,9 +34,6 @@ class AddressRelationManager extends RelationManager
 
         Grid::make()
         ->schema([
-          Toggle::make('primary')
-          ->label('Primäre Adresse?')
-          ->columnSpan('full'),
           Textarea::make('address')
           ->label('Adresse')
           ->columnSpan(6),
@@ -98,9 +95,6 @@ class AddressRelationManager extends RelationManager
     return $table
       ->heading('Adressen')
       ->columns([
-        IconColumn::make('primary')
-        ->label('Primär')
-        ->boolean(),
         TextColumn::make('address')->label('Adresse'),
         TextColumn::make('street')->label('Strasse/Nr.'),
         TextColumn::make('zip')->label('PLZ'),

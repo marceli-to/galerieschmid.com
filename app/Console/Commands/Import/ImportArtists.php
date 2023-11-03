@@ -42,6 +42,16 @@ class ImportArtists extends Command
           'artist_name' => $item->KUENSTLER_NAME ?? NULL,
           'firstname' => $item->VORNAME ?? NULL,
           'lastname' => $item->NAME ?? NULL,
+          'address' => $item->ADRESSE1_1 ?? NULL,
+          'address_additional' => $item->ADRESSE2_1 ?? NULL,
+          'street' => $item->STRASSE_1 ?? NULL,
+          'box' => $item->POSTFACH_1 ?? NULL,
+          'zip' => $item->PLZ_1 ?? NULL,
+          'city' => $item->ORT_1 ?? NULL,
+          'country' => $item->LAND_1 ?? NULL,
+          'phone' => $item->TELEFON_P_1 ?? NULL,
+          'phone_business' => $item->TELEFON_G_1 ?? NULL,
+          'fax' => $item->FAX_1 ?? NULL,
           'website' => $item->HREF ?? NULL,
           'biography_de' => $item->BIO_TEXT ?? NULL,
           'biography_en' => $item->BIO_TEXT_EN ?? NULL,
@@ -89,35 +99,6 @@ class ImportArtists extends Command
           {
             $artist->copyMedia($pathToFile)->toMediaCollection('artist_portraits');
           }
-        }
-
-        // Handle Addresses
-        if (
-          $item->ADRESSE1_1 ||
-          $item->ADRESSE2_1 ||
-          $item->STRASSE_1 ||
-          $item->POSTFACH_1 ||
-          $item->PLZ_1 ||
-          $item->ORT_1 ||
-          $item->LAND_1 ||
-          $item->TELEFON_P_1 ||
-          $item->TELEFON_G_1 ||
-          $item->FAX_1
-        ) {
-          $address = ArtistAddress::create([
-            'address' => $item->ADRESSE1_1 ?? NULL,
-            'address_additional' => $item->ADRESSE2_1 ?? NULL,
-            'street' => $item->STRASSE_1 ?? NULL,
-            'box' => $item->POSTFACH_1 ?? NULL,
-            'zip' => $item->PLZ_1 ?? NULL,
-            'city' => $item->ORT_1 ?? NULL,
-            'country' => $item->LAND_1 ?? NULL,
-            'phone' => $item->TELEFON_P_1 ?? NULL,
-            'phone_business' => $item->TELEFON_G_1 ?? NULL,
-            'fax' => $item->FAX_1 ?? NULL,
-            'artist_id' => $artist->id,
-            'user_id' => 1,
-          ]);
         }
 
         if (

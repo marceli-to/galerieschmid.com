@@ -16,6 +16,17 @@ return new class extends Migration
       $table->string('artist_name');
       $table->string('firstname')->nullable();
       $table->string('lastname');
+      $table->text('address')->nullable();
+      $table->text('address_additional')->nullable();
+      $table->string('street')->nullable();
+      $table->string('box', 100)->nullable();
+      $table->string('zip', 100)->nullable();
+      $table->string('city')->nullable();
+      $table->string('state')->nullable();
+      $table->string('country')->nullable();
+      $table->string('phone', 50)->nullable();
+      $table->string('phone_business', 50)->nullable();
+      $table->string('fax', 50)->nullable();
       $table->string('website')->nullable();
       $table->text('biography_de')->nullable();
       $table->text('biography_en')->nullable();

@@ -21,6 +21,17 @@ class Client extends Model
     'alfa',
     'firstname',
     'lastname',
+    'address',
+    'address_additional',
+    'street',
+    'box',
+    'zip',
+    'city',
+    'state',
+    'country',
+    'phone',
+    'phone_business',
+    'fax',
     'website',
     'mobile',
     'email',
@@ -51,11 +62,6 @@ class Client extends Model
   public function addresses(): HasMany
   {
     return $this->hasMany(ClientAddress::class);
-  }
-
-  public function primaryAddress(): HasMany
-  {
-    return $this->hasMany(ClientAddress::class)->where('primary', 1);
   }
   
   public function additional_fields(): HasMany

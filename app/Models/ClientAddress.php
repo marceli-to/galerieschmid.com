@@ -20,7 +20,6 @@ class ClientAddress extends Model
     'phone',
     'phone_business',
     'fax',
-    'primary',
     'client_id',
     'user_id'
   ];

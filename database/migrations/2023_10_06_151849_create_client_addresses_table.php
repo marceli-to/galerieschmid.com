@@ -24,7 +24,6 @@ return new class extends Migration
       $table->string('phone', 50)->nullable();
       $table->string('phone_business', 50)->nullable();
       $table->string('fax', 50)->nullable();
-      $table->tinyInteger('primary')->default(0);
       $table->foreignId('client_id')->nullable()->constrained();
       $table->foreignId('user_id')->nullable()->constrained();
       $table->softDeletes();

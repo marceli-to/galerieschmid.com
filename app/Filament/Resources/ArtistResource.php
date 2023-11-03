@@ -58,54 +58,100 @@ class ArtistResource extends Resource
           ->schema([
 
             Select::make('artist_type_id')
-            ->label('Status')
-            ->required()
-            ->options(ArtistType::all()->pluck('description_de', 'id')),
-
+              ->label('Status')
+              ->required()
+              ->options(ArtistType::all()->pluck('description_de', 'id')),
             TextInput::make('salutation')
-            ->label('Anrede')
-            ->columnSpan('full')
-            ->maxLength(255),
-
+              ->label('Anrede')
+              ->columnSpan('full')
+              ->maxLength(255),
             TextInput::make('firstname')
-            ->label('Vorname')
-            ->columnSpan('full')
-            ->maxLength(255),
-
+              ->label('Vorname')
+              ->columnSpan('full')
+              ->maxLength(255),
             TextInput::make('lastname')
-            ->label('Name')
-            ->columnSpan('full')
-            ->required()
-            ->maxLength(255),
-
+              ->label('Name')
+              ->columnSpan('full')
+              ->required()
+              ->maxLength(255),
+           
+            TextInput::make('phone')
+              ->label('Telefon')
+              ->tel()
+              ->prefixIcon('heroicon-m-phone')
+              ->columnSpan('full'),
+            TextInput::make('phone_business')
+              ->label('Telefon G.')
+              ->tel()
+              ->prefixIcon('heroicon-m-phone')
+              ->columnSpan('full'),
+            TextInput::make('fax')
+              ->label('Fax')
+              ->tel()
+              ->prefixIcon('heroicon-m-table-cells')
+              ->columnSpan('full'),
             TextInput::make('email')
-            ->label('E-Mail')
-            ->columnSpan('full')
-            ->email()
-            ->prefixIcon('heroicon-m-at-symbol'),
-
+              ->label('E-Mail')
+              ->columnSpan('full')
+              ->email()
+              ->prefixIcon('heroicon-m-at-symbol'),
             TextInput::make('mobile')
-            ->label('Mobile')
-            ->columnSpan('full')
-            ->tel()
-            ->prefixIcon('heroicon-m-device-phone-mobile'),
-
+              ->label('Mobile')
+              ->columnSpan('full')
+              ->tel()
+              ->prefixIcon('heroicon-m-device-phone-mobile'),
             TextInput::make('website')
-            ->label('Webseite')
-            ->columnSpan('full')
-            ->url()
-            ->prefixIcon('heroicon-m-globe-alt'),
-
+              ->label('Webseite')
+              ->columnSpan('full')
+              ->url()
+              ->prefixIcon('heroicon-m-globe-alt'),
             Textarea::make('bank_account')
-            ->label('Bankkonto')
-            ->columnSpan('full')
-            ->rows(3)
-            ->maxLength(255),
+              ->label('Bankkonto')
+              ->columnSpan('full')
+              ->rows(3)
+              ->maxLength(255),
           ])->columnSpan(7),
 
           Grid::make()->schema([
 
+            Section::make('Adresse')
+              ->collapsible()
+              ->schema([
+                Textarea::make('address')
+                ->label('Adresse')
+                ->columnSpan('full'),
+              Textarea::make('address_additional')
+                ->label('Adresszusatz')
+                ->columnSpan('full'),
+              TextInput::make('street')
+                ->label('Strasse, Nr.')
+                ->maxLength(50)
+                ->columnSpan('full'),
+              TextInput::make('box')
+                ->label('Postfach')
+                ->maxLength(50)
+                ->columnSpan('full'),
+              TextInput::make('zip')
+                ->label('PLZ')
+                ->maxLength(50)
+                ->columnSpan('full'),
+              TextInput::make('city')
+                ->label('Ort')
+                ->maxLength(255)
+                ->columnSpan('full'),
+              TextInput::make('state')
+                ->label('Kanton/Bundesland')
+                ->maxLength(255)
+                ->columnSpan('full'),
+              TextInput::make('country')
+                ->label('Land')
+                ->maxLength(255)
+                ->columnSpan('full'),
+              ]),
+
             Section::make('Einstellungen')
+              ->collapsible()
+              ->collapsed()
               ->schema([
                 Toggle::make('publish')
                 ->columnSpan(6)
