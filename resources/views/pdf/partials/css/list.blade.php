@@ -26,13 +26,4 @@ table.list-table.list-table--records td {
 table.list-table.list-table--records tr.even td {
   background-color: #eee;
 }
-/* #footer {
-  position: fixed;
-  left: 20px;
-  bottom: 0;
-  text-align: center;
-  }
-#footer .number:after {
-  content: counter(page);
-} */
 </style>
