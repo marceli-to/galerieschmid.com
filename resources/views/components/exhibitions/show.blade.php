@@ -12,9 +12,8 @@
       <a href="javascript:;" class="slider-btn slider-btn--next js-btn-slide-next">&nbsp;</a>			
     @endif
     <div class="swiper-wrapper">
-
       @if ($exhibition->artworks && $exhibition->artworks->count() > 0)
-        @foreach($exhibition->artworks as $artwork)
+        @foreach($exhibition->artworks->sortBy('pivot.sort') as $artwork)
           @if ($artwork->media->first())
             <x-media.slide :url="$artwork->media->first()->getUrl('detail')">
               <x-artwork.caption :artwork="$artwork" />
@@ -22,11 +21,9 @@
           @endif
         @endforeach
       @endif
-
       @if ($exhibition->media->first() && $exhibition->media->first()->getUrl('cover'))
         <x-media.slide :url="$exhibition->media->first()->getUrl('cover')"></x-media.slide>			
       @endif
-
     </div>
   </div>
   @if ($exhibition->artworks && $exhibition->artworks->count() > 0)
