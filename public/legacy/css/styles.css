@@ -2792,10 +2792,10 @@ nav.menu ul:first-child {
   width: 85%;
 }
 /* line 72, ../../.source/source/sass/layout/_navigation.scss */
-nav.menu ul:last-child {
+/* nav.menu ul:last-child {
   float: left;
   width: 15%;
-}
+} */
 /* line 78, ../../.source/source/sass/layout/_navigation.scss */
 nav.menu li {
   display: inline-block;
@@ -3135,6 +3135,10 @@ article.text-media a {
 /* line 144, ../../.source/source/sass/views/_content.scss */
 article.text-media a:hover {
   text-decoration: underline;
+}
+
+article.text-media .is-hidden {
+  display: none;
 }
 
 /**

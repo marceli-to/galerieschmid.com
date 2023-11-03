@@ -2,7 +2,7 @@
   <ul>
     <x-menu.items />
   </ul>
-  <ul>
+  {{-- <ul>
     <li class="search">
       <a href="javascript:;" class="icon icon-search js-btn-show-search">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55.1 55.1">
@@ -13,5 +13,5 @@
         </svg>
       </a>
     </li>										
-  </ul>		
+  </ul>		 --}}
 </nav>

@@ -24,4 +24,4 @@
 <link rel="stylesheet" href="{{ asset('legacy/css/styles.css') }}?v={{ date('dmY', time()) }}">
 </head>
 <body>
-<x-search.overlay />
+{{-- <x-search.overlay /> --}}

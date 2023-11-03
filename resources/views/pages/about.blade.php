@@ -6,10 +6,14 @@
     <h1>{{ $about_gallery->title_de }}</h1>
     {!! $about_gallery->text_de !!}
   </article>
-  <article class="text-media">
-    <h1>{{ $about_team->title_de }}</h1>
-    {!! $about_team->text_de !!}
-  </article>	
+  @if ($team)
+    <article class="text-media">
+      <h1>Das Team</h1>
+      @foreach($team as $t)
+        {{ $t->firstname }} {{ $t->lastname }}<br>
+      @endforeach
+    </article>
+  @endif	
 </section>
 
 <section class="grid__cell grid__cell--2_3 grid-order--2">

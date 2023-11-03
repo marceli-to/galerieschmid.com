@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Actions\Impressions\GetImpressions;
 use App\Actions\Content\GetItem;
+use App\Actions\Content\GetTeam;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -15,7 +16,7 @@ class AboutController extends Controller
   { 
     return view('pages.about', [
       'about_gallery' => (new GetItem())->execute('about_gallery'),
-      'about_team' => (new GetItem())->execute('about_team'),
+      'team' => (new GetTeam())->execute(),
       'impressions' => (new GetImpressions())->execute(),
     ]);
   }

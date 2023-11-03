@@ -36,15 +36,6 @@ class ImportContentArticle extends Command
     ]);
 
     ContentArticle::create([
-      'key' => 'about_team',
-      'title_de' => 'Das Team',
-      'text_de' => '<p>Barbara Bachmann<br>Stefan Schmid</p>',
-      'title_en' => null,
-      'text_en' => null,
-      'user_id' => 1,
-    ]);
-
-    ContentArticle::create([
       'key' => 'contact_opening_hours',
       'title_de' => 'Öffnungszeiten',
       'text_de' => '<p>Die Galerie ist vom 09. Oktober 2023 bis anfangs Dezember 2023 wegen Sanierung der Liegenschaft am Bundesplatz 14 geschlossen.</p><p>The gallery is closed from 09. Oktober 2023 until begining of december 2023 due to renovation of the building Bundesplatz 14.</p><p>Kontakt:  info@galerieschmid.com / Stefan Schmid</p>',

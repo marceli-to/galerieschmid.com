@@ -3,5 +3,5 @@
 	<ul class="nav-list">
     <x-menu.items />
 	</ul>
-  <x-search.form />
+  {{-- <x-search.form /> --}}
 </nav>
