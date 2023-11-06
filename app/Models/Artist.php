@@ -8,10 +8,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Laravel\Scout\Searchable;
 
 class Artist extends Model implements HasMedia
 {
-  use SoftDeletes, InteractsWithMedia;
+  use SoftDeletes, InteractsWithMedia, Searchable;
 
   protected $fillable = [
     'id',
@@ -46,6 +47,31 @@ class Artist extends Model implements HasMedia
   protected $appends = [
     'fullname'
   ];
+
+  /**
+   * Get the indexable data array for the model.
+   *
+   * @return array<string, mixed>
+   */
+  public function toSearchableArray(): array
+  { 
+    return [
+      'artist_name' => $this->artist_name,
+      'firstname' => $this->firstname,
+      'lastname' => $this->lastname,
+      'biography_de' => $this->biography_de,
+      'publish' => $this->publish,
+    ];
+  }
+
+  public function shouldBeSearchable()
+  {
+    if ($this->publish)
+    {
+      return true;
+    }
+    return false;
+  }
 
   public function user(): BelongsTo
   {

@@ -2792,10 +2792,10 @@ nav.menu ul:first-child {
   width: 85%;
 }
 /* line 72, ../../.source/source/sass/layout/_navigation.scss */
-/* nav.menu ul:last-child {
+nav.menu ul:last-child {
   float: left;
   width: 15%;
-} */
+}
 /* line 78, ../../.source/source/sass/layout/_navigation.scss */
 nav.menu li {
   display: inline-block;

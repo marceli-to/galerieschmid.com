@@ -55,16 +55,26 @@ class Exhibition extends Model implements HasMedia
     return [
       'id' => (int) $this->id,
       'title_de' => $this->title_de,
-      'subtitle_de' => $this->title_de,
+      'subtitle_de' => $this->subtitle_de,
       'summary_de' => $this->summary_de,
       'text_de' => $this->text_de,
       'keywords_de' => $this->keywords_de,
       'title_en' => $this->title_en,
-      'subtitle_en' => $this->title_en,
+      'subtitle_en' => $this->subtitle_en,
       'summary_en' => $this->summary_en,
       'text_en' => $this->text_en,
       'keywords_en' => $this->keywords_en,
+      'active' => $this->active
     ];
+  }
+
+  public function shouldBeSearchable()
+  {
+    if ($this->active)
+    {
+      return true;
+    }
+    return false;
   }
 
   public function user(): BelongsTo

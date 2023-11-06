@@ -3,9 +3,9 @@
 		<span></span>
 		<span></span>
 	</a>	
-	{{-- <form action="{{ route('page.search') }}" method="GET" class="search-form--overlay">
+	<form action="{{ route('page.search') }}" method="GET" class="search-form--overlay">
 		<div class="form-row">
-			<input type="text" name="keywords" minlength="5" value="">
+			<input type="text" name="keywords" minlength="3" value="">
 			<a href="javascript:;" class="icon icon-search icon-search--overlay js-btn-search">
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55.1 55.1">
 					<path class="st0" d="M55.1,50.9L36.6,32.4c2.6-3.5,4-7.7,4-12.1c0-5.4-2.1-10.5-5.9-14.4C30.8,2.1,25.7,0,20.3,0S9.8,2.1,5.9,5.9
@@ -15,5 +15,5 @@
 				</svg>
 			</a>
 		</div>
-	</form>	 --}}
+	</form>	
 </div>

@@ -9,10 +9,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Laravel\Scout\Searchable;
 
 class Artwork extends Model implements HasMedia
 {
-  use SoftDeletes, InteractsWithMedia;
+  use SoftDeletes, InteractsWithMedia, Searchable;
 
   protected $fillable = [
     'id',
@@ -79,6 +80,31 @@ class Artwork extends Model implements HasMedia
     'dimensions',
     'description_full'
   ];
+
+  /**
+   * Get the indexable data array for the model.
+   *
+   * @return array<string, mixed>
+   */
+  public function toSearchableArray(): array
+  { 
+    return [
+      'description_de' => $this->description_de,
+      'description_en' => $this->description_en,
+      'artist_inventory_number' => $this->artist_inventory_number,
+      'inventory_number' => $this->inventory_number,
+      'publish' => $this->publish,
+    ];
+  }
+
+  public function shouldBeSearchable()
+  {
+    if ($this->publish && $this->artwork_state_id == 1)
+    {
+      return true;
+    }
+    return false;
+  }
 
   public function user(): BelongsTo
   {

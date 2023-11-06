@@ -1,8 +1,8 @@
 <?php
-namespace App\Actions\Exhibition;
-use App\Models\Exhibition;
+namespace App\Actions\Artist;
+use App\Models\Artist;
 
-class SearchExhibitions
+class SearchArtists
 {
   /**
    * Search for exhibitions
@@ -13,7 +13,7 @@ class SearchExhibitions
   public function execute(String $keywords)
   {
     return $this->results(
-      Exhibition::search($keywords)->get()
+      Artist::search($keywords)->get()
     );
   }
 
@@ -30,14 +30,13 @@ class SearchExhibitions
     foreach($records as $record)
     {
       $results[] = [
-        'title' => $record->title_de .': '. $record->subtitle_de,
-        'url' => route('page.exhibition.show', [
-          'slug' => \Str::slug($record->title_de),
-          'exhibition' => $record
+        'title' => "{$record->fullname}",
+        'url' => route('page.artist.show', [
+          'slug' => \Str::slug($record->fullname),
+          'artist' => $record,
         ]),
       ];
     }
-
     return $results;
   }
 
