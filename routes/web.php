@@ -23,6 +23,7 @@ use App\Models\Newsletter;
 
 // Page routes
 Route::get('/', [HomeController::class, 'index'])->name('page.home');
+// Route::get('/suche/{keywords}', [SearchController::class, 'index'])->name('page.search');
 
 Route::get('/kuenstler', [ArtistController::class, 'index'])->name('page.artist');
 Route::get('/kuenstler/werke/{slug?}/{artist}/{index?}', [ArtistController::class, 'works'])->name('page.artist.works');

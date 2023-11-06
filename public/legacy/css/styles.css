@@ -3261,6 +3261,12 @@ article.search-result a {
   margin-bottom: 5px;
   text-decoration: underline;
 }
+
+article.search-result a em,
+article.search-result .search-result__preview-text em {
+  background-color: #ff0;
+}
+
 /* line 260, ../../.source/source/sass/views/_content.scss */
 article.search-result a:hover {
   text-decoration: none;

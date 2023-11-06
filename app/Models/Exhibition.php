@@ -8,10 +8,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Laravel\Scout\Searchable;
 
 class Exhibition extends Model implements HasMedia
 {
-  use SoftDeletes, InteractsWithMedia;
+  use SoftDeletes, InteractsWithMedia, Searchable;
 
   protected $fillable = [
     'id',
@@ -43,6 +44,28 @@ class Exhibition extends Model implements HasMedia
   protected $appends = [
     'periode'
   ];
+
+  /**
+   * Get the indexable data array for the model.
+   *
+   * @return array<string, mixed>
+   */
+  public function toSearchableArray(): array
+  { 
+    return [
+      'id' => (int) $this->id,
+      'title_de' => $this->title_de,
+      'subtitle_de' => $this->title_de,
+      'summary_de' => $this->summary_de,
+      'text_de' => $this->text_de,
+      'keywords_de' => $this->keywords_de,
+      'title_en' => $this->title_en,
+      'subtitle_en' => $this->title_en,
+      'summary_en' => $this->summary_en,
+      'text_en' => $this->text_en,
+      'keywords_en' => $this->keywords_en,
+    ];
+  }
 
   public function user(): BelongsTo
   {
