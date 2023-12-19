@@ -1,34 +1,39 @@
 <?php
 namespace App\Tasks;
+use App\Models\NewsletterQueue;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Newsletter\Newsletter;
 
 class QueueHandler
 {
   public function __invoke()
   {
-    // $jobs = JobModel::with('mailable')->unprocessed()->get();
-    // $jobs = collect($jobs)->splice(0,2);
+    $queueItems = NewsletterQueue::with('newsletter.articles', 'subscriber')->unprocessed()->get();
+    $queueItems = collect($queueItems)->splice(0,1);
 
-    // foreach($jobs->all() as $job)
-    // {
-    //   $recipient = env('MAIL_TO');
-    //   if ((app()->environment() == 'production') && $job->recipient)
-    //   {
-    //     $recipient = $job->recipient;
-    //   }
+    foreach($queueItems->all() as $queueItem)
+    {
+      $recipient = env('MAIL_TO');
+      if ((app()->environment() == 'production') && $queueItem->email)
+      {
+        $recipient = $queueItem->email;
+      }
       
-    //   try
-    //   {
-    //     \Mail::to($recipient)->send(new $job->mailable_class($job->mailable));
-    //     $job->processed = 1;
-    //     $job->save();
-    //   }
-    //   catch(\Throwable $e)
-    //   {
-    //     \Log::error($e);
-    //     $job->error = $e;
-    //     $job->processed = 1;
-    //     $job->save();
-    //   }
-    // }
+      try
+      {
+        Notification::route('mail', $recipient)->notify(new Newsletter($queueItem->newsletter, $queueItem->subscriber));
+        $queueItem->processed = 1;
+        $queueItem->processed_at = now();
+        $queueItem->save();
+      }
+      catch(\Throwable $e)
+      {
+        \Log::error($e);
+        $queueItem->errors = $e;
+        $queueItem->processed = 1;
+        $queueItem->processed_at = now();
+        $queueItem->save();
+      }
+    }
   }
 }

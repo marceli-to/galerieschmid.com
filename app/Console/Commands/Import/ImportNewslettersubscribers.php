@@ -41,8 +41,8 @@ class ImportNewslettersubscribers extends Command
           'firstname' => $item->firstname,
           'lastname' => $item->lastname,
           // generate random email address
-          'email' => \Str::random(8).'@'.\Str::random(6) . '.com',
-          // 'email' => $item->email,
+          // 'email' => \Str::random(8).'@'.\Str::random(6) . '.com',
+          'email' => $item->email,
           'hash' => \Str::uuid(),
 
           // get salutation from enum
