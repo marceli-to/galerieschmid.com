@@ -76,7 +76,6 @@ class ImportNewsletterarticle extends Command
             // check if file physically exists
             if (!file_exists($pathToFile))
             {
-
               $this->logError('Newsletter Article - [Image] ' . $pathToFile . ' does not exist for newsletter article with id: ' . $newsletter_article->id);
             }
             else
