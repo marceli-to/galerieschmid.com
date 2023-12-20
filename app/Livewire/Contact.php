@@ -35,7 +35,7 @@ class Contact extends Component
     $this->validate();
 
     // Send Email
-    Notification::route('mail', $this->email)->notify(new ContactForm([
+    Notification::route('mail', env('MAIL_TO'))->notify(new ContactForm([
       'firstname' => $this->firstname,
       'lastname' => $this->lastname,
       'email' => $this->email,
