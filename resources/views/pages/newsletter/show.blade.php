@@ -28,8 +28,7 @@
             </h2>
             <table class="mb-20">
               <td class="w-[160px]">
-                {{ dd($article->media) }}
-                @if ($article->media)
+                @if (count($article->media > 0))
                   <img src="{{ $article->media->first()->getUrl('newsletter') }}" alt="{{ $article->title }}" class="w-[120px] my-2 mr-10">
                 @endif
               </td>
