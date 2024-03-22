@@ -67,6 +67,7 @@ class ArtworkResource extends Resource
 
             TextInput::make('description_de')
             ->label('Titel')
+            ->required()
             ->columnSpan('full'),
             TextInput::make('description_en')
             ->label('Titel (EN)')
@@ -164,13 +165,16 @@ class ArtworkResource extends Resource
             Section::make('Einstellungen')
             ->collapsible()
             ->schema([
-              Select::make('artworkState')
+              Select::make('artwork_state_id')
               ->label('Status')
+              ->default(ArtworkState::first()->id)
               ->options(ArtworkState::all()->sortBy('description_de')->pluck('description_de', 'id'))
               ->columnSpan('full')
+              ->required()
               ->selectablePlaceholder(false),
-              Select::make('inventoryState')
+              Select::make('inventory_state_id')
               ->label('Bestandesstatus')
+              ->default(InventoryState::first()->id)
               ->options(InventoryState::all()->sortBy('description_de')->pluck('description_de', 'id'))
               ->columnSpan('full')
               ->selectablePlaceholder(false),

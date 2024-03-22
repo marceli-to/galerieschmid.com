@@ -11,7 +11,7 @@ class CreateArtwork extends CreateRecord
   protected function mutateFormDataBeforeCreate(array $data): array
   {
     $data['user_id'] = auth()->user()->id;
-    $data['alfa'] = (isset($data['firstname']) ? strtoupper($data['firstname']) . ' ' : '') . strtoupper($data['lastname']);
+    //$data['alfa'] = (isset($data['firstname']) ? strtoupper($data['firstname']) . ' ' : '') . strtoupper($data['lastname']);
     return $data;
   }
 
