@@ -123,5 +123,4 @@ class Exhibition extends Model implements HasMedia
   {
     $this->addMediaCollection('exhibition_cover');
   }
-
 }

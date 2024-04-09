@@ -70,14 +70,16 @@ class ExhibitionResource extends Resource
                 ->label('Zusammenfassung')
                 ->columnSpan('full')
                 ->rows(3),
-                RichEditor::make('text_de')
+                Textarea::make('text_de')
                 ->label('Text')
-                ->toolbarButtons([
-                  'h2',
-                  'bold',
-                  'bulletList',
-                  'link',
-                ]),
+                ->columnSpan('full')
+                ->rows(5),
+                // ->toolbarButtons([
+                //   'h2',
+                //   'bold',
+                //   'bulletList',
+                //   'link',
+                // ]),
                 Textarea::make('keywords_de')
                 ->label('Keywords')
                 ->columnSpan('full')
@@ -95,14 +97,16 @@ class ExhibitionResource extends Resource
                 ->label('Zusammenfassung')
                 ->columnSpan('full')
                 ->rows(3),
-                RichEditor::make('text_de')
+                Textarea::make('text_en')
                 ->label('Text')
-                ->toolbarButtons([
-                  'h2',
-                  'bold',
-                  'bulletList',
-                  'link',
-                ]),
+                ->columnSpan('full')
+                ->rows(3),
+                // ->toolbarButtons([
+                //   'h2',
+                //   'bold',
+                //   'bulletList',
+                //   'link',
+                // ]),
                 Textarea::make('keywords_en')
                 ->label('Keywords')
                 ->columnSpan('full')

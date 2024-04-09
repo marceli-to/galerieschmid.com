@@ -2,7 +2,7 @@
 <h2>{{ $exhibition->subtitle_de }}</h2>
 <article class="exhibition exhibition--current">
   <h3>{{ $exhibition->title_de }}</h3>
-  {!! $exhibition->text_de ? $exhibition->text_de : '<p></p>' !!}
+  {!! $exhibition->text_de ? nl2br($exhibition->text_de) : '<p></p>' !!}<br>
   <p><strong>{!! $exhibition->periode !!}</strong></p>
 </article>
 @if (($exhibition->artworks && $exhibition->artworks->count() > 0) || ($exhibition->media->first() && $exhibition->media->first()->getUrl('cover')))
