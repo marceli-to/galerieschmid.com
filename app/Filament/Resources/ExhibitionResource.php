@@ -73,7 +73,7 @@ class ExhibitionResource extends Resource
                 Textarea::make('text_de')
                 ->label('Text')
                 ->columnSpan('full')
-                ->rows(5),
+                ->rows(10),
                 // ->toolbarButtons([
                 //   'h2',
                 //   'bold',
@@ -100,7 +100,7 @@ class ExhibitionResource extends Resource
                 Textarea::make('text_en')
                 ->label('Text')
                 ->columnSpan('full')
-                ->rows(3),
+                ->rows(10),
                 // ->toolbarButtons([
                 //   'h2',
                 //   'bold',
