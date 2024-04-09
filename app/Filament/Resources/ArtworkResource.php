@@ -165,6 +165,9 @@ class ArtworkResource extends Resource
             Section::make('Einstellungen')
             ->collapsible()
             ->schema([
+              Toggle::make('publish')
+              ->label('Publizieren')
+              ->inline(false),
               Select::make('artwork_state_id')
               ->label('Status')
               ->default(ArtworkState::first()->id)
