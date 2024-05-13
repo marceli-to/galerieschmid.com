@@ -21,7 +21,7 @@ $records = $records->chunk(2);
               <strong>{{ $record->description_de }}{{ $record->year ? ', ' . $record->year : '' }}</strong>
             </div>
             <div class="text-sm" style="margin-top: 4.5mm">
-              <div style="margin-bottom: .5mm">{{ $record->artworkTechnique->description_de }}</div>
+              <div style="margin-bottom: .5mm">{{ $record->artworkTechnique->description_de }}@if ($record->litho_number), {{ $record->litho_number }}@endif</div>
               <div style="margin-bottom: .5mm; margin-top: .5mm">{{ $record->dimensions ?? '' }}</div>
               <div style="margin-bottom: .5mm; margin-top: .5mm">{{ $record->artworkFrame->description_de ?? '' }}</div>
             </div>
