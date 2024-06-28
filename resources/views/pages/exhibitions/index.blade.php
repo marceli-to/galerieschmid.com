@@ -8,6 +8,6 @@
 </section>
 <section class="grid__cell grid__cell--1_3 grid-order--1">
   <h2>{{ __('Ausstellungen') }}</h2>
-  <x-exhibitions.list :exhibitions="$exhibitions" :activeExhibitionId="$exhibitions['current']->id" />
+  {{-- <x-exhibitions.list :exhibitions="$exhibitions" :activeExhibitionId="$exhibitions['current']->id" /> --}}
 </section>
 @endsection
