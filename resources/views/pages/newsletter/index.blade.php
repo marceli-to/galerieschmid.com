@@ -28,7 +28,7 @@
             href="{{ route('page.newsletter.archive', ['newsletter' => $newsletter->id]) }}" 
             target="_blank" 
             title="Newsletter {{ $newsletter->title }} anzeigen">
-            {{ $newsletter->title }} ({{ $newsletter->sent_at?->format('d.m.Y')  }})
+            {{ $newsletter->title }} ({{ $newsletter->sent_at ? $newsletter->sent_at->format('d.m.Y') : '' }})
           </a>
         </li>
       @endforeach
