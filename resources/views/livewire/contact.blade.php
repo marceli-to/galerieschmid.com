@@ -9,9 +9,15 @@
     @endif
 
     @if ($errors->has('firstname') || $errors->has('lastname') || $errors->has('email'))
-      <x-notification 
-        type="error" 
+      <x-notification
+        type="error"
         :message="'Es sind Fehler aufgetreten. Bitte üperprüfen Sie ihre Angaben.'" />
+    @endif
+
+    @if ($errors->has('error_message') || $errors->has('website'))
+      <x-notification
+        type="error"
+        :message="'Es ist ein Fehler aufgetreten.'" />
     @endif
 
     <div class="form-row">
@@ -46,12 +52,16 @@
       <label class="@error('message') has-error @enderror">Mitteilung</label>
       <textarea wire:model="message"></textarea>
     </div>
+
+    <input type="text" name="website" wire:model="website" value="" />
+    
     <div class="form-row hover:cursor-pointer">
       <input type="checkbox" name="newsletter" id="newsletter-checkbox" wire:model="newsletter">
       <label class="checkbox-label" for="newsletter-checkbox" class="hover:!cursor-pointer">
         Newsletter abonnieren
       </label>
     </div>
+
     @livewire('cart-list')
     <div class="form-row">
       <button type="submit"class="btn btn--primary hover:!bg-black transition-background">Absenden</button>

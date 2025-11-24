@@ -21,18 +21,33 @@ class Contact extends Component
   public $street;
 
   public $location;
-  
+
   public $phone;
-  
+
   public $mobile;
 
   public $message;
 
   public $newsletter;
 
+  // Spam protection
+  #[Rule('nullable|max:0')]
+  public $website;
+
+  public $formStartTime;
+
   public function save()
   {
     $this->validate();
+
+    // Time-based spam protection (minimum 3 seconds)
+    if ($this->formStartTime) {
+      $elapsedTime = now()->timestamp * 1000 - $this->formStartTime;
+      if ($elapsedTime < 3000) {
+        $this->addError('error_message', 'Something went wrong. Please try again.');
+        return;
+      }
+    }
 
     // Send Email
     Notification::route('mail', env('MAIL_TO'))->notify(new ContactForm([
@@ -68,6 +83,7 @@ class Contact extends Component
   public function mount()
   {
     $this->cart = session('cart');
+    $this->formStartTime = now()->timestamp * 1000;
   }
 
   public function render()
