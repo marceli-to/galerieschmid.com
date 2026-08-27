@@ -37,7 +37,7 @@
         <td>{{ $record->description_de }}</td>
         <td>{{ $record->year }}</td>
         <td>{{ $record->dimensions }}</td>
-        <td>{{ $record->artworkTechnique->description_de}}</td>
+        <td>{{ $record->artworkTechnique?->description_de}}</td>
         <td>{{ $record->date_in ? date('d.m.Y', strtotime($record->date_in)) : '' }}</td>
         <td class="align-right">{{ $record->sale_price_internal > 0 ? $record->sale_price_internal : '' }}</td>
         <td style="padding-right: 0"></td>

@@ -12,7 +12,7 @@ $records = $records->chunk(2);
         @foreach($group as $record)
           <td class="label {{ $loop->index == 0 ? 'has-border-right' : ''}}">
             <div>
-              <strong>{{ $record->artist->lastname }} {{ $record->artist->firstname }}</strong>
+              <strong>{{ $record->artist?->lastname }} {{ $record->artist?->firstname }}</strong>
             </div>
             <div class="text-sm" style="margin-top: 4.5mm">
               <strong>{{ $record->inventory_number }}</strong>
@@ -21,9 +21,9 @@ $records = $records->chunk(2);
               <strong>{{ $record->description_de }}{{ $record->year ? ', ' . $record->year : '' }}</strong>
             </div>
             <div class="text-sm" style="margin-top: 4.5mm">
-              <div style="margin-bottom: .5mm">{{ $record->artworkTechnique->description_de }}@if ($record->litho_number), {{ $record->litho_number }}@endif</div>
+              <div style="margin-bottom: .5mm">{{ $record->artworkTechnique?->description_de }}@if ($record->litho_number), {{ $record->litho_number }}@endif</div>
               <div style="margin-bottom: .5mm; margin-top: .5mm">{{ $record->dimensions ?? '' }}</div>
-              <div style="margin-bottom: .5mm; margin-top: .5mm">{{ $record->artworkFrame->description_de ?? '' }}</div>
+              <div style="margin-bottom: .5mm; margin-top: .5mm">{{ $record->artworkFrame?->description_de ?? '' }}</div>
             </div>
             <div style="{{ $record->sale_price_internal > 0 && $record->sale_price_soll > 0 ? 'margin-top: 4mm' : 'margin-top: 8mm' }}">
 
