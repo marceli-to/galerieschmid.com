@@ -13,8 +13,8 @@
       <div class="swiper-wrapper">
         @foreach($artists as $artist)
           @php 
-            $artwork = $artist->artworksActive;
-            foreach ($artwork->shuffle() as $a)
+            $artwork = NULL;
+            foreach ($artist->artworksActive->shuffle() as $a)
             {
               if ($a->media->first())
               {
@@ -23,8 +23,13 @@
               }
             }
           @endphp
-          <x-media.slide :url="$artwork->media->first()->getUrl('detail')">
-            <x-artwork.caption :artwork="$artwork" />
+          {{-- Keep one slide per artist: the slider JS maps the active slide index
+               onto the artist list, so artists without a usable artwork image still
+               need a (blank) slide to keep both lists in sync. --}}
+          <x-media.slide :url="$artwork ? $artwork->media->first()->getUrl('detail') : ''">
+            @if ($artwork)
+              <x-artwork.caption :artwork="$artwork" />
+            @endif
           </x-media.slide>
         @endforeach
       </div>
