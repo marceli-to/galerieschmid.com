@@ -1,1 +1,1 @@
-<p>Oliver Schmid, Kurs Organisator<br>{{env('APP_NAME')}}</p>
+<p>Oliver Schmid, Kurs Organisator<br>{{config('app.name')}}</p>

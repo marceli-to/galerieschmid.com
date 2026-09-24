@@ -45,7 +45,7 @@ class Newsletter extends Notification
   public function toMail($notifiable)
   {
     return (new MailMessage)
-      ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+      ->from(config('mail.from.address'), config('mail.from.name'))
       ->subject('Galerie Schmid – ' . $this->data['newsletter']->title)
       ->markdown('email.newsletter', ['data' => $this->data]);
   }

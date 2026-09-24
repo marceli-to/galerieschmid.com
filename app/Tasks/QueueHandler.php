@@ -13,7 +13,7 @@ class QueueHandler
 
     foreach($queueItems->all() as $queueItem)
     {
-      $recipient = env('MAIL_TO');
+      $recipient = config('mail.to');
       if ((app()->environment() == 'production') && $queueItem->email)
       {
         $recipient = $queueItem->email;

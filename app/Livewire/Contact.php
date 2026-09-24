@@ -50,7 +50,7 @@ class Contact extends Component
     }
 
     // Send Email
-    Notification::route('mail', env('MAIL_TO'))->notify(new ContactForm([
+    Notification::route('mail', config('mail.to'))->notify(new ContactForm([
       'firstname' => $this->firstname,
       'lastname' => $this->lastname,
       'email' => $this->email,

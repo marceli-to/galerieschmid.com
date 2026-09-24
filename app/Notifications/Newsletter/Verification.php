@@ -43,7 +43,7 @@ class Verification extends Notification
   public function toMail($notifiable)
   {
     return (new MailMessage)
-      ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+      ->from(config('mail.from.address'), config('mail.from.name'))
       ->subject('Galerie Schmid – Anmeldung Newsletter')
       ->markdown('email.verification', ['data' => $this->data]);
   }
